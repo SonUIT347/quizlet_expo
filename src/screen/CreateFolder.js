@@ -1,6 +1,9 @@
+import { async } from "@firebase/util";
+import { collection, addDoc, doc } from "firebase/firestore";
 import React, { useState } from "react";
 import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native";
 import { Dimensions } from "react-native";
+import { db } from "../firebase/firebaseConfig";
 
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
@@ -13,8 +16,19 @@ const CreateFolder = ({navigation}) =>{
     const [folderDes, setFolderDes] = useState("")
     const submit = () =>{
         setFolder({folderName,folderDes})
+        console.log(folder)
+        }
+    const pushFolder = async () =>{
+        try{
+            const docFolder = await addDoc(collection(db,"Folder"),{
+                Name:folderName,
+                Description: folderDes
+            })
+            console.log(docFolder.id)
+            }catch(error){
+                console.log(error)
+            }
     }
-    console.log(folder)
     return(
         <SafeAreaView style={styles.container} >
             <SafeAreaView style = {styles.name_page_ctn} >
@@ -35,7 +49,7 @@ const CreateFolder = ({navigation}) =>{
                 style = {styles.text_ip}
             />
             </SafeAreaView>
-            <TouchableOpacity style={{alignSelf:"center"}} onPress={() => (submit(), navigation.navigate("create"))} >
+            <TouchableOpacity style={{alignSelf:"center"}} onPress={() => (submit(), pushFolder())} >
             <Text style = {{fontSize:24}} >Done</Text>
             </TouchableOpacity>
 
@@ -61,8 +75,8 @@ const styles = StyleSheet.create({
         borderColor:"white",
         marginLeft:20,
         marginRight:20,
-        marginTop:10
-
+        marginTop:10,
+        height:50
     },
     text_ip_ctn:{
         width:widthfull,
