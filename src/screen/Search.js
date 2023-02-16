@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Dimensions, ScrollView, TouchableOpacity } from "react-native";
 import { SafeAreaView, TextInput, StyleSheet, View, FlatList, Text } from "react-native";
 import Nav_Search_Touch from "../component/Nav_Search_Touch";
-
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { useEffect } from "react";
+import { db } from "../firebase/firebaseConfig";
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
@@ -24,7 +26,21 @@ var heightfull = Dimensions.get('window').height; //full height
 const Search = () =>{
     const [touch, setTouch] = useState(true)
     const [touch1, setTouch1] = useState(false)
-
+    const [search, setSearch] = useState([])
+    const [folder, setFolder] = useState([])
+    useEffect(() =>{
+      const getDataLesson = async () =>{
+        const data = await getDocs(collection(db, "Lesson"))
+        setSearch(data.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
+      }
+      const getDataFolder = async () =>{
+        const docFol = await getDocs(collection(db, "Folder"))
+        setFolder(docFol.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
+        console.log(folder)
+      }
+      getDataLesson()
+      getDataFolder()
+    },[])
 const [exam, setExam] = useState([
             {
               id: "1",
@@ -86,9 +102,6 @@ const [exam1, setExam1] = useState([
         user:"thang"
     }
 ])
-
-const [search, setSearch] = useState([...exam])
-const [folder, setFolder] = useState([...exam1])
 const [display,setDisplay] = useState(search)
     return(
     <SafeAreaView style = {styles.main} >
@@ -96,17 +109,13 @@ const [display,setDisplay] = useState(search)
             <View style = {styles.text_ip}>
             <TextInput placeholder="Search" placeholderTextColor={'white'} style = {{color: 'white'} }
             onChangeText = {(search_string) =>{
-              var temp = [...exam]
-              setSearch(temp)
-              setSearch(exam.filter((exam) =>{
-                return exam.name.toString().includes(search_string.toLocaleLowerCase()) ||
-                exam.user_name.toString().includes(search_string.toLocaleLowerCase())
+              setSearch(search.filter((search) =>{
+                return search.Name.toString().includes(search_string.toLocaleLowerCase())
+              //  || search.user_name.toString().includes(search_string.toLocaleLowerCase())
               }))
-              var temp1 = [...exam1]
-              setFolder(temp1)
-              setFolder(exam1.filter((exam1) => {
-                return exam1.name.toString().includes(search_string.toLocaleLowerCase()) ||
-                exam1.user.toString().includes(search_string.toLocaleLowerCase())
+              setFolder(folder.filter((folder) => {
+                return folder.Name.toString().includes(search_string.toLocaleLowerCase()) 
+                // || exam1.user.toString().includes(search_string.toLocaleLowerCase())
               }))
               console.log(folder)
             }}
@@ -133,12 +142,16 @@ const [display,setDisplay] = useState(search)
               <TouchableOpacity style = {styles.lesson} key={search.id}>
                 <SafeAreaView style = {styles.acm_name_text}>
                   <View style = {styles.name_ctn}>
-                  <Text style={{fontSize:20, fontWeight:"bold", marginBottom: 3, color:"#FFFFFF"}} >{search.name}</Text>
+                  <Text style={{fontSize:20, fontWeight:"bold", marginBottom: 3, color:"#FFFFFF"}} >{search.Name}</Text>
                   </View>
+                  {(touch?
                   <View style = {styles.term_ctn}>
-                  <Text style={{color:"#2E3856", fontSize:10, alignSelf:"center"}}>{search.count + " thuat ngu"}</Text>
-                  </View>
+
+                    <Text style={{color:"#2E3856", fontSize:10, alignSelf:"center"}}>{touch?search.count + " thuat ngu":null}</Text>
+
+                  </View>:"")}
                 </SafeAreaView>
+
                 <Text style = {{top: 55, left:10, fontSize: 15 ,color: "#6384B0"}} >{search.user_name}</Text>
               </TouchableOpacity>
             )

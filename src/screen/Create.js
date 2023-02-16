@@ -3,6 +3,8 @@ import { Dimensions, KeyboardAvoidingView, TouchableOpacity, View } from "react-
 import { Text, StyleSheet, SafeAreaView, ScrollView, TextInput } from "react-native";
 // import { Button, TextInput } from "react-native-paper";
 import Ionicons from "react-native-vector-icons/Ionicons"
+import { db } from "../firebase/firebaseConfig";
+import { collection, addDoc, doc } from "firebase/firestore";
 // import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 // import { Alert } from "react-native/Libraries/Alert/Alert";
 var widthfull = Dimensions.get('window').width; //full width
@@ -11,7 +13,8 @@ var heightfull = Dimensions.get('window').height; //full height
 
 const Create = ({navigation}) =>{
     const [lessonArray, setLessonArray] = useState({
-
+        vocabularies:"",
+        means:""
     })
     const [lessonName, setLessonName] = useState("")
     const [lesson, setLesson] = useState({
@@ -34,41 +37,57 @@ const Create = ({navigation}) =>{
     const submit = () =>{
         var a = []
         console.log(a)
-        a.push({
-            name:lessonName})
+        // a.push({
+        //     name:lessonName})
          for(let i = 1; i <= inputFlield.length; i++){
 
             if(lesson.vocabularies[i] == undefined && lesson.means[i] == undefined){
                 a.push({
                     id:i,
-                    vocabularies: "",
-                    means: ""
+                    Term: "",
+                    Define: ""
                 })
             }else if(lesson.vocabularies[i] == undefined && lesson.means[i] != undefined){
                 a.push({
                     id:i,
-                    vocabularies: "",
-                    means: lesson.means[i].mean
+                    Term: "",
+                    Define: lesson.means[i].mean
                 })
             }else if(lesson.vocabularies[i] !== undefined && lesson.means[i] == undefined){
                 a.push({
                     id:i,
-                    vocabularies: lesson.vocabularies[i].voca,
-                    means:""
+                    Term: lesson.vocabularies[i].voca,
+                    Define:""
                 })
             }else
             a.push({
                 id:i,
-                vocabularies: lesson.vocabularies[i].voca,
-                means: lesson.means[i].mean
+                Term: lesson.vocabularies[i].voca,
+                Define: lesson.means[i].mean
             })
         }
 
         setLessonArray(a)
+
   
     }
     console.log(lessonArray)
+    const pushData = async () =>{
+            try{
+                const docCard = await addDoc(collection(db, "Card"),{
+                    Card:[...lessonArray]
+                });
+                const docLesson = await addDoc(collection(db, "Lesson"),{
+                    CardID:docCard.id,
+                    Name:lessonName
+                })
+            console.log(docLesson.id)
+            } catch(error){
+                console.log(error)
+            }
 
+    }
+    console.log(lessonArray)
     return(
         <SafeAreaView style = {styles.main} >
             <SafeAreaView style = {styles.lesson_text_ctn} >
@@ -81,7 +100,7 @@ const Create = ({navigation}) =>{
             <Text style = {{ fontSize: 24, fontWeight: "bold", top:10, color:"white"}} >Create Lesstion</Text>
             </SafeAreaView>
 
-            <TouchableOpacity onPress={() => submit() } >
+            <TouchableOpacity onPress={() => (submit(),pushData()) } >
                 <Text style = {{ alignSelf:"center", color:"white", marginTop:18, fontSize:15, marginRight:10}} >
                     Done
                 </Text>
