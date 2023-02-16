@@ -79,7 +79,8 @@ const Create = ({navigation}) =>{
                 });
                 const docLesson = await addDoc(collection(db, "Lesson"),{
                     CardID:docCard.id,
-                    Name:lessonName
+                    Name:lessonName,
+                    Count:lessonArray.length
                 })
             console.log(docLesson.id)
             } catch(error){
