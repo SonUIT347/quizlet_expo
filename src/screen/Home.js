@@ -3,26 +3,46 @@ import { View,Text, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 import { Dimensions } from "react-native";
 import Lesson from "../component/Lesson";
 import Folder from "../component/Folder";
+import { db } from "../firebase/firebaseConfig";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { Button } from "@rneui/base";
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
 const Home = () =>{
+  const [lesson, setLesson] = useState([])
+  const [folder, setfolder] = useState([])
+  useEffect(() =>{
+    console.log("ac")
+    const getDataLesson = async () =>{
+      const data = await getDocs(collection(db, "Lesson"))
+      setLesson(data.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
+    }
+    const getDataFolder = async () =>{
+      const docFol = await getDocs(collection(db, "Folder"))
+      setfolder(docFol.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
+      console.log(folder)
+    }
+    getDataLesson()
+    getDataFolder()
+  },[])
   const exam = [
     {
       id: "1",
-      name:"lesson 1",
+      Name:"lesson 1",
       count: 32,
       user_name: "son"
     },
     {
       id: "2",
-      name:"lesson 2",
+      Name:"lesson 2",
       count: 32,
       user_name: "son"
     },
     {
       id: "3",
-      name:"lesson 3",
+      Name:"lesson 3",
       count: 32,
       user_name: "son"
     },
@@ -33,7 +53,6 @@ const Home = () =>{
         <Text style = {styles.name} >Quizzy</Text>
       </View>
     <ScrollView>
-
 
     <SafeAreaView style = {styles.ac_text_ctn}>
     <Text style = {{color:"#FFFFFF", fontWeight: 'bold',fontSize: 15, marginLeft:20}} >Lesson</Text>
@@ -53,19 +72,18 @@ const Home = () =>{
         <Text style = {{color:"#FFFFFF", fontWeight: 'bold',fontSize: 15, marginLeft:20}} >Lesson</Text>
         <Text style = {{color:"#FF8FA2", textDecorationLine: 'underline',fontSize: 15}}>See all</Text>
     </SafeAreaView>
-    <Lesson props={exam}/>
+    <Lesson props={lesson}/>
     <SafeAreaView style = {styles.ac_text_ctn}>
     <Text style = {{color:"#FFFFFF", fontWeight: 'bold',fontSize: 15, marginLeft:20}} >Folder</Text>
         <Text style = {{color:"#FF8FA2", textDecorationLine: 'underline',fontSize: 15}}>See all</Text>
     </SafeAreaView>
-    <Folder props = {exam} />
+    <Folder props={folder}/>
     </ScrollView>
     </SafeAreaView>
     )
 }
 const styles = StyleSheet.create({
   name:{
-    fontFamily: 'nunito',
     color: '#FFFFFF',
     fontSize: 30,
     padding:5,

@@ -8,83 +8,31 @@ import { db } from "../firebase/firebaseConfig";
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
-// const Item = ({title}) =>{
-//     return(
-//       <View style = {styles.name_ctn} >
-//         <Text style = {styles.name_text}>{title}</Text>
-//       </View>
-//     )
-// }
-// const renderItem = ({item}) =>{
-//   return(
-//   <View>
-//     <Text>{item.name}</Text>
-//   </View>
-//   )
-// }
-
 const Search = () =>{
     const [touch, setTouch] = useState(true)
     const [touch1, setTouch1] = useState(false)
+    const [docLess, setDocLes] = useState([])
+    const [docFols,setDocFol] = useState([])
     const [search, setSearch] = useState([])
     const [folder, setFolder] = useState([])
     useEffect(() =>{
       const getDataLesson = async () =>{
-        const data = await getDocs(collection(db, "Lesson"))
-        setSearch(data.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
+        const docLes = await getDocs(collection(db, "Lesson"))
+        setDocLes(docLes.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
+        setSearch(docLes.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
       }
       const getDataFolder = async () =>{
         const docFol = await getDocs(collection(db, "Folder"))
+        setDocFol(docFol.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
         setFolder(docFol.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
-        console.log(folder)
+        // setFolder(docFols)
       }
       getDataLesson()
       getDataFolder()
     },[])
-const [exam, setExam] = useState([
-            {
-              id: "1",
-              name:"lesson 1",
-              count: 32,
-              user_name: "son"
-            },
-            {
-              id: "2",
-              name:"lesson 2",
-              count: 32,
-              user_name: "son"
-            },
-            {
-              id: "3",
-              name:"lesson 3",
-              count: 32,
-              user_name: "linh"
-            },
-            {
-              id: "4",
-              name:"lesson 3",
-              count: 32,
-              user_name: "son"
-            },
-            {
-              id: "5",
-              name:"lesson 3",
-              count: 32,
-              user_name: "son"
-            },
-            {
-              id: "6",
-              name:"lesson 3",
-              count: 32,
-              user_name: "son"
-            },
-            {
-              id: "7",
-              name:"lessonnn",
-              count: 32,
-              user_name: "son"
-            },
-          ])
+
+
+
 const [exam1, setExam1] = useState([
     {
         id:1,
@@ -102,22 +50,20 @@ const [exam1, setExam1] = useState([
         user:"thang"
     }
 ])
-const [display,setDisplay] = useState(search)
     return(
     <SafeAreaView style = {styles.main} >
     <SafeAreaView>
             <View style = {styles.text_ip}>
             <TextInput placeholder="Search" placeholderTextColor={'white'} style = {{color: 'white'} }
             onChangeText = {(search_string) =>{
-              setSearch(search.filter((search) =>{
-                return search.Name.toString().includes(search_string.toLocaleLowerCase())
+              setSearch(docLess.filter((docLess) =>{
+                return docLess.Name.toString().includes(search_string)
               //  || search.user_name.toString().includes(search_string.toLocaleLowerCase())
               }))
-              setFolder(folder.filter((folder) => {
-                return folder.Name.toString().includes(search_string.toLocaleLowerCase()) 
+              setFolder(docFols.filter((docFols) => {
+                return docFols.Name.toString().includes(search_string) 
                 // || exam1.user.toString().includes(search_string.toLocaleLowerCase())
               }))
-              console.log(folder)
             }}
             
             /> 
@@ -146,9 +92,7 @@ const [display,setDisplay] = useState(search)
                   </View>
                   {(touch?
                   <View style = {styles.term_ctn}>
-
                     <Text style={{color:"#2E3856", fontSize:10, alignSelf:"center"}}>{touch?search.count + " thuat ngu":null}</Text>
-
                   </View>:"")}
                 </SafeAreaView>
 
