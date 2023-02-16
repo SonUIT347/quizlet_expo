@@ -24,10 +24,10 @@ export default function App() {
       {/* <Search/> */}
       {/* <Create/> */}
       {/* <CreateFolder/> */}
-      <Personal/>
-      {/* <NavigationContainer>
+      {/* <Personal/> */}
+      <NavigationContainer>
         <AuthNavigator/>
-      </NavigationContainer> */}
+      </NavigationContainer>
       {/* <OptionTest/> */}
       {/* <Flashcards/> */}
       {/* <Flashcard_List/> */}
