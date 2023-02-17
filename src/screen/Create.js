@@ -111,12 +111,13 @@ const Create = ({navigation}) =>{
             {/* <TextInput
                 placeholder="text some thing"
             /> */}
-            <SafeAreaView style={{color:"black", top:10}}>
+            <SafeAreaView style={{color:"black", top:10, marginRight: 20, marginLeft: 20}}>
             <TextInput 
                 placeholder="Name of lesson"
-                placeholderTextColor={"white"}
+                placeholderTextColor={"#8A9299"}
                 onChangeText={newtext => setLessonName(newtext)}
-                style = {{ backgroundColor:"",color:"white", margin:20}} />
+                style = {{ color:"white", margin:20, fontSize: 20}} />
+             <View style={{position: 'absolute', height: 5, width: '100%', backgroundColor: '#546999', bottom: 0, marginBottom: 10}}></View>
             </SafeAreaView>
 
 
@@ -173,16 +174,19 @@ const styles = StyleSheet.create({
         width: widthfull,
         height: 50,
         justifyContent:"space-around",
+        backgroundColor: 'red'
     },
     main:{
         width: widthfull,
         height:heightfull,
-        backgroundColor: "#0A092D"
+        backgroundColor: "#0A092D",
+        // backgroundColor: 'red',
       },
     text_ip: {
         with: 200,
         height:40,
         backgroundColor:"#2E3856",
+        backgroundColor: 'red',
         marginTop:20,
         marginLeft: 16,
         marginRight: 16,
@@ -198,10 +202,13 @@ const styles = StyleSheet.create({
         flexDirection:"column",
         justifyContent:"space-evenly",
         borderRadius:10,
-        backgroundColor:"#2E3856"
+        padding: 15,
+        backgroundColor:"#2E3856",
+        // backgroundColor: 'red',
     },
     text_ip_vocabulary:{
         height:40,
+        fontSize: 18,
         backgroundColor:"",
         borderBottomWidth:1,
         borderBottomColor:"white",
