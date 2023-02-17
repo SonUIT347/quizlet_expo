@@ -12,10 +12,7 @@ var heightfull = Dimensions.get('window').height; //full height
 
 
 const Create = ({navigation}) =>{
-    const [lessonArray, setLessonArray] = useState({
-        vocabularies:"",
-        means:""
-    })
+    const [lessonArray, setLessonArray] = useState({})
     const [lessonName, setLessonName] = useState("")
     const [lesson, setLesson] = useState({
         name:"",
@@ -34,9 +31,8 @@ const Create = ({navigation}) =>{
     const [vocabularies, setVocabularies] = useState({})
     const [mean, setMean] = useState("");
     const [means, setMeans] = useState({})
-    const submit = () =>{
+    const submit = async () =>{
         var a = []
-        console.log(a)
         // a.push({
         //     name:lessonName})
          for(let i = 1; i <= inputFlield.length; i++){
@@ -66,21 +62,18 @@ const Create = ({navigation}) =>{
                 Define: lesson.means[i].mean
             })
         }
-
-        setLessonArray(a)
-
-  
-    }
-    console.log(lessonArray)
-    const pushData = async () =>{
+        console.log(a)
+        // setLessonArray(a)
+        // console.log(lessonArray)
+        // const pushData = async () =>{
             try{
-                const docCard = await addDoc(collection(db, "Card"),{
-                    Card:[...lessonArray]
-                });
+                // const docCard = await addDoc(collection(db, "Card"),{
+
+                // });
                 const docLesson = await addDoc(collection(db, "Lesson"),{
-                    CardID:docCard.id,
+                    Card:a,
                     Name:lessonName,
-                    Count:lessonArray.length
+                    Count:a.length
                 })
             console.log(docLesson.id)
             } catch(error){
@@ -88,7 +81,10 @@ const Create = ({navigation}) =>{
             }
 
     }
-    console.log(lessonArray)
+    // }
+    // console.log(lessonArray)
+
+    // console.log(lessonArray)
     return(
         <SafeAreaView style = {styles.main} >
             <SafeAreaView style = {styles.lesson_text_ctn} >
@@ -101,7 +97,7 @@ const Create = ({navigation}) =>{
             <Text style = {{ fontSize: 24, fontWeight: "bold", top:10, color:"white"}} >Create Lesstion</Text>
             </SafeAreaView>
 
-            <TouchableOpacity onPress={() => (submit(),pushData()) } >
+            <TouchableOpacity onPress={() => (submit()) } >
                 <Text style = {{ alignSelf:"center", color:"white", marginTop:18, fontSize:15, marginRight:10}} >
                     Done
                 </Text>
@@ -174,7 +170,6 @@ const styles = StyleSheet.create({
         width: widthfull,
         height: 50,
         justifyContent:"space-around",
-        backgroundColor: 'red'
     },
     main:{
         width: widthfull,
