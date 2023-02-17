@@ -15,6 +15,7 @@ import Flashcard from './src/screen/FlashCard';
 import Test from './src/screen/Test';
 import Lesson from './src/component/Lesson';
 import ViewFolder from './src/screen/ViewFolder';
+import NewFlashCard from './src/screen/NewFlashCard';
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 export default function App() {
@@ -36,6 +37,7 @@ export default function App() {
      {/* <Login/> */}
      {/* <Test/> */}
      {/* <Flashcard/> */}
+     {/* <NewFlashCard/> */}
      {/* <ViewFolder/> */}
     </View>
   );

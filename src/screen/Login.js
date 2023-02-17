@@ -1,51 +1,44 @@
 import { View, Text, SafeAreaView, TextInput, StyleSheet,TouchableOpacity } from 'react-native'
 import React, { useState } from "react";
 import { Dimensions } from 'react-native'
+import {signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
 import Ionicons from "react-native-vector-icons/Ionicons"
+import { authentication } from '../firebase/firebaseConfig';
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
-// Import the functions you need from the SDKs you need
-// import { initializeApp } from "firebase/app";
-// // TODO: Add SDKs for Firebase products that you want to use
-// // https://firebase.google.com/docs/web/setup#available-libraries
 
-// // Your web app's Firebase configuration
-// const firebaseConfig = {
-//   apiKey: "AIzaSyA25Q1oaEXqw4kAC5pmn6fuoSbU0Hc4xy0",
-//   authDomain: "fire-base-22867.firebaseapp.com",
-//   projectId: "fire-base-22867",
-//   storageBucket: "fire-base-22867.appspot.com",
-//   messagingSenderId: "521608606829",
-//   appId: "1:521608606829:web:12d23edec4ef3e6c7e7b64"
-// };
-
-// Initialize Firebase
-//const app = initializeApp(firebaseConfig);
 const Login = ({navigation}) => {
   const [userName, setUserName] = useState("")
   const [Password, setPassword] = useState("")
   const [eyeIcon, setEyeicon] = useState("eye")
   const [typePass, setTypePass] = useState()
   const [isSecure, setIsSecure] = useState(true)
-  // const create = () =>{
-  //   auth()
-  // .createUserWithEmailAndPassword('jane.doe@example.com', 'SuperSecretPassword!')
-  // .then(() => {
-  //   console.log('User account created & signed in!');
-  // })
-  // .catch(error => {
-  //   if (error.code === 'auth/email-already-in-use') {
-  //     console.log('That email address is already in use!');
-  //   }
-
-  //   if (error.code === 'auth/invalid-email') {
-  //     console.log('That email address is invalid!');
-  //   }
-
-  //   console.error(error);
-  // });
- // }
-  
+  const signIn = () =>{ 
+    signInWithEmailAndPassword(authentication, userName, Password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      navigation.navigate("TabBar")
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(errorCode)
+    });
+    onAuthStateChanged(authentication, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        console.log(uid)
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+  }
   return (
     <SafeAreaView style = {styles.container} >
     <SafeAreaView style = {styles.textInput_ctn} >
@@ -62,8 +55,12 @@ const Login = ({navigation}) => {
                         color="white"
                       />
       </TouchableOpacity>
-      <TouchableOpacity style={{backgroundColor:"gray", marginTop:100, height:50,width:"60%", marginLeft:"20%", borderRadius:10}} onPress={() => navigation.navigate("TabBar")} >
+      <TouchableOpacity style={{backgroundColor:"gray", marginTop:100, height:50,width:"60%", marginLeft:"20%", borderRadius:10}} onPress={() => (signIn())} >
         <Text style={{textAlign:"center", marginTop:10, fontSize:20, color:"white"}} >Login</Text>
+
+    </TouchableOpacity>
+    <TouchableOpacity style={{backgroundColor:"gray", marginTop:10, height:50,width:"60%", marginLeft:"20%", borderRadius:10}} onPress={() => navigation.navigate("Register")} >
+        <Text style={{textAlign:"center", marginTop:10, fontSize:20, color:"white"}} >Register</Text>
 
     </TouchableOpacity>
     </SafeAreaView>
@@ -88,7 +85,8 @@ const styles = StyleSheet.create({
     borderBottomWidth:1,
     width:"100%",
     borderColor:"white",
-    backgroundColor:"white"
+    backgroundColor:"white",
+    height:50
   },
   text:{
     alignSelf:"flex-start",
