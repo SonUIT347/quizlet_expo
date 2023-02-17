@@ -2,22 +2,53 @@ import React from "react";
 import { View,Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView, Image } from "react-native";
 import { Dimensions } from "react-native";
 import Flashcards from "../component/FlashCards";
+import { db } from "../firebase/firebaseConfig";
+import { getDocs, collection, where, query, documentId } from "firebase/firestore";
 import Flashcard_List from "../component/FlashCard_List";
+import { useState, useEffect } from "react";
+import Lesson from "../component/Lesson";
+import { useRoute } from "@react-navigation/native";
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
 const OptionTest = () =>{
+  const route = useRoute()
+  const [card, setCard] = useState([])
+  const [displayCard, setDisplayCard] = useState([])
+  // useEffect(() =>{
+  //   const getCard = async () =>{
+  //     const docCard = await getDocs(collection(db, "Folder"))
+  //       setCard(docCard.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
+  //       console.log(card)
+  //   }
+  //   getCard()
+  // },[])
+  const [lesson, setLesson] = useState([])
+  const [folder, setfolder] = useState([])
+  useEffect(() =>{
+    const q = query(collection(db, "Lesson"), where(documentId(), "==", `${route.params.lessonId}`))
+    const getDataLesson = async () =>{
+      const data = await getDocs(q)
+      setLesson(data.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
+    }
+    getDataLesson()
+  },[])
+  // lesson.map((l) =>{
+  //   l.Card.map((c) =>{
+  //     console.log(c.Term)
+  //   })
+  // })
     return(
     <SafeAreaView style={styles.main}>
       <ScrollView horizontal = {false} style={styles.scroll}>
         
         {/* <Flashcard_List/> */}
         <SafeAreaView  >
-          <Flashcards/>
+          <Flashcards props={lesson}/>
         </SafeAreaView>
 
         <SafeAreaView style = {styles.lesson_name_ctn} >
-        <Text style={styles.lesson} >LESSON NAME</Text>
+        <Text style={styles.lesson} >{lesson.map((name) => {return name.Name})}</Text>
         <Text style={styles.user} >by User</Text>
         </SafeAreaView>
 
@@ -53,7 +84,7 @@ const OptionTest = () =>{
         </SafeAreaView> */}
 
         <SafeAreaView>
-          <Flashcard_List/>
+          <Flashcard_List props={lesson} />
         </SafeAreaView>
       </ScrollView>
     </SafeAreaView>

@@ -92,7 +92,7 @@ const [exam1, setExam1] = useState([
                   </View>
                   {(touch?
                   <View style = {styles.term_ctn}>
-                    <Text style={{color:"#2E3856", fontSize:10, alignSelf:"center"}}>{touch?search.count + " thuat ngu":null}</Text>
+                    <Text style={{color:"#2E3856", fontSize:10, alignSelf:"center"}}>{search.Count + " thuat ngu"}</Text>
                   </View>:"")}
                 </SafeAreaView>
 

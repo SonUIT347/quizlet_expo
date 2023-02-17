@@ -7,46 +7,26 @@ import { db } from "../firebase/firebaseConfig";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { Button } from "@rneui/base";
+import { TouchableOpacity } from "react-native-gesture-handler";
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
-const Home = () =>{
+const Home = ({navigation}) =>{
   const [lesson, setLesson] = useState([])
   const [folder, setfolder] = useState([])
   useEffect(() =>{
-    console.log("ac")
     const getDataLesson = async () =>{
       const data = await getDocs(collection(db, "Lesson"))
       setLesson(data.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
+      console.log(lesson.id)
     }
     const getDataFolder = async () =>{
       const docFol = await getDocs(collection(db, "Folder"))
       setfolder(docFol.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
-      console.log(folder)
     }
     getDataLesson()
     getDataFolder()
   },[])
-  const exam = [
-    {
-      id: "1",
-      Name:"lesson 1",
-      count: 32,
-      user_name: "son"
-    },
-    {
-      id: "2",
-      Name:"lesson 2",
-      count: 32,
-      user_name: "son"
-    },
-    {
-      id: "3",
-      Name:"lesson 3",
-      count: 32,
-      user_name: "son"
-    },
-  ]
     return(
       <SafeAreaView style = {styles.main}>
       <View style = {styles.container} >
@@ -72,12 +52,13 @@ const Home = () =>{
         <Text style = {{color:"#FFFFFF", fontWeight: 'bold',fontSize: 15, marginLeft:20}} >Lesson</Text>
         <Text style = {{color:"#FF8FA2", textDecorationLine: 'underline',fontSize: 15}}>See all</Text>
     </SafeAreaView>
-    <Lesson props={lesson}/>
+      <Lesson props={lesson} navigation = {navigation}/>
+
     <SafeAreaView style = {styles.ac_text_ctn}>
     <Text style = {{color:"#FFFFFF", fontWeight: 'bold',fontSize: 15, marginLeft:20}} >Folder</Text>
         <Text style = {{color:"#FF8FA2", textDecorationLine: 'underline',fontSize: 15}}>See all</Text>
     </SafeAreaView>
-    <Folder props={folder}/>
+    <Folder props={folder} navigation = {navigation}/>
     </ScrollView>
     </SafeAreaView>
     )

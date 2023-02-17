@@ -4,7 +4,7 @@ import { Dimensions } from "react-native";
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
-const Flashcards = () =>{
+const Flashcards = ({props}) =>{
   const TEST_LIST = [
     {
       idi: "1",
@@ -31,14 +31,19 @@ const Flashcards = () =>{
     return(
         <SafeAreaView  >
           <ScrollView horizontal={true} style = {styles.scroll} >
-          {TEST_LIST.map((list,index) => {
-            return(
-              <SafeAreaView style = {styles.text} key={list.idi}>
-                <TouchableOpacity style={styles.button} onPress={()=>setTouch(!touch)}>
-                  <Text style={{fontSize:40, fontWeight:"bold", alignSelf:"center",color:"white"}} >{!touch?list.question:list.answer }</Text>
-                  </TouchableOpacity>
-              </SafeAreaView>
-            )})}
+          {props.map((l) =>{
+              return(
+                l.Card.map((list,index) => {
+                  return(
+                   <SafeAreaView style = {styles.text} key={list.id}>
+                     <TouchableOpacity style={styles.button} onPress={()=>setTouch(!touch)}>
+                       <Text style={{fontSize:40, fontWeight:"bold", alignSelf:"center",color:"white"}} >{!touch?list.Term:list.Define}</Text>
+                       </TouchableOpacity>
+                   </SafeAreaView>
+                  )
+               })
+              )
+          })}
           </ScrollView>
         </SafeAreaView>
     )

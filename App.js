@@ -14,20 +14,22 @@ import Flashcard_List from './src/component/FlashCard_List';
 import Flashcard from './src/screen/FlashCard';
 import Test from './src/screen/Test';
 import Lesson from './src/component/Lesson';
+import ViewFolder from './src/screen/ViewFolder';
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 export default function App() {
   return (
     <View style={styles.container}>
+      {/* <ViewFolder/> */}
       {/* <Home/> */}
       {/* <Lesson/> */}
       {/* <Search/> */}
-      <Create/>
+      {/* <Create/> */}
       {/* <CreateFolder/> */}
-      <Personal/>
-      {/* <NavigationContainer>
+      {/* <Personal/> */}
+      <NavigationContainer>
         <AuthNavigator/>
-      </NavigationContainer> */}
+      </NavigationContainer>
       {/* <OptionTest/> */}
       {/* <Flashcards/> */}
       {/* <Flashcard_List/> */}

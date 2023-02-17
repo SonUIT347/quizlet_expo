@@ -6,40 +6,21 @@ var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
 
-const Flashcard_List = () =>{
-    const TEST_LIST = [
-        {
-          id: "1",
-          question:"d0g",
-          answer: "con cho",
-        },
-        {
-          id: "2",
-          question:"cat",
-          answer: "con meo",
-        },
-        {
-          id: "3",
-          question:"bird",
-          answer: "con chim",
-        },
-        {
-          id: "4",
-          question:"bird",
-          answer: "con chim",
-        },
-      ]
-    
+const Flashcard_List = ({props}) =>{
     return(
      
       <SafeAreaView >
-      {TEST_LIST.map((quiz,index) => {
-        return(
-          <SafeAreaView style = {styles.text} key={quiz.id}>
-            <Text style={{fontSize:20, marginLeft:10, marginBottom: 10, color:'white'}} >{quiz.question}</Text>
-            <Text style={{fontSize:20, marginLeft:10,color:'white'}} >{quiz.answer}</Text>
-          </SafeAreaView>
-        )})}
+        {props.map((l) =>{
+          return(
+            l.Card.map((quiz,index) => {
+              return(
+                <SafeAreaView style = {styles.text} key={quiz.id}>
+                  <Text style={{fontSize:20, marginLeft:10, marginBottom: 10, color:'white'}} >{quiz.Term}</Text>
+                  <Text style={{fontSize:20, marginLeft:10,color:'white'}} >{quiz.Define}</Text>
+                </SafeAreaView>
+              )})
+          )
+        })}
     </SafeAreaView>
 )
 }

@@ -10,6 +10,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome"
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 import Ionicons from "react-native-vector-icons/Ionicons"
 import LessonNavigator from './Lessonnavigator';
+import Personal from '../screen/Personal';
 // import CreateNavigator from './CreateNavigator';
 
 
@@ -56,7 +57,7 @@ const BottomTab = () =>{
                     )
                 },
             }} />
-            <Tab.Screen name = "StackNav" component={LessonNavigator} options = {{
+            <Tab.Screen name = "personal" component={Personal} options = {{
                 tabBarLabel:"",
                 tabBarIcon: ()=>{
                     return(
