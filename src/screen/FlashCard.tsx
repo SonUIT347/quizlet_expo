@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,14 +6,24 @@ import {
   Text,
   Platform,
   Image,
-  TouchableOpacity,
+  TouchableOpacity,  
 } from 'react-native';
-
+import {useState, useEffect} from "react"
+import { db } from '../firebase/firebaseConfig';
+import { getDocs, collection, query, where, documentId  } from 'firebase/firestore';
 import {LinearProgress} from '@rneui/themed';
 import useTinderCard from '../component/useFlashCard';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Speedometer from 'react-native-speedometer-chart';
-function FlashCard() {
+import { async } from '@firebase/util';
+import { useRoute } from '@react-navigation/native';
+function FlashCard({props}) {
+  const route = useRoute()
+  console.log(route.params.lessonId)
+  const [lesson, setLesson] = useState([])
+  const [display, setDisplay] = useState(
+    )
+ console.log(props, "2") /// mảng các kí tự và định nghĩa
   const [
     data,
     _panResponder,
@@ -25,32 +35,8 @@ function FlashCard() {
     setDataHeader,
     handlePlay,
     hanldeUndo,
-  ] = useTinderCard([
-    {
-      // image: Bobo,
-      id: 1,
-      name: 'Bobo',
-      animal: 'Cat',
-    },
-    {
-      // image: Dolly,
-      id: 2,
-      name: 'Dolly',
-      animal: 'Dog',
-    },
-    {
-      // image: Giraffe,
-      id: 3,
-      name: 'Milo',
-      animal: 'Giraffe',
-    },
-    {
-      // image: Goat,
-      id: 4,
-      name: 'Ollie',
-      animal: 'Goat',
-    },
-  ]);
+  ] = useTinderCard([]);
+// console.log(data)
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -116,6 +102,7 @@ function FlashCard() {
         .slice(0, 2)
         .reverse()
         .map((item, index, items) => {
+          console.log("a")
           const isLastItem = index === items.length - 1;
           const panHandlers = isLastItem ? {..._panResponder.panHandlers} : {};
           const isSecondToLast = index === items.length - 2;
@@ -152,7 +139,7 @@ function FlashCard() {
                     alignItems: 'center',
                   }}>
                   <Text style={{fontSize: 40, color: 'white', fontWeight: "500"}}>
-                    {item.name}
+                    {item.Term}
                   </Text>
                 </View>
               </Animated.View>

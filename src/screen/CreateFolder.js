@@ -25,7 +25,6 @@ const CreateFolder = ({navigation, route}) =>{
                 userID:route.params.userID,
                 Name:folderName,
                 Description: folderDes
-
             })
             console.log(docFolder.id)
             }catch(error){

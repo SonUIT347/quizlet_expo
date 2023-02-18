@@ -15,7 +15,7 @@ const EditFolder = ({
   headerFolder,
   setHeaderFolder,
 }) => {
-  const [text, setText] = useState({ nameCard: headerFolder.nameCard });
+  const [text, setText] = useState({ Name: headerFolder.Name });
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -47,9 +47,9 @@ const EditFolder = ({
               </Text>
               <TouchableOpacity
                 onPress={() => {
-                  if(text.nameCard.length !== 0){
+                  if(text.Name.length !== 0){
                     setHeaderFolder((headerFolder) => {
-                        return { ...headerFolder, nameCard: text.nameCard };
+                        return { ...headerFolder, Name: text.Name };
                       });
                       setModalVisible((modalVisible) => {
                         return {
@@ -68,10 +68,10 @@ const EditFolder = ({
                 inputStyle={{ color: "white", fontSize: 15 }}
                 errorStyle={{ color: "white", fontWeight: "600" }}
                 errorMessage="TIÊU ĐỀ THƯ MỤC"
-                defaultValue={text.nameCard}
+                defaultValue={text.Name}
                 onChangeText={(value) =>
                   setText((text) => {
-                    return { ...text, nameCard: value };
+                    return { ...text, Name: value };
                   })
                 }
               />

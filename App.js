@@ -15,8 +15,9 @@ import Flashcard from './src/screen/FlashCard';
 import Test from './src/screen/Test';
 import Lesson from './src/component/Lesson';
 import ViewFolder from './src/screen/ViewFolder';
-import NewFlashCard from './src/screen/NewFlashCard';
+import SettingFolder from './src/component/SettingFolder';
 import createContext from 'react'
+import { Card } from '@rneui/base';
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 export default function App() {
@@ -25,13 +26,16 @@ export default function App() {
       {/* <ViewFolder/> */}
       {/* <Home/> */}
       {/* <Lesson/> */}
-      <Search/>
+      {/* <Search/> */}
       {/* <Create/> */}
       {/* <CreateFolder/> */}
       {/* <Personal/> */}
-      {/* <NavigationContainer>
+      <NavigationContainer>
         <AuthNavigator/>
-      </NavigationContainer> */}
+      </NavigationContainer>
+      {/* <ViewFolder/> */}
+      {/* <Card/> */}
+      {/* <SettingFolder/> */}
       {/* <OptionTest/> */}
       {/* <Flashcards/> */}
       {/* <Flashcard_List/> */}

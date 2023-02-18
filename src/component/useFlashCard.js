@@ -1,30 +1,45 @@
 import React, {useRef, useState, useEffect} from 'react';
 import {Animated, PanResponder, Dimensions} from 'react-native';
-
+import { db } from '../firebase/firebaseConfig'
+import { getDocs,where, query, collection, documentId } from 'firebase/firestore'
 const {width} = Dimensions.get('screen');
 
 const SWIPE_THRESHOLD = 0.25 * width;
 
-export default function useTinderCards(deck) {
+export default function useTinderCards() {
+  const [deck , setDeck] = useState()
   function clamp(value, min, max) {
     return min < max
       ? (value < min ? min : value > max ? max : value)
       : (value < max ? max : value > min ? min : value)
   }
-  const [data, setData] = useState(deck);
+  const [data, setData] = useState([]);
   const [dataHeader, setDataHeader] = useState({
     indexFashCard: 0,
     indexStudying: 0,
     indexStudied: 0,
-    lenghtData: data.length,
+    // lenghtData: data.length,
     linearProgress: 0,
     velocity: 0,
     dx: 0,
   });
-  console.log(dataHeader);
+  const [id, setId] = useState("")
+  console.log(id, "id")
+  useEffect(() =>{
+    const q = query(collection(db, "Lesson"), where(documentId(), "==", `3gkXtDf6h7fL8szY3k4b`))
+
+   
+      getDocs(q).then(data=>{
+        setDeck(data.docs.map((doc) =>({...doc.data(), id: doc.id}))[0].Card)
+        setData(data.docs.map((doc) =>({...doc.data(), id: doc.id}))[0].Card)
+        setDataHeader(dataHeader=>{return{...dataHeader, lenghtData: data.docs.map((doc) =>({...doc.data(), id: doc.id}))[0].Card.length}})
+      })
+
+  },[])
+  // console.log(dataHeader);
   const [checkPlay, setCheckPlay] = useState(true);
   const [dataRead, setDataRead] = useState([]);
-  console.log(dataRead);
+  // console.log(dataRead);
 
   const animate = useRef(new Animated.Value(0));
   const animation = useRef(new Animated.ValueXY()).current;
@@ -224,5 +239,6 @@ export default function useTinderCards(deck) {
     setDataHeader,
     handlePlay,
     hanldeUndo,
+    id
   ];
 }
