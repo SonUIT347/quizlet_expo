@@ -1,5 +1,5 @@
 import AntDesign from "react-native-vector-icons/AntDesign";
-import { collection, getDocs, query, where, documentId } from "firebase/firestore";
+import { collection, getDocs, query, where, documentId,  } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import {
   Text,
@@ -24,24 +24,11 @@ const ViewFolder = () => {
     setModalVisible,
     dataCards,
     headerFolder,
+    temp,
     setHeaderFolder, setDataFolder, setDataFolders,
   } = useViewFolder();
 
-  useEffect (() => {
-      // console.log(headerFolder.Lesson_Id.length)
-      for(let i = 0; i < headerFolder.Lesson_Id.length; i++)
-        {
-          const b = query(collection(db, "Lesson"), where(documentId(), "==", headerFolder.Lesson_Id[i]))
-          const getDataFolders = async () => {
-          const abc = await getDocs(b)
-          setDataFolders((abc.docs.map((doc) => ({...doc.data(), id: doc.id}))).push())
-          }
-          // console.log(dataFolders)
 
-  
-          getDataFolders()
-        }
-    },[headerFolder])
     // console.log(headerFolder)
 
   return (
@@ -134,6 +121,7 @@ const ViewFolder = () => {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         setDataFolder={setDataFolder}
+        temp={temp}
       />
       <SettingFolder
         modalVisible={modalVisible}

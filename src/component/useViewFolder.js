@@ -12,6 +12,7 @@ import { db } from "../firebase/firebaseConfig";
 //   setdata = (data_Folders.docs.map((doc) =>({...doc.data(), id: doc.id}) )[0])
 // }
 // getData_Folder()
+let temp = 0;
 
 
 
@@ -30,7 +31,7 @@ const Folder =
 const useViewFolder = () => {
   const [dataFolder, setDataFolder] = useState([]);
   const [dataFolders, setDataFolders] = useState({});
-  const [headerFolder, setHeaderFolder] = useState({Lesson_Id: []});
+  const [headerFolder, setHeaderFolder] = useState({Lesson_Id:[]});
   const [dataCards, setDataCards] = useState(dataCard);
   useEffect(() =>{
     const getDataCard = async () =>{
@@ -58,36 +59,22 @@ const useViewFolder = () => {
 
   },[])
 
+  useEffect (() => {
+    const arr=['1'];
+      for (let i = 0; i < headerFolder.Lesson_Id.length; i++)
+      {
+        arr[i+1] = headerFolder.Lesson_Id[i];
+      }
 
-  // if (a == 12)
-  // {
-  //   for(let i = 0; i < headerFolder.Lesson_Id.lenght; i++)
-  //     {
-  //       const b = query(collection(db, "Lesson"), where(documentId(), "==", headerFolder.Lesson_Id[i]))
-  //       const getDataFolders = async () => {
-  //       const abc = await getDocs(b)
-  //       setDataFolders((abc.docs.map((doc) => ({...doc.data(), id: doc.id}))[0]).push())
-  //       }
-  //       console.log(dataFolders)
-  //       a++
-  //       getDataFolders()
-  //     }
-  // }
-  // useEffect (() => {
-  //   for(let i = 0; i < headerFolder.Lesson_Id.lenght; i++)
-  //     {
-  //       const b = query(collection(db, "Lesson"), where(documentId(), "==", headerFolder.Lesson_Id[i]))
-  //       const getDataFolders = async () => {
-  //       const abc = await getDocs(b)
-  //       setDataFolders((abc.docs.map((doc) => ({...doc.data(), id: doc.id}))[0]).push())
-  //       }
-  //       console.log(dataFolders)
+      const b = query(collection(db, "Lesson"), where(documentId(), 'in', arr))
+      const getDataFolders = async () => {
+      const abc = await getDocs(b)
+      setDataFolder((abc.docs.map((doc) => ({...doc.data(), id: doc.id}))))
+      }
+      getDataFolders()
+  },[headerFolder])
 
-  //       getDataFolders()
-  //     }
-  // }, )
-  // console.log(headerFolder.Lesson_Id)
-  // console.log(headerFolder.Lesson_Id)
+  // console.log(dataFolder)
 
   
   const [modalVisible, setModalVisible] = useState({
@@ -104,6 +91,7 @@ const useViewFolder = () => {
     headerFolder, setHeaderFolder,
     setDataFolder,
     setDataFolders,
+    temp,
   };
 };
 export default useViewFolder;
