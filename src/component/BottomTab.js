@@ -11,6 +11,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Ionicons from "react-native-vector-icons/Ionicons"
 import LessonNavigator from './Lessonnavigator';
 import Personal from '../screen/Personal';
+import SearchNavigation from './SearchNavigation';
 // import CreateNavigator from './CreateNavigator';
 
 
@@ -33,7 +34,7 @@ const BottomTab = () =>{
                 }
                 
             }} />
-            <Tab.Screen name = "Search" component={Search} options ={{
+            <Tab.Screen name = "SearchNavigation" component={SearchNavigation} options ={{
                 tabBarLabel:"",
                 tabBarIcon: ()=>{
                     return(

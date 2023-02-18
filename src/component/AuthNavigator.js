@@ -13,7 +13,14 @@ const AuthNavigator = () => {
       headerShown:false
     }} >
         <Stack.Screen name={'Login'} component={Login} />
-        <Stack.Screen name={'Register'} component={Register} />
+        <Stack.Screen name={'Register'} component={Register} options={{
+          headerShown:true,
+          title:"",
+          headerTintColor:"white",
+          headerStyle:{
+            backgroundColor:"#0A092D",
+          }
+        }} />
         <Stack.Screen name={'TabBar'} component={BottomTab} />
     </Stack.Navigator>
   )

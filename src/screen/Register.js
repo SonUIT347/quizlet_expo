@@ -1,6 +1,8 @@
 import { View, Text, SafeAreaView, TextInput, StyleSheet,TouchableOpacity } from 'react-native'
 import React, { useState } from "react";
 import { Dimensions } from 'react-native'
+import { authentication } from '../firebase/firebaseConfig';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
@@ -10,6 +12,19 @@ const Register = ({navigation}) => {
     const [eyeIcon, setEyeicon] = useState("eye")
     const [typePass, setTypePass] = useState()
     const [isSecure, setIsSecure] = useState(true)
+    const signUp = () =>{
+      createUserWithEmailAndPassword(authentication,userName, Password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log("user")
+        navigation.navigate('Login')
+      })
+      .catch((error) => {
+
+        alert(error)
+
+      });
+    }
   return (
     <SafeAreaView style = {styles.container} >
     <SafeAreaView style = {styles.textInput_ctn} >
@@ -26,7 +41,7 @@ const Register = ({navigation}) => {
                         color="white"
                       />
       </TouchableOpacity> */}
-      <TouchableOpacity style={{backgroundColor:"gray", marginTop:100, height:50,width:"60%", marginLeft:"20%", borderRadius:10}} onPress={() => navigation.navigate('Login')} >
+      <TouchableOpacity style={{backgroundColor:"gray", marginTop:100, height:50,width:"60%", marginLeft:"20%", borderRadius:10}} onPress={() => (signUp())} >
         <Text style={{textAlign:"center", marginTop:10, fontSize:20, color:"white"}} >Register</Text>
 
     </TouchableOpacity>
@@ -53,7 +68,8 @@ const styles = StyleSheet.create({
       borderBottomWidth:1,
       width:"100%",
       borderColor:"white",
-      backgroundColor:"white"
+      backgroundColor:"white",
+      height:50
     },
     text:{
       alignSelf:"flex-start",

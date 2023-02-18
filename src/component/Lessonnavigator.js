@@ -7,8 +7,7 @@ import Lesson from './Lesson';
 import ViewFolder from '../screen/ViewFolder';
 import Folder from './Folder';
 const Stack = createStackNavigator();
-const LessonNavigator
- = () => {
+const LessonNavigator = () => {
     return (
         <Stack.Navigator initialRouteName='Home' screenOptions={{
             title:"",
