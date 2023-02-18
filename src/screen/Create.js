@@ -14,7 +14,7 @@ var heightfull = Dimensions.get('window').height; //full height
 
 
 const Create = ({navigation, route}) =>{
-    console.log(route.params.userID)
+    // console.log(route.params.userID)
     const [lessonArray, setLessonArray] = useState({})
     const [lessonName, setLessonName] = useState("")
     const [lesson, setLesson] = useState({
@@ -83,7 +83,6 @@ const Create = ({navigation, route}) =>{
             } catch(error){
                 console.log(error)
             }
-
     }
     // }
     // console.log(lessonArray)
@@ -101,7 +100,7 @@ const Create = ({navigation, route}) =>{
             <Text style = {{ fontSize: 24, fontWeight: "bold", top:10, color:"white"}} >Create Lesstion</Text>
             </SafeAreaView>
 
-            <TouchableOpacity onPress={() => (submit(), navigation.navigate("home")) } >
+            <TouchableOpacity onPress={() => (submit()) } >
                 <Text style = {{ alignSelf:"center", color:"white", marginTop:18, fontSize:15, marginRight:10}} >
                     Done
                 </Text>
