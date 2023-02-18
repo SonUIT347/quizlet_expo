@@ -21,8 +21,8 @@ const CreateFolder = ({navigation}) =>{
     const pushFolder = async () =>{
         try{
             const docFolder = await addDoc(collection(db,"Folder"),{
-                Name:folderName,
-                Description: folderDes
+                nameFolder:folderName,
+                Description: folderDes,
             })
             console.log(docFolder.id)
             }catch(error){

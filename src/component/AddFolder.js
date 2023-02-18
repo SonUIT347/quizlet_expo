@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { doc, updateDoc, deleteField, setDoc, query, where, collection, documentId, getDocs } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 import {
   Alert,
   Modal,
@@ -9,12 +11,19 @@ import {
   ScrollView,
 } from "react-native";
 import Card from "./Card";
+
+const FolderId = 'jtOjniEeGlpuxHQg4txg'
+
 const AddFolder = ({
   dataFolder,
   dataCards,
+  headerFolder,
   modalVisible,
   setModalVisible,
   setDataFolder,
+  setHeaderFolder,
+
+  
 }) => {
   const checkCard = (data) => {
     for (let i = 0; i < dataFolder.length; i++) {
@@ -22,22 +31,35 @@ const AddFolder = ({
     }
     return false;
   };
-  console.log(dataFolder.length);
-  const handleClick = (check, id, nameCard, quantity, img, nameAuthor) => {
+
+  function handleButton()  {
+    if(!modalVisible.checkAddFolder)
+    {
+      console.log(modalVisible) 
+      {console.log(dataFolder)}
+    }
+  }
+  
+                  
+  // console.log(dataFolder.length);
+  const handleClick = (check, id, Name, Count, img, nameAuthor) => {
     if (!check) {
       setDataFolder(dataFolder=>{return[...dataFolder, {
         id: id,
         nameAuthor: nameAuthor,
-        nameCard: nameCard,
-        quantity: quantity,
+        Name: Name,
+        Count: Count,
         img: img,
       }]});
-      console.log(dataFolder.length, "hello");
+      // console.log(dataFolder.length, "hello");
     } else {
       setDataFolder(dataFolder.filter((data) => data.id !== id));
-      console.log(dataFolder.filter((data) => data.id !== id).length, 'hi')
+      // console.log(dataFolder.filter((data) => data.id !== id).length, 'hi')
+      
     }
   };
+  
+  
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -66,10 +88,47 @@ const AddFolder = ({
                 <TouchableOpacity
                   onPress={() =>
                     setModalVisible((modalVisible) => {
+                      // if(!modalVisible.checkAddFolder)
+                      // {
+                      //   console.log(modalVisible) 
+                      //   {console.log(dataFolder)}
+                      // }
+                      // console.log(modalVisible)
+                      // console.log(dataFolder)
+                      const DataId = []
+                      for (let i = 0; i < dataFolder.length; i++) {
+                        DataId[i] = dataFolder[i].id
+                      }
+                      const HoH = async () =>{
+                      const ho = await updateDoc(doc(db, 'Folder', FolderId ), {
+
+                        Lesson_Id: DataId,
+                        // dsdfsd: ''00
+                      }
+                      
+                      );               
+                      }
+
+
+                      HoH()
+                      const b = query(collection(db, "Folder"), where(documentId(), "==", FolderId))
+                      const getDataFolder = async () =>{
+                      const headerFolders = await getDocs(b)
+                      setHeaderFolder(headerFolders.docs.map((doc) =>({...doc.data(), id: doc.id}))[0])
+                      }
+                      getDataFolder()
+                      // console.log(headerFolder)
                       return { ...modalVisible, checkAddFolder: false };
+                      
                     })
+                    
                   }
+                  
                 >
+                  {/* {console.log(dataFolder)} */}
+                  {/* {console.log(dataFolder)} */}
+
+                  {/* false => luu */}
                   <Text style={[styles.text, { fontWeight: "700" }]}>Xong</Text>
                 </TouchableOpacity>
               </View>
@@ -90,16 +149,16 @@ const AddFolder = ({
                       handleClick(
                         checkCard(dataCards.id, dataFolder),
                         dataCards.id,
-                        dataCards.nameCard,
-                        dataCards.quantity,
+                        dataCards.Name,
+                        dataCards.Count,
                         dataCards.img,
                         dataCards.nameAuthor
                       );
                     }}
                   >
                     <Card
-                      nameCard={dataCards.nameCard}
-                      quantity={dataCards.quantity}
+                      Name={dataCards.Name}
+                      Count={dataCards.Count}
                       img={dataCards.img}
                       nameAuthor={dataCards.nameAuthor}
                       borderColor={checkCard(dataCards.id, dataFolder)}
