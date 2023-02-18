@@ -5,16 +5,18 @@ import { Text, StyleSheet, SafeAreaView, ScrollView, TextInput } from "react-nat
 import Ionicons from "react-native-vector-icons/Ionicons"
 import { db } from "../firebase/firebaseConfig";
 import { collection, addDoc, doc } from "firebase/firestore";
+import { useRoute } from "@react-navigation/native";
 // import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 // import { Alert } from "react-native/Libraries/Alert/Alert";
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
 
-const Create = ({navigation}) =>{
+
+const Create = ({navigation, route}) =>{
+    console.log(route.params.userID)
     const [lessonArray, setLessonArray] = useState({})
     const [lessonName, setLessonName] = useState("")
-    var routeID
     const [lesson, setLesson] = useState({
         name:"",
         id:"",
@@ -22,8 +24,8 @@ const Create = ({navigation}) =>{
         vocabularies:""
     }
     )
-    const [count,setCount] = useState(2)
-    const [inputFlield, setInputField] = useState([2])
+    const [count,setCount] = useState(1)
+    const [inputFlield, setInputField] = useState([1])
     const addTextField = () =>{
         setCount((count) => count + 1)
         setInputField([...inputFlield, count + 1])
@@ -72,13 +74,12 @@ const Create = ({navigation}) =>{
 
                 // });
                 const docLesson = await addDoc(collection(db, "Lesson"),{
+                    userID:route.params.userID,
                     Card:a, 
                     Name:lessonName,
                     Count:a.length
                 })
             console.log(docLesson.id)
-            routeID = docLesson.id
-            console.log(routeID)
             } catch(error){
                 console.log(error)
             }

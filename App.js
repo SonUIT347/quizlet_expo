@@ -16,6 +16,7 @@ import Test from './src/screen/Test';
 import Lesson from './src/component/Lesson';
 import ViewFolder from './src/screen/ViewFolder';
 import NewFlashCard from './src/screen/NewFlashCard';
+import createContext from 'react'
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 export default function App() {
@@ -24,13 +25,13 @@ export default function App() {
       {/* <ViewFolder/> */}
       {/* <Home/> */}
       {/* <Lesson/> */}
-      {/* <Search/> */}
+      <Search/>
       {/* <Create/> */}
       {/* <CreateFolder/> */}
       {/* <Personal/> */}
-      <NavigationContainer>
+      {/* <NavigationContainer>
         <AuthNavigator/>
-      </NavigationContainer>
+      </NavigationContainer> */}
       {/* <OptionTest/> */}
       {/* <Flashcards/> */}
       {/* <Flashcard_List/> */}

@@ -1,9 +1,10 @@
 import { View, Text, SafeAreaView, TextInput, StyleSheet,TouchableOpacity } from 'react-native'
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import { Dimensions } from 'react-native'
 import {signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
 import Ionicons from "react-native-vector-icons/Ionicons"
 import { authentication } from '../firebase/firebaseConfig';
+import { useContext } from 'react';
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
@@ -18,7 +19,23 @@ const Login = ({navigation}) => {
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
-      navigation.navigate("TabBar")
+      onAuthStateChanged(authentication, (user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          const uid = user.uid;
+          // const userId = createContext(uid)
+          // console.log(userId.Provider)
+          navigation.navigate("TabBar",{
+            userID: uid
+          })
+          // console.log(uid)
+          // ...
+        } else {
+          // User is signed out
+          // ...
+        }
+      });
       // ...
     })
     .catch((error) => {
@@ -26,18 +43,7 @@ const Login = ({navigation}) => {
       const errorMessage = error.message;
       alert(errorCode)
     });
-    onAuthStateChanged(authentication, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        console.log(uid)
-        // ...
-      } else {
-        // User is signed out
-        // ...
-      }
-    });
+
   }
   return (
     <SafeAreaView style = {styles.container} >
