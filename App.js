@@ -27,15 +27,15 @@ export default function App() {
       {/* <Create/> */}
       {/* <CreateFolder/> */}
       {/* <Personal/> */}
-      <NavigationContainer>
+      {/* <NavigationContainer>
         <AuthNavigator/>
-      </NavigationContainer>
+      </NavigationContainer> */}
       {/* <OptionTest/> */}
       {/* <Flashcards/> */}
       {/* <Flashcard_List/> */}
      {/* <Login/> */}
      {/* <Test/> */}
-     {/* <Flashcard/> */}
+     <Flashcard/>
      {/* <ViewFolder/> */}
     </View>
   );
