@@ -1,12 +1,12 @@
 import { Text, View, StyleSheet, Image } from "react-native";
-const Card = ({nameCard, quantity, img, nameAuthor, borderColor}) => {
+const Card = ({Name, Count, img, nameAuthor, borderColor}) => {
   return (
     <View style={[styles.container,{ borderColor: borderColor ? '#A9B1F9' : "#2F3856"}]}>
       <View style={styles.marginContainer}>
         <View style={{marginBottom: 5}}>
-          <Text style={[styles.text, { fontSize: 20, fontWeight: '600' }]}>{nameCard}</Text>
+          <Text style={[styles.text, { fontSize: 20, fontWeight: '600' }]}>{Name}</Text>
         </View>
-        <Text style={[styles.text, {fontSize: 10}]}>{quantity} thuật ngữ</Text>
+        <Text style={[styles.text, {fontSize: 10}]}>{Count} thuật ngữ</Text>
         <View style={{marginTop: 20, flexDirection: 'row'}}>
         <Image
             style={styles.img}

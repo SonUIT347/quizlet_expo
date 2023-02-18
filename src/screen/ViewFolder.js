@@ -1,4 +1,6 @@
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { collection, getDocs, query, where, documentId } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 import {
   Text,
   View,
@@ -13,18 +15,39 @@ import useViewFolder from "../component/useViewFolder";
 import AddFolder from "../component/AddFolder";
 import SettingFolder from "../component/SettingFolder";
 import EditFolder from "../component/EditFolder";
+import { useEffect } from "react";
 const ViewFolder = () => {
   const {
     dataFolder,
+    dataFolders,
     modalVisible,
     setModalVisible,
     dataCards,
     headerFolder,
-    setHeaderFolder, setDataFolder,
+    setHeaderFolder, setDataFolder, setDataFolders,
   } = useViewFolder();
+
+  useEffect (() => {
+      // console.log(headerFolder.Lesson_Id.length)
+      for(let i = 0; i < headerFolder.Lesson_Id.length; i++)
+        {
+          const b = query(collection(db, "Lesson"), where(documentId(), "==", headerFolder.Lesson_Id[i]))
+          const getDataFolders = async () => {
+          const abc = await getDocs(b)
+          setDataFolders((abc.docs.map((doc) => ({...doc.data(), id: doc.id}))).push())
+          }
+          // console.log(dataFolders)
+
+  
+          getDataFolders()
+        }
+    },[headerFolder])
+    // console.log(headerFolder)
+
   return (
     <View style={styles.container}>
       <View style={styles.marginContainer}>
+  {/* {console.log(headerFolder)} */}
         <View style={styles.header}>
           <TouchableOpacity style={{ width: "70%" }}>
             <AntDesign name="arrowleft" color="white" size={30} />
@@ -58,7 +81,7 @@ const ViewFolder = () => {
         </View>
         <View style={{ marginTop: 50, marginBottom: 10 }}>
           <Text style={[styles.text, { fontSize: 30, fontWeight: "700" }]}>
-            {headerFolder.nameCard}
+            {headerFolder.nameFolder}
           </Text>
         </View>
         <View style={styles.row}>
@@ -73,6 +96,7 @@ const ViewFolder = () => {
           />
           <View style={{ justifyContent: "center", marginLeft: 10 }}>
             <Text style={styles.text}>{headerFolder.nameAuthor}</Text>
+            {/* {console.log(headerFolder)} */}
           </View>
         </View>
         <Button
@@ -88,12 +112,13 @@ const ViewFolder = () => {
         />
       </View>
       <ScrollView style={{ marginLeft: 30, marginRight: 30 }}>
+        {/* {console.log(headerFolder)} */}
         {dataFolder.map((dataFl, index) => {
           return (
             <TouchableOpacity key={index}>
               <Card
-                nameCard={dataFl.nameCard}
-                quantity={dataFl.quantity}
+                Name={dataFl.Name}
+               Count={dataFl.Count}
                 img={dataFl.img}
                 nameAuthor={dataFl.nameAuthor}
               />
@@ -103,6 +128,8 @@ const ViewFolder = () => {
       </ScrollView>
       <AddFolder
         dataFolder={dataFolder}
+        headerFolder={headerFolder}
+        setHeaderFolder={setHeaderFolder}
         dataCards={dataCards}
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
