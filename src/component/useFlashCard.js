@@ -239,6 +239,5 @@ export default function useTinderCards() {
     setDataHeader,
     handlePlay,
     hanldeUndo,
-    id
   ];
 }

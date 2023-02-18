@@ -15,9 +15,7 @@ import Flashcard from './src/screen/FlashCard';
 import Test from './src/screen/Test';
 import Lesson from './src/component/Lesson';
 import ViewFolder from './src/screen/ViewFolder';
-import SettingFolder from './src/component/SettingFolder';
-import createContext from 'react'
-import { Card } from '@rneui/base';
+// import NewFlashCard from './src/screen/NewFlashCard';
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 export default function App() {

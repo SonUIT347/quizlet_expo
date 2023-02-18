@@ -22,7 +22,7 @@ const AddFolder = ({
   setModalVisible,
   setDataFolder,
   setHeaderFolder,
-
+  temp,
   
 }) => {
   const checkCard = (data) => {
@@ -88,6 +88,8 @@ const AddFolder = ({
                 <TouchableOpacity
                   onPress={() =>
                     setModalVisible((modalVisible) => {
+                      temp++;
+                      console.log(temp)
                       // if(!modalVisible.checkAddFolder)
                       // {
                       //   console.log(modalVisible) 
@@ -99,6 +101,14 @@ const AddFolder = ({
                       for (let i = 0; i < dataFolder.length; i++) {
                         DataId[i] = dataFolder[i].id
                       }
+                      const cityRef = doc(db, 'Folder', FolderId);
+                      const del = async () => {
+                        const ha = await updateDoc(cityRef, {
+                          Lesson_Id: deleteField()
+                      })}
+
+                      del()
+
                       const HoH = async () =>{
                       const ho = await updateDoc(doc(db, 'Folder', FolderId ), {
 
@@ -106,9 +116,10 @@ const AddFolder = ({
                         // dsdfsd: ''00
                       }
                       
+                      
                       );               
                       }
-
+                      console.log(DataId)
 
                       HoH()
                       const b = query(collection(db, "Folder"), where(documentId(), "==", FolderId))
@@ -117,18 +128,15 @@ const AddFolder = ({
                       setHeaderFolder(headerFolders.docs.map((doc) =>({...doc.data(), id: doc.id}))[0])
                       }
                       getDataFolder()
-                      // console.log(headerFolder)
+    // console.log(headerFolder.Lesson_Id)
+
                       return { ...modalVisible, checkAddFolder: false };
-                      
                     })
                     
                   }
                   
                 >
-                  {/* {console.log(dataFolder)} */}
-                  {/* {console.log(dataFolder)} */}
 
-                  {/* false => luu */}
                   <Text style={[styles.text, { fontWeight: "700" }]}>Xong</Text>
                 </TouchableOpacity>
               </View>
