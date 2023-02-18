@@ -8,7 +8,7 @@ import { db } from "../firebase/firebaseConfig";
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
-const Search = () =>{
+const Search = ({navigation}) =>{
     const [touch, setTouch] = useState(true)
     const [touch1, setTouch1] = useState(false)
     const [docLess, setDocLes] = useState([])
@@ -85,7 +85,9 @@ const [exam1, setExam1] = useState([
 { 
     (touch?search:folder).map((search,index) => {
             return(
-              <TouchableOpacity style = {styles.lesson} key={search.id}>
+              <TouchableOpacity style = {styles.lesson} key={search.id} onPress={() => navigation.navigate("option",{
+                lessonId:search.id
+              })} >
                 <SafeAreaView style = {styles.acm_name_text}>
                   <View style = {styles.name_ctn}>
                   <Text style={{fontSize:20, fontWeight:"bold", marginBottom: 3, color:"#FFFFFF"}} >{search.Name}</Text>

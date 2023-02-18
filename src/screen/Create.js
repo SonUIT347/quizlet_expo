@@ -14,6 +14,7 @@ var heightfull = Dimensions.get('window').height; //full height
 const Create = ({navigation}) =>{
     const [lessonArray, setLessonArray] = useState({})
     const [lessonName, setLessonName] = useState("")
+    var routeID
     const [lesson, setLesson] = useState({
         name:"",
         id:"",
@@ -21,8 +22,8 @@ const Create = ({navigation}) =>{
         vocabularies:""
     }
     )
-    const [count,setCount] = useState(1)
-    const [inputFlield, setInputField] = useState([1])
+    const [count,setCount] = useState(2)
+    const [inputFlield, setInputField] = useState([2])
     const addTextField = () =>{
         setCount((count) => count + 1)
         setInputField([...inputFlield, count + 1])
@@ -71,11 +72,13 @@ const Create = ({navigation}) =>{
 
                 // });
                 const docLesson = await addDoc(collection(db, "Lesson"),{
-                    Card:a,
+                    Card:a, 
                     Name:lessonName,
                     Count:a.length
                 })
             console.log(docLesson.id)
+            routeID = docLesson.id
+            console.log(routeID)
             } catch(error){
                 console.log(error)
             }
@@ -97,7 +100,7 @@ const Create = ({navigation}) =>{
             <Text style = {{ fontSize: 24, fontWeight: "bold", top:10, color:"white"}} >Create Lesstion</Text>
             </SafeAreaView>
 
-            <TouchableOpacity onPress={() => (submit()) } >
+            <TouchableOpacity onPress={() => (submit(), navigation.navigate("home")) } >
                 <Text style = {{ alignSelf:"center", color:"white", marginTop:18, fontSize:15, marginRight:10}} >
                     Done
                 </Text>
