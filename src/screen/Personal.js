@@ -9,26 +9,11 @@ import { async } from '@firebase/util';
 // import { ScrollView } from 'react-native-web';
 
 const Avatar = 'https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2022/09/avatar-anime-1.jpg?ssl=1'
+
+const userID = 'CGBLkojIxlfdlBbg6TcffaD9ngi2'//này là userID của tài khoản đag login
+// Từ userID lưu trên Lesson liên kết ra username r gán nó bằng nameAuthor dùm t nha
 const nameAuthor = 'SonTran'
-const userID = 'CGBLkojIxlfdlBbg6TcffaD9ngi2'
 
-const HOCPHAN=[
-  // {Name: 'hocphan1', SL: 1, Avt: 'https://i.pinimg.com/originals/e8/55/73/e85573853e5cd1cf589b6a3e015c2d18.jpg', UserName: 'Sơn Trần'},
-  // {Name: 'hocphan2', SL: 1, Avt: Avatar, UserName: 'Tài Tài'},
-  // {Name: 'hocphan3', SL: 1, Avt: Avatar, UserName: 'Thắng Nguyễn'},
-  // {Name: 'hocphan3', SL: 1, Avt: Avatar, UserName: 'Sơn Trần'},
-  // {Name: 'hocphan3', SL: 1, Avt: Avatar, UserName: 'Tài Tài'},
-  // {Name: 'hocphan3', SL: 1, Avt: Avatar, UserName: 'Sơn Tần'}
-]
-
-const FOLDER=[
-  // {Name: 'folder1', Avt: Avatar, UserName: 'Sơn Trần'},
-  // {Name: 'folder2', Avt: Avatar, UserName: 'Sơn Trần'},
-  // {Name: 'folder3', Avt: Avatar, UserName: 'Thắng Nguyễn'},
-  // {Name: 'folder35', Avt: Avatar, UserName: 'Thắng Nguyễn'},
-  // {Name: 'folder4', Avt: Avatar, UserName: 'name'},
-  // {Name: 'folder5', Avt: Avatar, UserName: 'name'}
-]
 
 export default function Personal() {
   
