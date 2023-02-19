@@ -15,7 +15,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Speedometer from "react-native-speedometer-chart";
 import { useRoute } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-function FlashCard() {
+function FlashCard({navigation}) {
   const route = useRoute()
   console.log(route.params.lessonId)
   useEffect(() =>{
@@ -346,7 +346,9 @@ function FlashCard() {
             }}
           >
             <View style={{ backgroundColor: "#4654F6", borderRadius: 7 }}>
-              <TouchableOpacity style={{ margin: 20 }}>
+              <TouchableOpacity style={{ margin: 20 }} onPress={() => navigation.navigate("Test",{
+                lessonId:route.params.lessonId
+              })}>
                 <Text
                   style={{
                     textAlign: "center",

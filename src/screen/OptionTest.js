@@ -68,7 +68,9 @@ const OptionTest = ({navigation}) =>{
             <Text style={styles.text}  >Study with help of a study path</Text>
           </TouchableOpacity> */}
           <SafeAreaView >
-          <TouchableOpacity style={styles.touch} >
+          <TouchableOpacity style={styles.touch} onPress={() => navigation.navigate("Test",{
+            lessonId:route.params.lessonId
+          })} >
             <Text style={styles.text} >Learn</Text>
             <Text style={styles.text}  >Study with help of a study path</Text>
           </TouchableOpacity>

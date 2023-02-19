@@ -10,13 +10,19 @@ import {
 } from 'react-native';
 import Speedometer from 'react-native-speedometer-chart';
 import {Switch} from '@rneui/themed';
-import {useState, useRef} from 'react';
+import {useState, useRef,useEffect} from 'react';
 import {Picker} from '@react-native-picker/picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {LinearProgress, Dialog, Button} from '@rneui/themed';
 import useStudy from '../component/useStudy';
+import { useRoute } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Test = () => {
+  const route = useRoute()
+  useEffect(() =>{
+    AsyncStorage.setItem("lessonId", `${route.params.lessonId}`)
+  },[])
   const pickerRef = useRef();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [
