@@ -10,21 +10,22 @@ import { async } from '@firebase/util';
 
 const Avatar = 'https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2022/09/avatar-anime-1.jpg?ssl=1'
 
-const userID = 'CGBLkojIxlfdlBbg6TcffaD9ngi2'//này là userID của tài khoản đag login
+
 // Từ userID lưu trên Lesson liên kết ra username r gán nó bằng nameAuthor dùm t nha
 const nameAuthor = 'SonTran'
 
 
-export default function Personal() {
-  
+export default function Personal({route}) {
+
   const [Lesson, setLesson] = useState([]);
   const [Folder, setFolder] = useState([]);
   // const [Content, setContent] = useState(Lesson);
   const [Page, setPage] = useState('HOC_PHAN');
-
+  const userID = `${route.params.userID}`//này là userID của tài khoản đag login
+  console.log(userID)
   useEffect (() => {
     const pLesson = query(collection(db, 'Lesson'), where('userID', '==', userID))
-    const pFolder  = query(collection(db, 'Folder',), where('nameAuthor', '==', nameAuthor))
+    const pFolder  = query(collection(db, 'Folder',), where('userID', '==', userID))
     getDataLesson = async () => {
       const DataLesson = await getDocs(pLesson)
       setLesson(DataLesson.docs.map((doc)=>({...doc.data(), id: doc.id})))

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, query, where, documentId } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const LessonID = 'FFuNQeomrVf4ov8TIuIL'// id cua lesson dag test
@@ -17,7 +18,8 @@ const shuffle = (arr) => {
   return arr;
 };
 
-useEffect(()=>{
+useEffect( async ()=>{
+  const LessonID = await AsyncStorage.getItem("lessonId")
   const dbArr = query(collection(db, 'Lesson'), where(documentId(), '==', LessonID))
   const getDataArr = async () =>{
     const DataArr = await getDocs(dbArr)

@@ -7,6 +7,7 @@ import Lesson from './Lesson';
 import ViewFolder from '../screen/ViewFolder';
 import Folder from './Folder';
 import useFlashCard from "./useFlashCard"
+import Test from '../screen/Test';
 import FlashCard from '../screen/FlashCard';
 const Stack = createStackNavigator();
 const LessonNavigator = ({route}) => {
@@ -24,6 +25,7 @@ const LessonNavigator = ({route}) => {
           <Stack.Screen name="Option" component={OptionTest}  /> 
           <Stack.Screen name='ViewFolder' component={ViewFolder} />
           <Stack.Screen name='Flashcard' component={FlashCard} />
+          <Stack.Screen name='Test' component={Test} />
           <Stack.Screen name='Lesson' component={Lesson} />
           <Stack.Screen name='Folder' component={Folder} />
         </Stack.Navigator>
