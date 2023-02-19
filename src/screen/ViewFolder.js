@@ -29,7 +29,6 @@ const ViewFolder = () => {
     setModalVisible,
     dataCards,
     headerFolder,
-    temp,
     setHeaderFolder, setDataFolder, setDataFolders,
   } = useViewFolder();
 
@@ -128,7 +127,6 @@ const ViewFolder = () => {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         setDataFolder={setDataFolder}
-        temp={temp}
       />
       <SettingFolder
         modalVisible={modalVisible}

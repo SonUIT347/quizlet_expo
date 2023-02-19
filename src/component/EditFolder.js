@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { doc, updateDoc, deleteField, setDoc, query, where, collection, documentId, getDocs } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 import {
   Alert,
   Modal,
@@ -9,13 +11,17 @@ import {
   ScrollView,
 } from "react-native";
 import { Input, Icon, Button } from "@rneui/themed";
+import Folder from "./Folder";
+
+const FolderId = 'jtOjniEeGlpuxHQg4txg'
+
 const EditFolder = ({
   modalVisible,
   setModalVisible,
   headerFolder,
   setHeaderFolder,
 }) => {
-  const [text, setText] = useState({ Name: headerFolder.Name });
+  const [text, setText] = useState({ nameFolder: headerFolder.nameFolder });
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -47,9 +53,13 @@ const EditFolder = ({
               </Text>
               <TouchableOpacity
                 onPress={() => {
-                  if(text.Name.length !== 0){
+                  if(text.nameFolder.length !== 0){
+                    const UpdatenameFolder = async () => {
+                      await updateDoc(doc(db, 'Folder', FolderId), {nameFolder: text.nameFolder})
+                    }
+                    UpdatenameFolder()
                     setHeaderFolder((headerFolder) => {
-                        return { ...headerFolder, Name: text.Name };
+                        return { ...headerFolder, nameFolder: text.nameFolder };
                       });
                       setModalVisible((modalVisible) => {
                         return {
@@ -68,10 +78,10 @@ const EditFolder = ({
                 inputStyle={{ color: "white", fontSize: 15 }}
                 errorStyle={{ color: "white", fontWeight: "600" }}
                 errorMessage="TIÊU ĐỀ THƯ MỤC"
-                defaultValue={text.Name}
+                defaultValue={text.nameFolder}
                 onChangeText={(value) =>
                   setText((text) => {
-                    return { ...text, Name: value };
+                    return { ...text, nameFolder: value };
                   })
                 }
               />

@@ -23,7 +23,6 @@ const AddFolder = ({
   setModalVisible,
   setDataFolder,
   setHeaderFolder,
-  temp,
   
 }) => {
   const checkCard = (data) => {
@@ -93,15 +92,6 @@ const AddFolder = ({
                 <TouchableOpacity
                   onPress={() =>
                     setModalVisible((modalVisible) => {
-                      temp++;
-                      console.log(temp)
-                      // if(!modalVisible.checkAddFolder)
-                      // {
-                      //   console.log(modalVisible) 
-                      //   {console.log(dataFolder)}
-                      // }
-                      // console.log(modalVisible)
-                      // console.log(dataFolder)
                       const DataId = []
                       for (let i = 0; i < dataFolder.length; i++) {
                         DataId[i] = dataFolder[i].id

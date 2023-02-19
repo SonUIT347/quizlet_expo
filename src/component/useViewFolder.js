@@ -43,17 +43,9 @@ const useViewFolder = () => {
       const headerFolders = await getDocs(q)
       setHeaderFolder(headerFolders.docs.map((doc) =>({...doc.data(), id: doc.id}) )[0])
       
-      // setDataFolders(headerFolders.docs.map((doc) =>({...doc.data(), id: doc.id}))[0])
     }
 
     getDataFolder()
-
-    // const b = query(collection(db, "Lesson"), where(documentId(), "==", headerFolder.Lesson_Id[0]))
-    // const getTest = async () => {
-    //   const abc = await getDocs(b)
-    //   setDataFolders(abc.docs.map((doc) =>({...doc.data(), id: doc.id})))
-    // }
-    // getTest()
 
   },[])
 
@@ -89,7 +81,6 @@ const useViewFolder = () => {
     headerFolder, setHeaderFolder,
     setDataFolder,
     setDataFolders,
-    temp,
   };
 };
 export default useViewFolder;

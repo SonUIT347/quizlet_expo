@@ -1,38 +1,47 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, Image, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+
+import { collection, getDocs, query, where, documentId } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
+import { async } from '@firebase/util';
 // import { ScrollView } from 'react-native-web';
 
 const Avatar = 'https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2022/09/avatar-anime-1.jpg?ssl=1'
 
-const HOCPHAN=[
-  {Name: 'hocphan1', SL: 1, Avt: 'https://i.pinimg.com/originals/e8/55/73/e85573853e5cd1cf589b6a3e015c2d18.jpg', UserName: 'Sơn Trần'},
-  {Name: 'hocphan2', SL: 1, Avt: Avatar, UserName: 'Tài Tài'},
-  {Name: 'hocphan3', SL: 1, Avt: Avatar, UserName: 'Thắng Nguyễn'},
-  {Name: 'hocphan3', SL: 1, Avt: Avatar, UserName: 'Sơn Trần'},
-  {Name: 'hocphan3', SL: 1, Avt: Avatar, UserName: 'Tài Tài'},
-  {Name: 'hocphan3', SL: 1, Avt: Avatar, UserName: 'Sơn Tần'}
-]
+const userID = 'CGBLkojIxlfdlBbg6TcffaD9ngi2'//này là userID của tài khoản đag login
+// Từ userID lưu trên Lesson liên kết ra username r gán nó bằng nameAuthor dùm t nha
+const nameAuthor = 'SonTran'
 
-const FOLDER=[
-  {Name: 'folder1', Avt: Avatar, UserName: 'Sơn Trần'},
-  {Name: 'folder2', Avt: Avatar, UserName: 'Sơn Trần'},
-  {Name: 'folder3', Avt: Avatar, UserName: 'Thắng Nguyễn'},
-  {Name: 'folder35', Avt: Avatar, UserName: 'Thắng Nguyễn'},
-  {Name: 'folder4', Avt: Avatar, UserName: 'name'},
-  {Name: 'folder5', Avt: Avatar, UserName: 'name'}
-]
 
 export default function Personal() {
+  
+  const [Lesson, setLesson] = useState([]);
+  const [Folder, setFolder] = useState([]);
+  // const [Content, setContent] = useState(Lesson);
   const [Page, setPage] = useState('HOC_PHAN');
-  const [Content, setContent] = useState(HOCPHAN);
 
-  // _onPressSetting = () => {
-  //   Alert.alert("adfadfa")
+  useEffect (() => {
+    const pLesson = query(collection(db, 'Lesson'), where('userID', '==', userID))
+    const pFolder  = query(collection(db, 'Folder',), where('nameAuthor', '==', nameAuthor))
+    getDataLesson = async () => {
+      const DataLesson = await getDocs(pLesson)
+      setLesson(DataLesson.docs.map((doc)=>({...doc.data(), id: doc.id})))
+    }
+    getDataFolder = async () => {
+      const DataFolder = await getDocs(pFolder)
+      setFolder(DataFolder.docs.map((doc)=>({...doc.data(), id: doc.id})))
+    }
+    getDataLesson()
+    getDataFolder()
+  }, [])
+  console.log(Lesson)
+  console.log(Folder)
 
-  // }
+
   return (
+    
     <View style={{height: '100%'}}>
       <View style={styles.container}>
         <View style={{flex: 1, flexDirection: 'row', backgroundColor: '#2e3969'}}>
@@ -42,17 +51,17 @@ export default function Personal() {
 
         <View style={{flex: 4, alignItems: 'center',  width: '100%', height: '100%'}}>
           <Image source={{uri: Avatar}} style={styles.Img}/>
-          <Text style={styles.Name}>Sơn Trần</Text>
+          <Text style={styles.Name}>{nameAuthor}</Text>
 
           <View style={{flex: 1, flexDirection: 'row', marginTop: 10, bottom: 0}}>
             <TouchableOpacity style={styles.ButtonContent1} 
-            onPress ={()=>{setPage('HOC_PHAN'), setContent(HOCPHAN)}}
-            disabled={Page === 'HOC_PHAN' ? true : false}>
+            onPress ={()=>{setPage('HOC_PHAN')}}
+            disabled={(Page === 'HOC_PHAN') ? true : false}>
               <Text style={styles.Title}>Các học phần</Text>
               {Page === 'HOC_PHAN' ? <View style={{position: 'absolute', height: 5, width: '100%', backgroundColor: '#546999', bottom: 0}}></View> : null}
             </TouchableOpacity>
             <TouchableOpacity style={styles.ButtonContent2}
-            onPress ={()=>{setPage('FOLDER'), setContent(FOLDER)}}
+            onPress ={()=>{setPage('FOLDER')}}
             disabled={Page === 'FOLDER' ? true : false}>
               <Text style={styles.Title}>Thư  mục</Text>
               {Page === 'FOLDER' ? <View style={{position: 'absolute', height: 5, width: '100%', backgroundColor: '#546999', bottom: 0}}></View> : null}
@@ -67,23 +76,23 @@ export default function Personal() {
       <View style={{flex:7, backgroundColor: '#000044'}}>
       {Page === 'FOLDER' ? 
       <ScrollView>
-        {Content.map((Contents, index) => {
+        {Folder.map((Contents, index) => {
           return(
             <TouchableOpacity key={index}
              style={{backgroundColor: '#2e3969', margin: 20, marginBottom: 0, borderRadius: 10, padding: 20, paddingTop: 10, height: 127}}>
                 <Icon name='folder' size={25} color='white' style={{}}></Icon>
 
-                <Text style={{color:'white', fontSize: 25, fontWeight: '700'}}>{Contents.Name}</Text>
+                <Text style={{color:'white', fontSize: 25, fontWeight: '700'}}>{Contents.nameFolder}</Text>
 
                 <View style={{flexDirection: 'row', paddingTop: 10}}>
-                  <Image source={{uri: Contents.Avt}} style={styles.Hpimg}/>
-                  <Text style={{color:'white',fontSize: 16,fontWeight: '500', textAlign: 'center', padding: 5, marginLeft: 5}}>{Contents.UserName}</Text>
+                  <Image source={{uri: Avatar}} style={styles.Hpimg}/>
+                  <Text style={{color:'white',fontSize: 16,fontWeight: '500', textAlign: 'center', padding: 5, marginLeft: 5}}>{Contents.nameAuthor}</Text>
                 </View>
             </TouchableOpacity>
           )
         })}
   
-        {Content.length == 0 ?
+        {Folder.length === 0 ?
         <View style={{flexDirection: 'column', justifyContent: 'center', paddingTop: 240}}>
           <Icon name="folder" color="white" size={40} style={{textAlign: 'center'}}></Icon>
           <Text style={{fontSize: 22, textAlign: 'center', color: 'white', paddingTop: 5}}>Bạn chưa có thư mục nào.</Text>
@@ -93,20 +102,20 @@ export default function Personal() {
         }
       </ScrollView> :
       <ScrollView>
-        {Content.map((Contents, index) => {
+        {Lesson.map((Contents, index) => {
           return(
           <TouchableOpacity key={index}
-          style={{backgroundColor: '#2e3969', margin: 20, marginBottom: 0, borderRadius: 10, padding: 20, paddingTop: 10, height: 127, width: 350}}>
+          style={{backgroundColor: '#2e3969', margin: 20, marginBottom: 0, borderRadius: 10, padding: 20, paddingTop: 10, height: 127}}>
             <Text style={{color:'white', fontSize: 25, fontWeight: '700'}}>{Contents.Name}</Text>
-            <Text style={{color:'white', fontSize: 18}}>{Contents.SL} Thuật ngữ</Text>
+            <Text style={{color:'white', fontSize: 18}}>{Contents.Count} Thuật ngữ</Text>
             <View style={{flexDirection: 'row', paddingTop: 10}}>
-            <Image source={{uri: Contents.Avt}} style={styles.Hpimg}/>
-            <Text style={{color:'white',fontSize: 16,fontWeight: '500', textAlign: 'center', padding: 5, marginLeft: 5}}>{Contents.UserName}</Text>
+            <Image source={{uri: Avatar}} style={styles.Hpimg}/>
+            <Text style={{color:'white',fontSize: 16,fontWeight: '500', textAlign: 'center', padding: 5, marginLeft: 5}}>{nameAuthor}</Text>
             </View>
           </TouchableOpacity>
           )
         })}
-        {Content.length == 0 ?
+        {Lesson.length === 0 ?
           <View style={{flexDirection: 'column', justifyContent: 'center', paddingTop: 240}}>
             <Icon name="book-open" color="white" size={40} style={{textAlign: 'center'}}></Icon>
             <Text style={{fontSize: 22, textAlign: 'center', color: 'white', paddingTop: 5}}>Bạn chưa tạo học phần nào.</Text>
