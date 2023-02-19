@@ -4,10 +4,13 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Login from '../screen/Login'
 import BottomTab from './BottomTab'
 import Register from '../screen/Register'
-
+import { useRoute } from '@react-navigation/native'
 const Stack = createStackNavigator()
 
-const AuthNavigator = () => {
+const AuthNavigator = () => { 
+  // const route = useRoute()
+  // console.log(route.params.userID)
+
   return (
     <Stack.Navigator initialRouteName='Login' screenOptions={{
       headerShown:false

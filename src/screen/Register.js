@@ -29,10 +29,10 @@ const Register = ({navigation}) => {
     <SafeAreaView style = {styles.container} >
     <SafeAreaView style = {styles.textInput_ctn} >
       <Text style={styles.text} >User name</Text>
-      <TextInput fontSize={15} onChangeText={(newtext) => setUserName(newtext) } style={styles.textInput} placeholder='username' placeholderTextColor={"gray"} >
+      <TextInput fontSize={15} onChangeText={(newtext) => setUserName(newtext) } style={styles.textInput} placeholder='email' placeholderTextColor={"gray"} >
       </TextInput>
       <Text style={styles.text} >Password</Text>
-      <TextInput fontSize={15} onChangeText={(newtext) => setPassword(newtext) } style={styles.textInput} secureTextEntry={isSecure} placeholder='Passwork' placeholderTextColor={"gray"} >
+      <TextInput fontSize={15} onChangeText={(newtext) => setPassword(newtext) } style={styles.textInput} secureTextEntry={isSecure} placeholder='Password' placeholderTextColor={"gray"} >
       </TextInput>
       {/* <TouchableOpacity onPress={() => setEyeicon("eye-off") } >
               <Ionicons

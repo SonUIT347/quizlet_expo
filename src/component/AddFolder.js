@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { doc, updateDoc, deleteField, setDoc, query, where, collection, documentId, getDocs } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import {
@@ -11,6 +11,7 @@ import {
   ScrollView,
 } from "react-native";
 import Card from "./Card";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const FolderId = 'jtOjniEeGlpuxHQg4txg'
 
@@ -38,7 +39,11 @@ const AddFolder = ({
       {console.log(dataFolder)}
     }
   }
-  
+  const [FolderId,setFolderID] = useState('')
+  useEffect(async() =>{
+    id = await AsyncStorage.getItem("FolderID")
+    setFolderID(id)
+  },[])
                   
   // console.log(dataFolder.length);
   const handleClick = (check, id, Name, Count, img, nameAuthor) => {
@@ -177,7 +182,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#0A092D",
   },
   modalView: {
-    marginTop: 30,
+    marginTop: 50,
     marginLeft: 30,
     marginRight: 30,
     height: "95%",

@@ -11,7 +11,7 @@ import { useRoute } from "@react-navigation/native";
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
-const OptionTest = () =>{
+const OptionTest = ({navigation}) =>{
   const route = useRoute()
   const [card, setCard] = useState([])
   const [displayCard, setDisplayCard] = useState([])
@@ -55,7 +55,9 @@ const OptionTest = () =>{
 
         <SafeAreaView style={styles.touch_ctn}>
           <SafeAreaView >
-          <TouchableOpacity style={styles.touch} >
+          <TouchableOpacity style={styles.touch} onPress={() => navigation.navigate("Flashcard",{
+            lessonId:route.params.lessonId
+          })}  >
             <Text style={styles.text} >Flashcards</Text>
             <Text style={styles.text}  >Review terms and their meaning</Text>
           </TouchableOpacity>
@@ -67,8 +69,8 @@ const OptionTest = () =>{
           </TouchableOpacity> */}
           <SafeAreaView >
           <TouchableOpacity style={styles.touch} >
-            <Text style={styles.text} >Flashcards</Text>
-            <Text style={styles.text}  >Review terms and their meaning</Text>
+            <Text style={styles.text} >Learn</Text>
+            <Text style={styles.text}  >Study with help of a study path</Text>
           </TouchableOpacity>
           </SafeAreaView>
 

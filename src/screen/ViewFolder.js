@@ -10,13 +10,18 @@ import {
   ScrollView,
 } from "react-native";
 import { Button } from "@rneui/themed";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Card from "../component/Card";
 import useViewFolder from "../component/useViewFolder";
 import AddFolder from "../component/AddFolder";
 import SettingFolder from "../component/SettingFolder";
 import EditFolder from "../component/EditFolder";
+import { useRoute } from "@react-navigation/native";
 import { useEffect } from "react";
+import { async } from "@firebase/util";
 const ViewFolder = () => {
+  const route = useRoute()
+  console.log(route.params.FolderID)
   const {
     dataFolder,
     dataFolders,
@@ -27,7 +32,9 @@ const ViewFolder = () => {
     setHeaderFolder, setDataFolder, setDataFolders,
   } = useViewFolder();
 
-
+  useEffect(() =>{
+    AsyncStorage.setItem("FolderID", `${route.params.FolderID}`)
+  },[])
     // console.log(headerFolder)
 
   return (

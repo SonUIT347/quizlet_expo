@@ -13,15 +13,18 @@ var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
 
-const Folder = ({props}) => {
+const Folder = ({props, navigation}) => {
   return (
     <SafeAreaView style = {styles.scroll_ctn}>
     <ScrollView horizontal={true} style = {styles.scroll}>
       {props.map((props,index) => {
+        // console.log(props.id)
         return(
-          <TouchableOpacity style = {styles.lesson} key={props.id}>
+          <TouchableOpacity style = {styles.lesson} key={props.id} onPress={() => navigation.navigate('ViewFolder',{
+            FolderID:props.id
+          })} >
             <SafeAreaView style = {styles.acm_name_text}>
-              <Text style={{fontSize:20, fontWeight:"bold", marginBottom: 3, color: "white",marginBottom:15}} >{props.Name}</Text>
+              <Text style={{fontSize:20, fontWeight:"bold", marginBottom: 3, color: "white",marginBottom:15}} >{props.nameFolder}</Text>
               {/* <Text style={{width:60, borderRadius: 10, padding:3, backgroundColor:"white", fontSize:10,paddingLeft:5,color:"red"}}>{props.count + " tems"}</Text> */}
             </SafeAreaView>
 

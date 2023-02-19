@@ -11,7 +11,8 @@ var heightfull = Dimensions.get('window').height; //full height
 const Search = ({navigation}) =>{
     const [touch, setTouch] = useState(true)
     const [touch1, setTouch1] = useState(false)
-    const [docLess, setDocLes] = useState([])
+    const [exam, setExam] = useState([])
+    const [docLess, setDocLes] = useState([{}])
     const [docFols,setDocFol] = useState([])
     const [search, setSearch] = useState([])
     const [folder, setFolder] = useState([])
@@ -23,33 +24,14 @@ const Search = ({navigation}) =>{
       }
       const getDataFolder = async () =>{
         const docFol = await getDocs(collection(db, "Folder"))
-        setDocFol(docFol.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
+        setDocFol(docFol.docs.map((doc) =>({...doc.data(), id: doc.id})) )
         setFolder(docFol.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
         // setFolder(docFols)
       }
       getDataLesson()
       getDataFolder()
     },[])
-
-
-
-const [exam1, setExam1] = useState([
-    {
-        id:1,
-        name:"nihon",
-        user:"son"
-    },
-    {
-        id:2,
-        name:"english",
-        user:"tai"
-    },
-    {
-        id:3,
-        name:"vietnamese",
-        user:"thang"
-    }
-])
+    console.log(docFols)
     return(
     <SafeAreaView style = {styles.main} >
     <SafeAreaView>
@@ -61,10 +43,11 @@ const [exam1, setExam1] = useState([
               //  || search.user_name.toString().includes(search_string.toLocaleLowerCase())
               }))
               setFolder(docFols.filter((docFols) => {
-                return docFols.Name.toString().includes(search_string) 
+                return docFols.nameFolder.toString().includes(search_string) 
                 // || exam1.user.toString().includes(search_string.toLocaleLowerCase())
               }))
-            }}
+            }
+          }
             
             /> 
             </View>
@@ -82,8 +65,8 @@ const [exam1, setExam1] = useState([
     </SafeAreaView>
     <SafeAreaView style = {styles.search_ctn}>
     <ScrollView>
-{ 
-    (touch?search:folder).map((search,index) => {
+{ touch?search
+    .map((search,index) => {
             return(
               <TouchableOpacity style = {styles.lesson} key={search.id} onPress={() => navigation.navigate("option",{
                 lessonId:search.id
@@ -101,7 +84,22 @@ const [exam1, setExam1] = useState([
                 <Text style = {{top: 55, left:10, fontSize: 15 ,color: "#6384B0"}} >{search.user_name}</Text>
               </TouchableOpacity>
             )
-          })}
+          }):
+          folder.map((folder, index) =>{
+            return(
+              <TouchableOpacity style = {styles.lesson} key={search.id} onPress={() => navigation.navigate("ViewFolder",{
+                FolderID:folder.id
+              })} >
+                <SafeAreaView style = {styles.acm_name_text}>
+                  <View style = {styles.name_ctn}>
+                  <Text style={{fontSize:20, fontWeight:"bold", marginBottom: 3, color:"#FFFFFF"}} >{folder.nameFolder}</Text>
+                  </View>
+                </SafeAreaView>
+                {/* <Text style = {{top: 55, left:10, fontSize: 15 ,color: "#6384B0"}} >{search.user_name}</Text> */}
+              </TouchableOpacity>
+            )
+          })
+        }
     </ScrollView>
 
     </SafeAreaView>

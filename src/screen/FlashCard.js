@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -13,7 +13,14 @@ import { LinearProgress } from "@rneui/themed";
 import useTinderCard from "../component/useFlashCard";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Speedometer from "react-native-speedometer-chart";
+import { useRoute } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 function FlashCard() {
+  const route = useRoute()
+  console.log(route.params.lessonId)
+  useEffect(() =>{
+    AsyncStorage.setItem("lessonId", `${route.params.lessonId}`)
+  },[])
   const [
     data,
     _panResponder,
@@ -164,7 +171,7 @@ function FlashCard() {
                   <Text
                     style={{ fontSize: 40, color: "white", fontWeight: "500" }}
                   >
-                    {item.name}
+                    {item.Term}
                   </Text>
                 </View>
               </Animated.View>

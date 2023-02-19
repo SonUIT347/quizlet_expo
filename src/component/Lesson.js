@@ -11,26 +11,6 @@ var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
 const Lesson = ({props, navigation}) =>{
-    const exam = [
-        {
-          id: "1",
-          Name:"lesson 1",
-          count: 32,
-          user_name: "son"
-        },
-        {
-          id: "2",
-          Name:"lesson 2",
-          count: 32,
-          user_name: "son"
-        },
-        {
-          id: "3",
-          Name:"lesson 3",
-          count: 32,
-          user_name: "son"
-        },
-      ]
     return(
         <SafeAreaView style = {styles.scroll_ctn}>
         <ScrollView horizontal={true} style = {styles.scroll}>

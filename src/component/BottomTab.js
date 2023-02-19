@@ -12,16 +12,20 @@ import Ionicons from "react-native-vector-icons/Ionicons"
 import LessonNavigator from './Lessonnavigator';
 import Personal from '../screen/Personal';
 import SearchNavigation from './SearchNavigation';
+import { useRoute } from '@react-navigation/native';
+
 // import CreateNavigator from './CreateNavigator';
 
 
 const Tab = createBottomTabNavigator()
 
 
-const BottomTab = () =>{
+const BottomTab = ({navigation}) =>{
+    const route = useRoute()
+    // console.log(route.params.userID)
     return(
-        <Tab.Navigator screenOptions={{headerShown:false,tabBarStyle: styles.tabBarStyle} } >
-            <Tab.Screen name = "LessonNavigator" component={LessonNavigator} options={{
+        <Tab.Navigator screenOptions={{headerShown:false,tabBarStyle: styles.tabBarStyle}  } >
+            <Tab.Screen name = "LessonNavigator" initialParams={{userID:route.params.userID}}  component={LessonNavigator} options={{
                 tabBarLabel:"",
                 tabBarIcon: () =>{
                     return(
@@ -46,9 +50,9 @@ const BottomTab = () =>{
                     )
                 }
             }} />
-            <Tab.Screen name = "CreateNav" component={CreateNavigator} options = {{
+            <Tab.Screen name = "CreateNav" initialParams={{userID:route.params.userID}} component={CreateNavigator} options={{
                 tabBarLabel:"",
-                tabBarIcon: ()=>{
+                tabBarIcon: () => {
                     return(
                         <MaterialCommunityIcons
                         name = "plus-circle-outline"
@@ -56,9 +60,9 @@ const BottomTab = () =>{
                         color = {"#2E3856"}
                         />
                     )
-                },
+                }
             }} />
-            <Tab.Screen name = "personal" component={Personal} options = {{
+            <Tab.Screen name = "personal" component={Personal} initialParams={{userID:route.params.userID}} options = {{
                 tabBarLabel:"",
                 tabBarIcon: ()=>{
                     return(

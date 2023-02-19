@@ -1,9 +1,10 @@
 import { View, Text, SafeAreaView, TextInput, StyleSheet,TouchableOpacity } from 'react-native'
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import { Dimensions } from 'react-native'
 import {signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
 import Ionicons from "react-native-vector-icons/Ionicons"
 import { authentication } from '../firebase/firebaseConfig';
+import { useContext } from 'react';
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
@@ -18,7 +19,23 @@ const Login = ({navigation}) => {
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
-      navigation.navigate("TabBar")
+      onAuthStateChanged(authentication, (user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          const uid = user.uid;
+          // const userId = createContext(uid)
+          // console.log(userId.Provider)
+          navigation.navigate("TabBar",{
+            userID: uid
+          })
+          // console.log(uid)
+          // ...
+        } else {
+          // User is signed out
+          // ...
+        }
+      });
       // ...
     })
     .catch((error) => {
@@ -26,35 +43,24 @@ const Login = ({navigation}) => {
       const errorMessage = error.message;
       alert(errorCode)
     });
-    onAuthStateChanged(authentication, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        console.log(uid)
-        // ...
-      } else {
-        // User is signed out
-        // ...
-      }
-    });
+
   }
   return (
     <SafeAreaView style = {styles.container} >
     <SafeAreaView style = {styles.textInput_ctn} >
       <Text style={styles.text} >User name</Text>
-      <TextInput fontSize={15} onChangeText={(newtext) => setUserName(newtext) } style={styles.textInput} placeholder='username' placeholderTextColor={"gray"} >
+      <TextInput fontSize={15} onChangeText={(newtext) => setUserName(newtext) } style={styles.textInput} placeholder='email' placeholderTextColor={"gray"} >
       </TextInput>
       <Text style={styles.text} >Password</Text>
-      <TextInput fontSize={15} onChangeText={(newtext) => setPassword(newtext) } style={styles.textInput} secureTextEntry={isSecure} placeholder='Passwork' placeholderTextColor={"gray"} >
+      <TextInput fontSize={15} onChangeText={(newtext) => setPassword(newtext) } style={styles.textInput} secureTextEntry={isSecure} placeholder='Password' placeholderTextColor={"gray"} >
       </TextInput>
-      <TouchableOpacity onPress={() => setEyeicon("eye-off") } >
+      {/* <TouchableOpacity onPress={() => setEyeicon("eye-off") } >
               <Ionicons
                         name={eyeIcon}
                         size={24}
                         color="white"
                       />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <TouchableOpacity style={{backgroundColor:"gray", marginTop:100, height:50,width:"60%", marginLeft:"20%", borderRadius:10}} onPress={() => (signIn())} >
         <Text style={{textAlign:"center", marginTop:10, fontSize:20, color:"white"}} >Login</Text>
 

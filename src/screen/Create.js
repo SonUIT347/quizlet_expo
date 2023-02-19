@@ -5,16 +5,17 @@ import { Text, StyleSheet, SafeAreaView, ScrollView, TextInput } from "react-nat
 import Ionicons from "react-native-vector-icons/Ionicons"
 import { db } from "../firebase/firebaseConfig";
 import { collection, addDoc, doc } from "firebase/firestore";
+import { useRoute } from "@react-navigation/native";
 // import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 // import { Alert } from "react-native/Libraries/Alert/Alert";
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
 
-const Create = ({navigation}) =>{
-    const [lessonArray, setLessonArray] = useState({})
+
+const Create = ({navigation, route}) =>{
+    // console.log(route.params.userID)
     const [lessonName, setLessonName] = useState("")
-    var routeID
     const [lesson, setLesson] = useState({
         name:"",
         id:"",
@@ -22,8 +23,8 @@ const Create = ({navigation}) =>{
         vocabularies:""
     }
     )
-    const [count,setCount] = useState(2)
-    const [inputFlield, setInputField] = useState([2])
+    const [count,setCount] = useState(1)
+    const [inputFlield, setInputField] = useState([1])
     const addTextField = () =>{
         setCount((count) => count + 1)
         setInputField([...inputFlield, count + 1])
@@ -72,17 +73,29 @@ const Create = ({navigation}) =>{
 
                 // });
                 const docLesson = await addDoc(collection(db, "Lesson"),{
+                    userID:route.params.userID,
                     Card:a, 
                     Name:lessonName,
                     Count:a.length
                 })
-            console.log(docLesson.id)
-            routeID = docLesson.id
-            console.log(routeID)
+            navigation.goBack()
+            setCount(1);
+            setInputField([1])
+            setVocabularies({})
+            setMeans({})
+            setVocabulary("")
+            setMean("")
+            setLesson({
+                name:"",
+                id:"",
+                means:"",
+                vocabularies:""
+            }
+            )
+            setLessonName("")
             } catch(error){
                 console.log(error)
             }
-
     }
     // }
     // console.log(lessonArray)
@@ -100,7 +113,7 @@ const Create = ({navigation}) =>{
             <Text style = {{ fontSize: 24, fontWeight: "bold", top:10, color:"white"}} >Create Lesstion</Text>
             </SafeAreaView>
 
-            <TouchableOpacity onPress={() => (submit(), navigation.navigate("home")) } >
+            <TouchableOpacity onPress={() => (submit()) } >
                 <Text style = {{ alignSelf:"center", color:"white", marginTop:18, fontSize:15, marginRight:10}} >
                     Done
                 </Text>
@@ -127,6 +140,7 @@ const Create = ({navigation}) =>{
                         <SafeAreaView style = {styles.text_input_ctn} key = {inputFlield} >
                             {/* {console.log(inputFlield)} */}
                                 <TextInput
+                                    clearButtonMode="always"
                                     name = "vocabulary"
                                     autoFocus={true}
                                     onChangeText={e => {
@@ -139,6 +153,7 @@ const Create = ({navigation}) =>{
                                 />
                                 <Text style = {styles.text_name} >THUAT NGU</Text>
                                 <TextInput
+                                clearButtonMode="always"
                                     name = "mean"
                                     onChangeText={e => {
                                         setMean({...mean, mean: e});
