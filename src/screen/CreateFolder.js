@@ -23,7 +23,8 @@ const CreateFolder = ({navigation, route}) =>{
         try{
             const docFolder = await addDoc(collection(db,"Folder"),{
                 userID:route.params.userID,
-                Name:folderName,
+                Lesson_Id:"",
+                nameFolder:folderName,
                 Description: folderDes
             })
             console.log(docFolder.id)

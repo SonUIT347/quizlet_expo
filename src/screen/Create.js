@@ -15,7 +15,6 @@ var heightfull = Dimensions.get('window').height; //full height
 
 const Create = ({navigation, route}) =>{
     // console.log(route.params.userID)
-    const [lessonArray, setLessonArray] = useState({})
     const [lessonName, setLessonName] = useState("")
     const [lesson, setLesson] = useState({
         name:"",
@@ -79,7 +78,21 @@ const Create = ({navigation, route}) =>{
                     Name:lessonName,
                     Count:a.length
                 })
-            console.log(docLesson.id)
+            navigation.goBack()
+            setCount(1);
+            setInputField([1])
+            setVocabularies({})
+            setMeans({})
+            setVocabulary("")
+            setMean("")
+            setLesson({
+                name:"",
+                id:"",
+                means:"",
+                vocabularies:""
+            }
+            )
+            setLessonName("")
             } catch(error){
                 console.log(error)
             }
@@ -127,6 +140,7 @@ const Create = ({navigation, route}) =>{
                         <SafeAreaView style = {styles.text_input_ctn} key = {inputFlield} >
                             {/* {console.log(inputFlield)} */}
                                 <TextInput
+                                    clearButtonMode="always"
                                     name = "vocabulary"
                                     autoFocus={true}
                                     onChangeText={e => {
@@ -139,6 +153,7 @@ const Create = ({navigation, route}) =>{
                                 />
                                 <Text style = {styles.text_name} >THUAT NGU</Text>
                                 <TextInput
+                                clearButtonMode="always"
                                     name = "mean"
                                     onChangeText={e => {
                                         setMean({...mean, mean: e});

@@ -49,18 +49,18 @@ const Login = ({navigation}) => {
     <SafeAreaView style = {styles.container} >
     <SafeAreaView style = {styles.textInput_ctn} >
       <Text style={styles.text} >User name</Text>
-      <TextInput fontSize={15} onChangeText={(newtext) => setUserName(newtext) } style={styles.textInput} placeholder='username' placeholderTextColor={"gray"} >
+      <TextInput fontSize={15} onChangeText={(newtext) => setUserName(newtext) } style={styles.textInput} placeholder='email' placeholderTextColor={"gray"} >
       </TextInput>
       <Text style={styles.text} >Password</Text>
-      <TextInput fontSize={15} onChangeText={(newtext) => setPassword(newtext) } style={styles.textInput} secureTextEntry={isSecure} placeholder='Passwork' placeholderTextColor={"gray"} >
+      <TextInput fontSize={15} onChangeText={(newtext) => setPassword(newtext) } style={styles.textInput} secureTextEntry={isSecure} placeholder='Password' placeholderTextColor={"gray"} >
       </TextInput>
-      <TouchableOpacity onPress={() => setEyeicon("eye-off") } >
+      {/* <TouchableOpacity onPress={() => setEyeicon("eye-off") } >
               <Ionicons
                         name={eyeIcon}
                         size={24}
                         color="white"
                       />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <TouchableOpacity style={{backgroundColor:"gray", marginTop:100, height:50,width:"60%", marginLeft:"20%", borderRadius:10}} onPress={() => (signIn())} >
         <Text style={{textAlign:"center", marginTop:10, fontSize:20, color:"white"}} >Login</Text>
 

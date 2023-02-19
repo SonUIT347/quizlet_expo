@@ -3,6 +3,7 @@ import {Animated, PanResponder, Dimensions} from 'react-native';
 import { db } from '../firebase/firebaseConfig'
 import { getDocs,where, query, collection, documentId } from 'firebase/firestore'
 const {width} = Dimensions.get('screen');
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SWIPE_THRESHOLD = 0.25 * width;
 
@@ -23,10 +24,11 @@ export default function useTinderCards() {
     velocity: 0,
     dx: 0,
   });
-  const [id, setId] = useState("")
-  console.log(id, "id")
-  useEffect(() =>{
-    const q = query(collection(db, "Lesson"), where(documentId(), "==", `3gkXtDf6h7fL8szY3k4b`))
+
+  useEffect( async () =>{
+    const lessonId = await AsyncStorage.getItem("lessonId")
+    console.log(lessonId, "use")
+    const q = query(collection(db, "Lesson"), where(documentId(), "==", `${lessonId}`))
 
    
       getDocs(q).then(data=>{

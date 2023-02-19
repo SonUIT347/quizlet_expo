@@ -24,7 +24,7 @@ const Folder = ({props, navigation}) => {
             FolderID:props.id
           })} >
             <SafeAreaView style = {styles.acm_name_text}>
-              <Text style={{fontSize:20, fontWeight:"bold", marginBottom: 3, color: "white",marginBottom:15}} >{props.Name}</Text>
+              <Text style={{fontSize:20, fontWeight:"bold", marginBottom: 3, color: "white",marginBottom:15}} >{props.nameFolder}</Text>
               {/* <Text style={{width:60, borderRadius: 10, padding:3, backgroundColor:"white", fontSize:10,paddingLeft:5,color:"red"}}>{props.count + " tems"}</Text> */}
             </SafeAreaView>
 

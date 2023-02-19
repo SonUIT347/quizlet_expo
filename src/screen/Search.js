@@ -42,10 +42,10 @@ const Search = ({navigation}) =>{
                 return docLess.Name.toString().includes(search_string)
               //  || search.user_name.toString().includes(search_string.toLocaleLowerCase())
               }))
-              // setFolder(docFols.filter((docFols) => {
-              //   return docFols.Name.toString().includes(search_string) 
-              //   // || exam1.user.toString().includes(search_string.toLocaleLowerCase())
-              // }))
+              setFolder(docFols.filter((docFols) => {
+                return docFols.nameFolder.toString().includes(search_string) 
+                // || exam1.user.toString().includes(search_string.toLocaleLowerCase())
+              }))
             }
           }
             
@@ -65,8 +65,8 @@ const Search = ({navigation}) =>{
     </SafeAreaView>
     <SafeAreaView style = {styles.search_ctn}>
     <ScrollView>
-{ 
-    (touch?search:folder).map((search,index) => {
+{ touch?search
+    .map((search,index) => {
             return(
               <TouchableOpacity style = {styles.lesson} key={search.id} onPress={() => navigation.navigate("option",{
                 lessonId:search.id
@@ -84,7 +84,22 @@ const Search = ({navigation}) =>{
                 <Text style = {{top: 55, left:10, fontSize: 15 ,color: "#6384B0"}} >{search.user_name}</Text>
               </TouchableOpacity>
             )
-          })}
+          }):
+          folder.map((folder, index) =>{
+            return(
+              <TouchableOpacity style = {styles.lesson} key={search.id} onPress={() => navigation.navigate("ViewFolder",{
+                FolderID:folder.id
+              })} >
+                <SafeAreaView style = {styles.acm_name_text}>
+                  <View style = {styles.name_ctn}>
+                  <Text style={{fontSize:20, fontWeight:"bold", marginBottom: 3, color:"#FFFFFF"}} >{folder.nameFolder}</Text>
+                  </View>
+                </SafeAreaView>
+                {/* <Text style = {{top: 55, left:10, fontSize: 15 ,color: "#6384B0"}} >{search.user_name}</Text> */}
+              </TouchableOpacity>
+            )
+          })
+        }
     </ScrollView>
 
     </SafeAreaView>
