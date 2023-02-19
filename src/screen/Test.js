@@ -35,7 +35,7 @@ const Test = () => {
   const [linear, setLinear] = useState(0);
   const [visible1, setVisible1] = useState(false);
   const [visible2, setVisible2] = useState({visible: false, ans: undefined});
-  console.log(getInf);
+  // console.log(getInf);
   const toggleDialog1 = () => {
     setVisible1(!visible1);
     setResult(result => {
@@ -65,7 +65,7 @@ const Test = () => {
     currentSlide <= slideLengh - 1 && setCurrentSlide(currentSlide + 1);
   };
   const checkResults = (ans1, ans2, question) => {
-    console.log(ans1, ans2);
+    // console.log(ans1, ans2);
     if (getInf.check) {
       if (ans1 === ans2) {
         setVisible1(!visible1);
@@ -120,7 +120,7 @@ const Test = () => {
       }
     }
   };
-  console.log(linear);
+  // console.log(linear);
   return (
     <View style={styles.container}>
       <Modal
@@ -167,9 +167,11 @@ const Test = () => {
                 }}>
                 Số câu hỏi{' '}
               </Text>
+              {console.log(getInf.ansLenght)}
               <Picker
                 style={{backgroundColor: 'white', width: '30%'}}
                 ref={pickerRef}
+                
                 selectedValue={getInf.ansLenght}
                 onValueChange={(itemValue, itemIndex) =>
                   setGetInf(getInf => {
@@ -177,10 +179,11 @@ const Test = () => {
                   })
                 }>
                 {datas.map((data, index) => {
+                  
                   let num = index + 1;
                   return (
                     num !== 1 && (
-                      <Picker.Item label={num.toString()} value={index + 1} />
+                      <Picker.Item key={index}label={num.toString()} value={index + 1} />
                     )
                   );
                 })}
@@ -233,10 +236,11 @@ const Test = () => {
           animation={50}
         />
         {tests.map(
-          (test, index) =>
+          (test, index) => 
             index === currentSlide && (
-              <>
+              <View key={index}>
                 <View style={{marginLeft: 30, marginRight: 30}}>
+                  
                   <View style={{marginTop: 90, marginBottom: 90}}>
                     <Text style={[styles.textHeader, {fontSize: 25}]}>
                       {test.question}
@@ -406,7 +410,7 @@ const Test = () => {
                     <Dialog.Button title="Tiếp tục" onPress={toggleDialog2} />
                   </Dialog.Actions>
                 </Dialog>
-              </>
+              </View>
             ),
         )}
       </View>
@@ -558,7 +562,8 @@ const Test = () => {
           </View>
           {history.map((his, index) => {
             return (
-              <View style={{marginTop: 10}}>
+              <View key={index} style={{marginTop: 10}}>
+                
                 <View
                   style={{
                     width: '100%',
