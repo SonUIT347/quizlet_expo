@@ -14,6 +14,7 @@ const LessonNavigator = ({route}) => {
     return (
         <Stack.Navigator initialRouteName='Home' screenOptions={{
             title:"",
+            headerShown:false,
             headerTintColor:"white",
             headerTitleAlign:"center",
             headerStyle:{

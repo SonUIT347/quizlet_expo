@@ -15,6 +15,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Speedometer from "react-native-speedometer-chart";
 import { useRoute } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { SafeAreaView } from "react-native-safe-area-context";
 function FlashCard({navigation}) {
   const route = useRoute()
   console.log(route.params.lessonId)
@@ -61,7 +62,12 @@ function FlashCard({navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Icon name="close" color="white" size={30} marginTop={30} />
+        <SafeAreaView>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Icon name="close" color="white" size={30} marginTop={30} />
+          </TouchableOpacity>
+        </SafeAreaView>
+
         <Text
           style={[
             styles.textHeader,
@@ -70,7 +76,6 @@ function FlashCard({navigation}) {
         >
           {dataHeader.indexFashCard}/{dataHeader.lenghtData}
         </Text>
-        <Icon name="cog" color="white" size={30} marginTop={30} />
       </View>
       <LinearProgress
         style={{ marginVertical: 10 }}

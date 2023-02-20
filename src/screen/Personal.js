@@ -45,10 +45,10 @@ export default function Personal({route}) {
     
     <View style={{height: '100%'}}>
       <View style={styles.container}>
-        <View style={{flex: 1, flexDirection: 'row', backgroundColor: '#2e3969'}}>
+        {/* <View style={{flex: 1, flexDirection: 'row', backgroundColor: '#2e3969'}}>
           <TouchableOpacity style={styles.ButtonSetting}><Text style={{textAlign: 'center'}}><Icon name="settings" size={30} color="white" style={styles.setting}/></Text></TouchableOpacity>
           <TouchableOpacity style={styles.ButtonSetting1}><Text style={styles.Upgrade}>Nâng Cấp</Text></TouchableOpacity>
-        </View>
+        </View> */}
 
         <View style={{flex: 4, alignItems: 'center',  width: '100%', height: '100%'}}>
           <Image source={{uri: Avatar}} style={styles.Img}/>

@@ -7,13 +7,24 @@ import { db } from "../firebase/firebaseConfig";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { Button } from "@rneui/base";
+import { authentication } from "../firebase/firebaseConfig";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
+import { signOut } from "firebase/auth";
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
 const Home = ({navigation}) =>{
   const [lesson, setLesson] = useState([])
   const [folder, setfolder] = useState([])
+  const logOut = () =>{
+    signOut(authentication). then((result) =>{
+      console.log("abc")
+      navigation.navigate("Login")
+    }). catch((error) => {
+      console.log(error)
+    })
+  }
   useEffect(() =>{
     const getDataLesson = async () =>{
       const data = await getDocs(collection(db, "Lesson"))
@@ -30,7 +41,16 @@ const Home = ({navigation}) =>{
     return(
       <SafeAreaView style = {styles.main}>
       <View style = {styles.container} >
-        <Text style = {styles.name} >Quizzy</Text>
+        <Text style = {styles.name}  >Quizzy </Text>
+        <SafeAreaView style={{left:100, top: 10}}>
+        <TouchableOpacity onPress={() => logOut()}>
+          <Ionicons
+            name="log-out-outline"
+            size={35}
+            color="white"
+          />
+        </TouchableOpacity>
+        </SafeAreaView>
       </View>
     <ScrollView>
 
@@ -68,7 +88,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 30,
     padding:5,
-
+    alignSelf:"center",left:20
   },
   main:{
     width: widthfull,
