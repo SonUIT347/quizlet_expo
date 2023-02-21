@@ -26,8 +26,8 @@ export default function useTinderCards() {
   });
 
   useEffect( async () =>{
-    const lessonId = await AsyncStorage.getItem("lessonId")
-    console.log(lessonId, "use")
+    // const lessonId = await AsyncStorage.getItem("lessonId")
+    // console.log(lessonId, "use")
     const q = query(collection(db, "Lesson"), where(documentId(), "==", `${lessonId}`))
 
    

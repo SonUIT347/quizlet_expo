@@ -17,11 +17,11 @@ import { useRoute } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SafeAreaView } from "react-native-safe-area-context";
 function FlashCard({navigation}) {
-  const route = useRoute()
-  console.log(route.params.lessonId)
-  useEffect(() =>{
-    AsyncStorage.setItem("lessonId", `${route.params.lessonId}`)
-  },[])
+  // const route = useRoute()
+  // console.log(route.params.lessonId)
+  // useEffect(() =>{
+  //   AsyncStorage.setItem("lessonId", `${route.params.lessonId}`)
+  // },[])
   const [
     data,
     _panResponder,

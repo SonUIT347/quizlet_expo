@@ -37,8 +37,8 @@ const useViewFolder = () => {
       setDataCards(dataCards.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
     }
     getDataCard()
-    const FolderID = await AsyncStorage.getItem("FolderID")
-    const q = query(collection(db, "Folder"), where(documentId(), "==", FolderID))
+    // const FolderID = await AsyncStorage.getItem("FolderID")
+    const q = query(collection(db, "Folder"), where(documentId(), "==", "5spIOicjDcXhzf9dNil6"))
     const getDataFolder = async () =>{
       const headerFolders = await getDocs(q)
       setHeaderFolder(headerFolders.docs.map((doc) =>({...doc.data(), id: doc.id}) )[0])

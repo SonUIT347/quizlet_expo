@@ -26,9 +26,9 @@ const Login = ({navigation}) => {
           const uid = user.uid;
           // const userId = createContext(uid)
           // console.log(userId.Provider)
-          navigation.navigate("TabBar",{
+          navigation.navigate("TabBar"/*,{
             userID: uid
-          })
+          }*/)
           // console.log(uid)
           // ...
         } else {

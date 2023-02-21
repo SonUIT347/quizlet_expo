@@ -12,9 +12,9 @@ const CreateNavigator = ({route}) => {
     <Stack.Navigator initialRouteName='create' screenOptions={{
         headerShown:false
     }} >
-        <Stack.Screen initialParams={{userID:route.params.userID}} name='create' component={Create} />
+        <Stack.Screen /*initialParams={{userID:route.params.userID}} */name='create' component={Create} />
         <Stack.Screen name='home' component={Home} />
-        <Stack.Screen name='createfolder' initialParams={{userID:route.params.userID}} component={CreateFolder} />
+        <Stack.Screen name='createfolder'  /*initialParams={{userID:route.params.userID}} */ component={CreateFolder} />
         <Stack.Screen name='option' component={OptionTest}/>
     </Stack.Navigator>
   )

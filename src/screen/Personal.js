@@ -21,11 +21,11 @@ export default function Personal({route}) {
   const [Folder, setFolder] = useState([]);
   // const [Content, setContent] = useState(Lesson);
   const [Page, setPage] = useState('HOC_PHAN');
-  const userID = `${route.params.userID}`//này là userID của tài khoản đag login
-  console.log(userID)
+  // // const userID = `${route.params.userID}`//này là userID của tài khoản đag login
+  // console.log(userID)
   useEffect (() => {
-    const pLesson = query(collection(db, 'Lesson'), where('userID', '==', userID))
-    const pFolder  = query(collection(db, 'Folder',), where('userID', '==', userID))
+    const pLesson = query(collection(db, 'Lesson'), where('userID', '==', "CGBLkojIxlfdlBbg6TcffaD9ngi2" )) // trong la user id
+    const pFolder  = query(collection(db, 'Folder',), where('userID', '==', "CGBLkojIxlfdlBbg6TcffaD9ngi2"))// trong la user id
     getDataLesson = async () => {
       const DataLesson = await getDocs(pLesson)
       setLesson(DataLesson.docs.map((doc)=>({...doc.data(), id: doc.id})))

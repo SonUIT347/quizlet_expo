@@ -11,6 +11,8 @@ import { authentication } from "../firebase/firebaseConfig";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import { signOut } from "firebase/auth";
+import { useRoute } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 
@@ -19,7 +21,6 @@ const Home = ({navigation}) =>{
   const [folder, setfolder] = useState([])
   const logOut = () =>{
     signOut(authentication). then((result) =>{
-      console.log("abc")
       navigation.navigate("Login")
     }). catch((error) => {
       console.log(error)

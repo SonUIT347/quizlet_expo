@@ -20,8 +20,8 @@ import { useRoute } from "@react-navigation/native";
 import { useEffect } from "react";
 import { async } from "@firebase/util";
 const ViewFolder = ({navigation}) => {
-  const route = useRoute()
-  console.log(route.params.FolderID)
+  // const route = useRoute()
+  // console.log(route.params.FolderID)
   const {
     dataFolder,
     dataFolders,
@@ -32,9 +32,9 @@ const ViewFolder = ({navigation}) => {
     setHeaderFolder, setDataFolder, setDataFolders,
   } = useViewFolder();
 
-  useEffect(() =>{
-    AsyncStorage.setItem("FolderID", `${route.params.FolderID}`)
-  },[])
+  // useEffect(() =>{
+  //   AsyncStorage.setItem("FolderID", `${route.params.FolderID}`)
+  // },[])
     // console.log(headerFolder)
 
   return (
