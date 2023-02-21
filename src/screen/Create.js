@@ -5,6 +5,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import { Input } from "@rneui/themed";
 import {
   Text,
   StyleSheet,
@@ -115,121 +117,131 @@ const Create = ({ navigation, route }) => {
   // console.log(lessonArray)
   return (
     <SafeAreaView style={styles.main}>
-      {/* <SafeAreaView style={styles.lesson_text_ctn}>
-        <TouchableOpacity onPress={() => navigation.navigate("createfolder")}>
-          <Text
-            style={{
-              alignSelf: "center",
-              color: "white",
-              fontSize: 13,
-              marginTop: 10,
-              width: 50,
-            }}
-          >
-            Create Folder
-          </Text>
-        </TouchableOpacity>
-        <SafeAreaView>
-          <Text
-            style={{
-              fontSize: 24,
-              fontWeight: "bold",
-              top: 10,
-              color: "white",
-            }}
-          >
-            Create Lesstion
-          </Text>
+      <View style={{ marginLeft: 10, marginRight: 10, marginTop: 30 }}>
+        <SafeAreaView style={styles.lesson_text_ctn}>
+          <TouchableOpacity onPress={() => navigation.navigate("createfolder")}>
+            <Text
+              style={{
+                alignSelf: "center",
+                color: "white",
+                fontSize: 13,
+                marginTop: 10,
+                width: 50,
+              }}
+            >
+              Tạo thư mục
+            </Text>
+          </TouchableOpacity>
+          <SafeAreaView>
+            <Text
+              style={{
+                fontSize: 24,
+                fontWeight: "bold",
+                top: 10,
+                color: "white",
+              }}
+            >
+              Tạo học phần
+            </Text>
+          </SafeAreaView>
+
+          <TouchableOpacity onPress={() => submit()}>
+            <Text
+              style={{
+                alignSelf: "center",
+                color: "white",
+                marginTop: 18,
+                fontSize: 15,
+                marginRight: 10,
+              }}
+            >
+              Xong
+            </Text>
+          </TouchableOpacity>
         </SafeAreaView>
 
-        <TouchableOpacity onPress={() => submit()}>
-          <Text
-            style={{
-              alignSelf: "center",
-              color: "white",
-              marginTop: 18,
-              fontSize: 15,
-              marginRight: 10,
-            }}
-          >
-            Done
-          </Text>
-        </TouchableOpacity>
-      </SafeAreaView> */}
-
-      {/* <TextInput
+        {/* <TextInput
                 placeholder="text some thing"
             /> */}
-      {/* <SafeAreaView
-        style={{ color: "black", top: 10, marginRight: 20, marginLeft: 20 }}
-      >
-        <TextInput
-          placeholder="Name of lesson"
-          placeholderTextColor={"#8A9299"}
-          onChangeText={(newtext) => setLessonName(newtext)}
-          style={{ color: "white", margin: 20, fontSize: 20 }}
-        />
-        <View
+        <SafeAreaView
           style={{
-            position: "absolute",
-            height: 5,
-            width: "100%",
-            backgroundColor: "#546999",
-            bottom: 0,
-            marginBottom: 10,
+            color: "black",
+            marginRight: 20,
+            marginLeft: 20,
+            marginBottom: 30,
+            marginTop: 10,
           }}
-        ></View>
-      </SafeAreaView> */}
-
-      {/* <KeyboardAvoidingView
-        style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}
-        behavior="padding"
-        enabled
-        keyboardVerticalOffset={100}
-      > */}
-        <ScrollView>
-          {inputFlield.map((inputFlield) => {
-            return (
-              <SafeAreaView style={styles.text_input_ctn} key={inputFlield}>
-                {/* {console.log(inputFlield)} */}
-                <TextInput
-                  clearButtonMode="always"
-                  name="vocabulary"
-                  autoFocus={true}
-                  onChangeText={(e) => {
-                    setVocabulary({ ...vocabulary, voca: e });
-                    vocabularies[inputFlield] = { ...vocabulary, voca: e };
-                    setVocabularies(vocabularies);
-                    setLesson({ ...lesson, vocabularies });
-                  }}
-                  style={styles.text_ip_vocabulary}
-                />
-                <Text style={styles.text_name}>THUAT NGU</Text>
-                <TextInput
-                  clearButtonMode="always"
-                  name="mean"
-                  onChangeText={(e) => {
-                    setMean({ ...mean, mean: e });
-                    means[inputFlield] = { ...mean, mean: e };
-                    setMeans(means);
-                    setLesson({ ...lesson, means });
-                  }}
-                  style={styles.text_ip_vocabulary}
-                />
-                <Text style={styles.text_name}>DINH NGHIA</Text>
-              </SafeAreaView>
-            );
-          })}
-        </ScrollView>
-        {/* <TouchableOpacity onPress={() => addTextField()}>
-          <Ionicons
-            name="md-add-circle-outline"
-            color="white"
-            size={50}
-            style={{ alignSelf: "center" }}
+        >
+          <Input
+            placeholder="Chủ đề, chương, đơn vị"
+            inputStyle={{ color: "white" }}
+            inputContainerStyle={{
+              borderBottomWidth: 3,
+              borderBottomColor: "white",
+            }}
+            errorStyle={{
+              color: "white",
+              fontSize: 10,
+              fontWeight: "500",
+              margin: 0,
+            }}
+            errorMessage="TIÊU ĐỀ"
+            onChangeText={(newtext) => setLessonName(newtext)}
           />
-        </TouchableOpacity> */}
-      {/* </KeyboardAvoidingView> */}
+        </SafeAreaView>
+
+        <KeyboardAvoidingView
+          behavior="padding"
+          enabled
+          keyboardVerticalOffset={10}
+        >
+          <ScrollView>
+            {inputFlield.map((inputFlield, index) => {
+              return (
+                <SafeAreaView style={styles.text_input_ctn} key={inputFlield}>
+                  {/* {console.log(inputFlield)} */}
+                  {index > 1 && <TouchableOpacity>
+                    <AntDesign name="close" color="white" size={15} />
+                  </TouchableOpacity>}
+                  <TextInput
+                    clearButtonMode="always"
+                    name="vocabulary"
+                    autoFocus={true}
+                    onChangeText={(e) => {
+                      setVocabulary({ ...vocabulary, voca: e });
+                      vocabularies[inputFlield] = { ...vocabulary, voca: e };
+                      setVocabularies(vocabularies);
+                      setLesson({ ...lesson, vocabularies });
+                    }}
+                    style={styles.text_ip_vocabulary}
+                  />
+                  <Text style={styles.text_name}>THUẬT NGỮ</Text>
+                  <TextInput
+                    clearButtonMode="always"
+                    name="mean"
+                    onChangeText={(e) => {
+                      setMean({ ...mean, mean: e });
+                      means[inputFlield] = { ...mean, mean: e };
+                      setMeans(means);
+                      setLesson({ ...lesson, means });
+                    }}
+                    style={styles.text_ip_vocabulary}
+                  />
+                  <Text style={styles.text_name}>ĐỊNH NGHĨA</Text>
+                </SafeAreaView>
+              );
+            })}
+          </ScrollView>
+          <TouchableOpacity onPress={() => addTextField()}>
+            <Ionicons
+              name="md-add-circle-outline"
+              color="white"
+              size={50}
+              style={{ alignSelf: "center" }}
+            />
+          </TouchableOpacity>
+        </KeyboardAvoidingView>
+      </View>
     </SafeAreaView>
   );
 };
@@ -239,30 +251,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   main: {
-    flex:1,
-    width: '100%',
+    flex: 1,
     backgroundColor: "#0A092D",
     // backgroundColor: 'red',
   },
-  text_ip: {
-    with: 200,
-    height: 40,
-    backgroundColor: "#2E3856",
-    backgroundColor: "red",
-    marginTop: 20,
-    marginLeft: 16,
-    marginRight: 16,
-    borderRadius: 10,
-  },
   text_input_ctn: {
-    position: "relative",
-    width: 353,
-    height: 150,
-    alignSelf: "center",
+    width: "100%",
     marginTop: 10,
     backgroundColor: "white",
     flexDirection: "column",
-    justifyContent: "space-evenly",
     borderRadius: 10,
     padding: 15,
     backgroundColor: "#2E3856",
@@ -272,7 +269,7 @@ const styles = StyleSheet.create({
     height: 40,
     fontSize: 18,
     backgroundColor: "",
-    borderBottomWidth: 1,
+    borderBottomWidth: 2,
     borderBottomColor: "white",
     color: "white",
   },
