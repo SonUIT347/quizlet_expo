@@ -19,9 +19,9 @@ import EditFolder from "../component/EditFolder";
 import { useRoute } from "@react-navigation/native";
 import { useEffect } from "react";
 import { async } from "@firebase/util";
-const ViewFolder = () => {
-  const route = useRoute()
-  console.log(route.params.FolderID)
+const ViewFolder = ({navigation}) => {
+  // const route = useRoute()
+  // console.log(route.params.FolderID)
   const {
     dataFolder,
     dataFolders,
@@ -35,14 +35,14 @@ const ViewFolder = () => {
   useEffect(() =>{
     AsyncStorage.setItem("FolderID", `${route.params.FolderID}`)
   },[])
-    console.log(headerFolder)
+    // console.log(headerFolder)
 
   return (
     <View style={styles.container}>
       <View style={styles.marginContainer}>
   {/* {console.log(headerFolder)} */}
         <View style={styles.header}>
-          <TouchableOpacity style={{ width: "70%" }}>
+          <TouchableOpacity style={{ width: "70%" }}onPress={() => navigation.goBack()} >
             <AntDesign name="arrowleft" color="white" size={30} />
           </TouchableOpacity>
           <View

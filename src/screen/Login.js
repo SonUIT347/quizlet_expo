@@ -26,9 +26,9 @@ const Login = ({navigation}) => {
           const uid = user.uid;
           // const userId = createContext(uid)
           // console.log(userId.Provider)
-          navigation.navigate("TabBar",{
+          navigation.navigate("TabBar"/*,{
             userID: uid
-          })
+          }*/)
           // console.log(uid)
           // ...
         } else {
@@ -48,7 +48,7 @@ const Login = ({navigation}) => {
   return (
     <SafeAreaView style = {styles.container} >
     <SafeAreaView style = {styles.textInput_ctn} >
-      <Text style={styles.text} >User name</Text>
+      <Text style={styles.text} >Email</Text>
       <TextInput fontSize={15} onChangeText={(newtext) => setUserName(newtext) } style={styles.textInput} placeholder='email' placeholderTextColor={"gray"} >
       </TextInput>
       <Text style={styles.text} >Password</Text>

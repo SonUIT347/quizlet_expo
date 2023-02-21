@@ -14,6 +14,7 @@ const LessonNavigator = ({route}) => {
     return (
         <Stack.Navigator initialRouteName='Home' screenOptions={{
             title:"",
+            headerShown:false,
             headerTintColor:"white",
             headerTitleAlign:"center",
             headerStyle:{
@@ -21,7 +22,7 @@ const LessonNavigator = ({route}) => {
             }
 
         }} >
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Home" /* initialParams={{userID:route.params.userID}} */component={Home} />
           <Stack.Screen name="Option" component={OptionTest}  /> 
           <Stack.Screen name='ViewFolder' component={ViewFolder} />
           <Stack.Screen name='Flashcard' component={FlashCard} />

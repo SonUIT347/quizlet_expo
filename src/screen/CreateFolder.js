@@ -8,7 +8,7 @@ import { db } from "../firebase/firebaseConfig";
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
 const CreateFolder = ({navigation, route}) =>{
-    console.log(route.params.userID)
+    // console.log(route.params.userID)
     const [folder, setFolder] = useState({
         folderName:"",
         folerDes:""
@@ -22,7 +22,7 @@ const CreateFolder = ({navigation, route}) =>{
     const pushFolder = async () =>{
         try{
             const docFolder = await addDoc(collection(db,"Folder"),{
-                userID:route.params.userID,
+                // userID:route.params.userID,
                 Lesson_Id:"",
                 nameFolder:folderName,
                 Description: folderDes

@@ -68,9 +68,9 @@ const Search = ({navigation}) =>{
 { touch?search
     .map((search,index) => {
             return(
-              <TouchableOpacity style = {styles.lesson} key={search.id} onPress={() => navigation.navigate("option",{
+              <TouchableOpacity style = {styles.lesson} key={search.id} onPress={() => navigation.navigate("option"/*,{
                 lessonId:search.id
-              })} >
+              }*/)} >
                 <SafeAreaView style = {styles.acm_name_text}>
                   <View style = {styles.name_ctn}>
                   <Text style={{fontSize:20, fontWeight:"bold", marginBottom: 3, color:"#FFFFFF"}} >{search.Name}</Text>

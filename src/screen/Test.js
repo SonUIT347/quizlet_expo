@@ -18,11 +18,11 @@ import useStudy from '../component/useStudy';
 import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Test = () => {
-  const route = useRoute()
-  useEffect(() =>{
-    AsyncStorage.setItem("lessonId", `${route.params.lessonId}`)
-  },[])
+const Test = ({navigation}) => {
+  // const route = useRoute()
+  // useEffect(() =>{
+  //   AsyncStorage.setItem("lessonId", `${route.params.lessonId}`)
+  // },[])
   const pickerRef = useRef();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [
@@ -228,6 +228,9 @@ const Test = () => {
             flexDirection: 'row',
             justifyContent: 'space-around',
           }}>
+            <TouchableOpacity>
+              
+            </TouchableOpacity>
           <Icon name="close" color="white" size={30} />
           <Text style={styles.textHeader}>
             {getInf.index}/{getInf.ansLenght}
@@ -495,7 +498,7 @@ const Test = () => {
           </View>
           <Text style={{color: 'white', fontWeight: '600'}}>Bước tiếp theo</Text>
           <View style={{marginTop: 20, marginBottom: 20}}>
-            <TouchableOpacity
+            <TouchableOpacity onPress={() => navigation.goBack()}
               style={{
                 width: '100%',
                 height: 100,
@@ -513,7 +516,7 @@ const Test = () => {
                 <View style={{justifyContent: 'space-between'}}>
                   <Text
                     style={{color: '#A9B1F9', fontWeight: '600', fontSize: 15}}>
-                    Làm bài kiểm tra mới
+                    Làm lại bài kiểm tra
                   </Text>
                   <View style={{width: '89%'}}>
                     <Text style={{color: 'white', fontWeight: '400'}}>
@@ -527,7 +530,7 @@ const Test = () => {
                 </View>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity
+            <TouchableOpacity onPress={() => navigation.goBack()}
               style={{
                 width: '100%',
                 height: 100,

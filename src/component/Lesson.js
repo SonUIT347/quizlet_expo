@@ -16,9 +16,9 @@ const Lesson = ({props, navigation}) =>{
         <ScrollView horizontal={true} style = {styles.scroll}>
           {props.map((props,index) => {
             return(
-              <TouchableOpacity style = {styles.lesson} key={props.id} onPress={() => navigation.navigate("Option",{
+              <TouchableOpacity style = {styles.lesson} key={props.id} onPress={() => navigation.navigate("Option"/*,{
                 lessonId:props.id
-              })}>
+              }*/)}>
                 <SafeAreaView style = {styles.acm_name_text}>
                   <Text style={{fontSize:20, fontWeight:"bold", marginBottom: 3, color: "white",marginBottom:15}} >{props.Name}</Text>
                   <Text style={{width:60, borderRadius: 10, padding:3, backgroundColor:"white", fontSize:10,paddingLeft:5,color:"red"}}>{props.Count + " tems"}</Text>

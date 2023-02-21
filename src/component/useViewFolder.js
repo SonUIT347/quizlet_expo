@@ -39,7 +39,6 @@ const useViewFolder = () => {
     }
     getDataCard()
     const FolderID = await AsyncStorage.getItem("FolderID")
-
     const q = query(collection(db, "Folder"), where(documentId(), "==", FolderID))
     const getDataFolder = async () =>{
       const headerFolders = await getDocs(q)

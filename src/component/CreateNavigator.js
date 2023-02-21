@@ -10,11 +10,11 @@ const Stack = createStackNavigator()
 const CreateNavigator = ({route}) => {
   return (
     <Stack.Navigator initialRouteName='create' screenOptions={{
-        headerShown:true
+        headerShown:false
     }} >
-        <Stack.Screen initialParams={{userID:route.params.userID}} name='create' component={Create} />
+        <Stack.Screen /*initialParams={{userID:route.params.userID}} */name='create' component={Create} />
         <Stack.Screen name='home' component={Home} />
-        <Stack.Screen name='createfolder' initialParams={{userID:route.params.userID}} component={CreateFolder} />
+        <Stack.Screen name='createfolder'  /*initialParams={{userID:route.params.userID}} */ component={CreateFolder} />
         <Stack.Screen name='option' component={OptionTest}/>
     </Stack.Navigator>
   )

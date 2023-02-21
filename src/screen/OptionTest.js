@@ -26,8 +26,9 @@ const OptionTest = ({navigation}) =>{
   const [lesson, setLesson] = useState([])
   const [folder, setfolder] = useState([])
   useEffect(() =>{
-    const q = query(collection(db, "Lesson"), where(documentId(), "==", `${route.params.lessonId}`))
-    console.log(route.params.lessonId)
+    const q = query(collection(db, "Lesson"), where(documentId(), "==", `aXW58um0w8HHiKVl7END`))
+    // console.log(route.params.lessonId)
+    // ${route.params.lessonId}
     const getDataLesson = async () =>{
       const data = await getDocs(q)
       setLesson(data.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
