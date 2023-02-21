@@ -18,7 +18,8 @@ const Login = ({navigation}) => {
     signInWithEmailAndPassword(authentication, userName, Password)
     .then((userCredential) => {
       // Signed in 
-      const user = userCredential.user;
+      const user = authentication.currentUser;
+      console.log(user.email)
       onAuthStateChanged(authentication, (user) => {
         if (user) {
           // User is signed in, see docs for a list of available properties
@@ -26,6 +27,8 @@ const Login = ({navigation}) => {
           const uid = user.uid;
           // const userId = createContext(uid)
           // console.log(userId.Provider)
+
+
           navigation.navigate("TabBar"/*,{
             userID: uid
           }*/)
@@ -43,13 +46,18 @@ const Login = ({navigation}) => {
       const errorMessage = error.message;
       alert(errorCode)
     });
+    const getUserName = () =>{
 
+    }
+    getUserName()
+
+    setUserName({value:""})
   }
   return (
     <SafeAreaView style = {styles.container} >
     <SafeAreaView style = {styles.textInput_ctn} >
       <Text style={styles.text} >Email</Text>
-      <TextInput fontSize={15} onChangeText={(newtext) => setUserName(newtext) } style={styles.textInput} placeholder='email' placeholderTextColor={"gray"} >
+      <TextInput fontSize={15} onChangeText={(newtext) => setUserName(newtext) } style={styles.textInput} placeholder='email' placeholderTextColor={"gray"} value={userName} >
       </TextInput>
       <Text style={styles.text} >Password</Text>
       <TextInput fontSize={15} onChangeText={(newtext) => setPassword(newtext) } style={styles.textInput} secureTextEntry={isSecure} placeholder='Password' placeholderTextColor={"gray"} >
