@@ -15,8 +15,8 @@ const Flashcard_List = ({props}) =>{
             l.Card.map((quiz,index) => {
               return(
                 <SafeAreaView style = {styles.text} key={quiz.id}>
-                  <Text style={{fontSize:20, marginLeft:10, marginBottom: 10, color:'white'}} >{quiz.Term}</Text>
-                  <Text style={{fontSize:20, marginLeft:10,color:'white'}} >{quiz.Define}</Text>
+                  <Text style={{fontSize:30, margin:10, marginBottom: 0, color:'white'}} >{quiz.Term}</Text>
+                  <Text style={{fontSize:20, margin:10,color:'white'}} >{quiz.Define}</Text>
                 </SafeAreaView>
               )})
           )
@@ -27,17 +27,14 @@ const Flashcard_List = ({props}) =>{
 const styles = StyleSheet.create({
 
   text:{
-    height: heightfull/10,
-    width: "90%",
     backgroundColor: "#EEEEEE",
-    borderRadius: 5,
+    borderRadius: 10,
     borderCurve: 25,
-    marginTop:20,
-    marginLeft:"5%",
     shadowOpacity:.2,
     shadowRadius:5,
     justifyContent:"center",
-    backgroundColor:"#2E3856"
+    backgroundColor:"#2E3856",
+    margin: 10,
   },
 })
 export default Flashcard_List

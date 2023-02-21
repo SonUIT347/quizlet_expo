@@ -33,7 +33,6 @@ const BottomTab = ({navigation}) =>{
                     name = "home"
                     size = {24}
                     color = {"#2E3856"}
-                    style ={{marginTop: 10}}
                     />
                     )
                 }
@@ -47,7 +46,6 @@ const BottomTab = ({navigation}) =>{
                         name = "search"
                         size = {24}
                         color = "#2E3856"
-                        style ={{marginTop: 10}}
                         />
                     )
                 }
@@ -60,7 +58,6 @@ const BottomTab = ({navigation}) =>{
                         name = "plus-circle-outline"
                         size = {24}
                         color = {"#2E3856"}
-                        style ={{marginTop: 10}}
                         />
                     )
                 }
@@ -73,7 +70,6 @@ const BottomTab = ({navigation}) =>{
                         name = "person"
                         size = {24}
                         color = "#2E3856"
-                        style ={{marginTop: 10}}
                         />
                     )
                 }

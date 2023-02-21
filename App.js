@@ -27,7 +27,7 @@ export default function App() {
       {/* <Home/> */}
       {/* <Lesson/> */}
       {/* <Search/> */}
-      <Create/>
+      {/* <Create/> */}
       {/* <CreateFolder/> */}
       {/* <Personal/> */}
       <NavigationContainer>

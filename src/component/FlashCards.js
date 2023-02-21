@@ -29,11 +29,11 @@ const Flashcards = ({props}) =>{
   ]
   const [touch, setTouch] = useState(false)
     return(
-        <SafeAreaView  >
+        <SafeAreaView style={{}}>
           <ScrollView horizontal={true} style = {styles.scroll} >
           {props.map((l) =>{
               return(
-                l.Card.map((list,index) => {
+                l.Card.map((list) => {
                   return(
                    <SafeAreaView style = {styles.text} key={list.id}>
                      <TouchableOpacity style={styles.button} onPress={()=>setTouch(!touch)}>
@@ -60,10 +60,10 @@ const styles = StyleSheet.create({
     marginTop:10
   },
   text:{
-    height: 200,
+    height: '100%',
     width: widthfull-100,
-    backgroundColor: "#2E3856",
-    borderRadius: 10,
+    // backgroundColor: "green",
+    // borderRadius: 10,
     marginLeft:50,
     marginRight:50,
     alignSelf: "center",
@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#2E3856',
     padding: 1,
     flexDirection:"column",
-    justifyContent:"center"
+    justifyContent:"center",
+    borderRadius: 10,
   }
 })
 export default Flashcards

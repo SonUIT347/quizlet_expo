@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { doc, updateDoc, deleteField, setDoc, query, where, collection, documentId, getDocs } from "firebase/firestore";
+import { doc, updateDoc, deleteField, setDoc, query, where, collection, documentId, getDocs, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
+
 import {
   Alert,
   Modal,
@@ -59,7 +60,7 @@ const EditFolder = ({
                     }
                     UpdatenameFolder()
                     setHeaderFolder((headerFolder) => {
-                        return { ...headerFolder, nameFolder: text.nameFolder };
+                        return { ...headerFolder, nameFolder: text.nameFolder};
                       });
                       setModalVisible((modalVisible) => {
                         return {
@@ -94,7 +95,12 @@ const EditFolder = ({
               />
             </View>
             <View style={{ height: "75%", justifyContent: "flex-end" }}>
-              <Button
+              <Button onPress={()=>{
+                const DeleteData = async () => {
+                await deleteDoc(doc(db, "Folder", FolderId));
+                }
+                DeleteData()
+              }}
                 title="Xoá thư mục"
                 buttonStyle={{
                   backgroundColor: "#C14024",
