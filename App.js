@@ -24,15 +24,15 @@ export default function App() {
   return (
     <View style={styles.container}>
       {/* <ViewFolder/> */}
-      <Home/>
+      {/* <Home/> */}
       {/* <Lesson/> */}
       {/* <Search/> */}
       {/* <Create/> */}
       {/* <CreateFolder/> */}
       {/* <Personal/> */}
-      {/* <NavigationContainer>
+      <NavigationContainer>
         <AuthNavigator/>
-      </NavigationContainer> */}
+      </NavigationContainer>
       {/* <ViewFolder/> */}
       {/* <Card/> */}
       {/* <SettingFolder/> */}
@@ -42,7 +42,7 @@ export default function App() {
      {/* <Login/> */}
      {/* <Test/> */}
      {/* <Flashcard/> */}
-     <ViewFolder/>
+     {/* <ViewFolder/> */}
     </View>
   );
 }
