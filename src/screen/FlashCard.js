@@ -11,17 +11,17 @@ import {
 import { LinearProgress } from "@rneui/themed";
 import useTinderCard from "../component/useFlashCard";
 import Icon from "react-native-vector-icons/FontAwesome";
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import AntDesign from "react-native-vector-icons/AntDesign";
 import Speedometer from "react-native-speedometer-chart";
 import { useRoute } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SafeAreaView } from "react-native-safe-area-context";
 function FlashCard({ navigation }) {
-  const route = useRoute()
+  const route = useRoute();
   // console.log(route.params.lessonId)
-  useEffect(() =>{
-    AsyncStorage.setItem("lessonId", `${route.params.lessonId}`)
-  },[])
+  useEffect(() => {
+    AsyncStorage.setItem("lessonId", `${route.params.lessonId}`);
+  }, []);
   const [
     data,
     _panResponder,
@@ -33,6 +33,8 @@ function FlashCard({ navigation }) {
     setDataHeader,
     handlePlay,
     hanldeUndo,
+    chek,
+    setcheck,
   ] = useTinderCard([
     {
       // image: Bobo,
@@ -170,20 +172,20 @@ function FlashCard({ navigation }) {
                 style={[styles.card, cardStyle, nextStyle]}
                 key={item.id}
               >
-                
-                <View
+                <TouchableOpacity
                   style={{
                     flex: 1,
                     justifyContent: "center",
                     alignItems: "center",
                   }}
+                  onPress={()=>setcheck(chek=>!chek)}
                 >
                   <Text
                     style={{ fontSize: 40, color: "white", fontWeight: "500" }}
                   >
-                    {item.Term}
+                    {chek ? item.Term  : item.Define}
                   </Text>
-                </View>
+                </TouchableOpacity>
               </Animated.View>
             </View>
           );

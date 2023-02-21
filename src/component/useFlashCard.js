@@ -14,6 +14,7 @@ export default function useTinderCards() {
       ? (value < min ? min : value > max ? max : value)
       : (value < max ? max : value > min ? min : value)
   }
+  const [chek, setcheck] = useState(true)
   const [data, setData] = useState([]);
   const [dataHeader, setDataHeader] = useState({
     indexFashCard: 0,
@@ -24,7 +25,7 @@ export default function useTinderCards() {
     velocity: 0,
     dx: 0,
   });
-
+console.log(chek,Math.random())
   useEffect( async () =>{
     const lessonId = await AsyncStorage.getItem("lessonId")
     // console.log(lessonId, "use")
@@ -73,6 +74,7 @@ export default function useTinderCards() {
     scale.setValue(0.9);
     opacity.setValue(1);
     animation.setValue({x: 0, y: 0});
+    setcheck(true)
   }, [data]);
   useEffect(() => {
     if (dataHeader.velocity !== 0) {
@@ -240,5 +242,6 @@ export default function useTinderCards() {
     setDataHeader,
     handlePlay,
     hanldeUndo,
+    chek, setcheck,
   ];
 }
