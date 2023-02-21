@@ -13,7 +13,7 @@ import {
 import Card from "./Card";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const FolderId = 'jtOjniEeGlpuxHQg4txg'
+// const FolderId = 'jtOjniEeGlpuxHQg4txg'
 
 const AddFolder = ({
   dataFolder,
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#0A092D",
   },
   modalView: {
-    marginTop: 50,
+    marginTop: 20,
     marginLeft: 30,
     marginRight: 30,
     height: "95%",

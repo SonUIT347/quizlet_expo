@@ -45,27 +45,27 @@ export default function Personal({route}) {
     
     <View style={{height: '100%'}}>
       <View style={styles.container}>
-        {/* <View style={{flex: 1, flexDirection: 'row', backgroundColor: '#2e3969'}}>
+        <View style={{flex: 1, flexDirection: 'row', backgroundColor: '#2F3856', justifyContent: 'space-between', marginTop: 10}}>
           <TouchableOpacity style={styles.ButtonSetting}><Text style={{textAlign: 'center'}}><Icon name="settings" size={30} color="white" style={styles.setting}/></Text></TouchableOpacity>
           <TouchableOpacity style={styles.ButtonSetting1}><Text style={styles.Upgrade}>Nâng Cấp</Text></TouchableOpacity>
-        </View> */}
+        </View>
 
-        <View style={{flex: 4, alignItems: 'center',  width: '100%', height: '100%'}}>
+        <View style={{flex: 4, alignItems: 'center',  width: '100%', height: '100%', marginTop: 20}}>
           <Image source={{uri: Avatar}} style={styles.Img}/>
           <Text style={styles.Name}>{nameAuthor}</Text>
 
-          <View style={{flex: 1, flexDirection: 'row', marginTop: 10, bottom: 0}}>
+          <View style={{flex: 1, flexDirection: 'row', marginTop: -5, bottom: 0}}>
             <TouchableOpacity style={styles.ButtonContent1} 
             onPress ={()=>{setPage('HOC_PHAN')}}
             disabled={(Page === 'HOC_PHAN') ? true : false}>
               <Text style={styles.Title}>Các học phần</Text>
-              {Page === 'HOC_PHAN' ? <View style={{position: 'absolute', height: 5, width: '100%', backgroundColor: '#546999', bottom: 0}}></View> : null}
+              {Page === 'HOC_PHAN' ? <View style={{position: 'absolute', height: 4, width: '100%', backgroundColor: '#546999', bottom: 0}}></View> : null}
             </TouchableOpacity>
             <TouchableOpacity style={styles.ButtonContent2}
             onPress ={()=>{setPage('FOLDER')}}
             disabled={Page === 'FOLDER' ? true : false}>
               <Text style={styles.Title}>Thư  mục</Text>
-              {Page === 'FOLDER' ? <View style={{position: 'absolute', height: 5, width: '100%', backgroundColor: '#546999', bottom: 0}}></View> : null}
+              {Page === 'FOLDER' ? <View style={{position: 'absolute', height: 4, width: '100%', backgroundColor: '#546999', bottom: 0}}></View> : null}
             </TouchableOpacity>
           </View>
 
@@ -74,22 +74,26 @@ export default function Personal({route}) {
         {/* <StatusBar style="auto" /> */}
       </View>
       
-      <View style={{flex:7, backgroundColor: '#000044'}}>
+      <View style={{flex:7, backgroundColor: '#09092B'}}>
       {Page === 'FOLDER' ? 
-      <ScrollView>
+      <ScrollView style={{marginTop: 10}}>
         {Folder.map((Contents, index) => {
           return(
-            <TouchableOpacity key={index}
-             style={{backgroundColor: '#2e3969', margin: 20, marginBottom: 0, borderRadius: 10, padding: 20, paddingTop: 10, height: 127}}>
-                <Icon name='folder' size={25} color='white' style={{}}></Icon>
+            <View style = {{marginLeft: 30, marginRight: 30, marginTop: 10, marginBottom: 10}}>
+              <TouchableOpacity key={index}
+              style={{backgroundColor: '#2F3856', borderRadius: 10}}>
+                <View style = {{margin: 15,}}>
+                  <Icon name='folder' size={25} color='white' style={{margin: 5}}></Icon>
 
-                <Text style={{color:'white', fontSize: 25, fontWeight: '700'}}>{Contents.nameFolder}</Text>
+                  <Text style={{color:'white', fontSize: 25, fontWeight: '700', margin: 5}}>{Contents.nameFolder}</Text>
 
-                <View style={{flexDirection: 'row', paddingTop: 10}}>
-                  <Image source={{uri: Avatar}} style={styles.Hpimg}/>
-                  <Text style={{color:'white',fontSize: 16,fontWeight: '500', textAlign: 'center', padding: 5, marginLeft: 5}}>{Contents.nameAuthor}</Text>
+                  <View style={{flexDirection: 'row', margin: 5}}>
+                    <Image source={{uri: Avatar}} style={styles.Hpimg}/>
+                    <Text style={{color:'white',fontSize: 18,fontWeight: '500', textAlign: 'center', padding: 5, marginLeft: 5}}>{Contents.nameAuthor}</Text>
+                  </View>
                 </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
+            </View>
           )
         })}
   
@@ -102,18 +106,24 @@ export default function Personal({route}) {
           null
         }
       </ScrollView> :
-      <ScrollView>
+      <ScrollView style={{marginTop: 10}}>
         {Lesson.map((Contents, index) => {
           return(
-          <TouchableOpacity key={index}
-          style={{backgroundColor: '#2e3969', margin: 20, marginBottom: 0, borderRadius: 10, padding: 20, paddingTop: 10, height: 127}}>
-            <Text style={{color:'white', fontSize: 25, fontWeight: '700'}}>{Contents.Name}</Text>
-            <Text style={{color:'white', fontSize: 18}}>{Contents.Count} Thuật ngữ</Text>
-            <View style={{flexDirection: 'row', paddingTop: 10}}>
-            <Image source={{uri: Avatar}} style={styles.Hpimg}/>
-            <Text style={{color:'white',fontSize: 16,fontWeight: '500', textAlign: 'center', padding: 5, marginLeft: 5}}>{nameAuthor}</Text>
-            </View>
-          </TouchableOpacity>
+          <View style = {{marginLeft: 30, marginRight: 30, marginTop: 10, marginBottom: 10}}>
+            <TouchableOpacity key={index}
+            style={{backgroundColor: '#2F3856', borderRadius: 10}}>
+              <View style = {{margin: 15,}}>
+                <Text style={{color:'white', fontSize: 25, margin: 5, fontWeight: '700'}}>{Contents.Name}</Text>
+
+                <Text style={{color:'white', fontSize: 18, margin: 5}}>{Contents.Count} Thuật ngữ</Text>
+
+                <View style={{flexDirection: 'row', margin: 5}}>
+                  <Image source={{uri: Avatar}} style={styles.Hpimg}/>
+                  <Text style={{color:'white',fontSize: 18,fontWeight: '500', textAlign: 'center', padding: 5, marginLeft: 5}}>{nameAuthor}</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          </View>
           )
         })}
         {Lesson.length === 0 ?
@@ -135,17 +145,17 @@ export default function Personal({route}) {
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
-    backgroundColor: '#2e3969',
-    height: '30%',
+    backgroundColor: '#2F3856',
+    height: '32%',
     // alignContent: 'center' ,
   },
   ButtonSetting: {
-    color: 'red',
+    // color: 'red',
     marginTop: 30,
-    marginLeft: '10%',
+    marginLeft: 15,
     height: 40,
     width:  40,
-    backgroundColor: '#2e3969',
+    backgroundColor: '#2F3856',
     justifyContent: 'center',
     // padding: '10%',
   },
@@ -161,10 +171,10 @@ const styles = StyleSheet.create({
     height: 40,
     width:  110,
     marginTop: 30,
-    marginLeft: '47%',
+    marginRight: 15,
     justifyContent: 'center',
     // alignContent: 'center' ,
-    backgroundColor: '#2e3969',
+    backgroundColor: '#2F3856',
   },
   Img: {
     width: 75,
@@ -195,7 +205,7 @@ const styles = StyleSheet.create({
 
   },
   Title: {
-    fontSize: 22,
+    fontSize: 23,
     textAlign: 'center',
     color: 'white',
   },
