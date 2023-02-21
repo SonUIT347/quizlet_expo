@@ -16,7 +16,7 @@ import Test from './src/screen/Test';
 import Personal from './src/screen/Personal';
 import Lesson from './src/component/Lesson';
 import ViewFolder from './src/screen/ViewFolder';
-
+import Register from './src/screen/Register';
 // import NewFlashCard from './src/screen/NewFlashCard';
 var widthfull = Dimensions.get('window').width; //full width
 var heightfull = Dimensions.get('window').height; //full height
@@ -30,9 +30,9 @@ export default function App() {
       {/* <Create/> */}
       {/* <CreateFolder/> */}
       {/* <Personal/> */}
-      <NavigationContainer>
+      {/* <NavigationContainer>
         <AuthNavigator/>
-      </NavigationContainer>
+      </NavigationContainer> */}
       {/* <ViewFolder/> */}
       {/* <Card/> */}
       {/* <SettingFolder/> */}
@@ -43,6 +43,7 @@ export default function App() {
      {/* <Test/> */}
      {/* <Flashcard/> */}
      {/* <ViewFolder/> */}
+     <Register/>
     </View>
   );
 }
