@@ -13,7 +13,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 //   setdata = (data_Folders.docs.map((doc) =>({...doc.data(), id: doc.id}) )[0])
 // }
 // getData_Folder()
-let temp = 0;
 
 const dataCard = [
 
@@ -25,6 +24,8 @@ const Folder =
     // img: "https://chimgogo.com/wp-content/uploads/2021/05/Pug-Feature-e1620301801946.jpg",
     // nameFolder: 'Son'
   }]
+
+  // const FolderID = 'jtOjniEeGlpuxHQg4txg'
 
 const useViewFolder = () => {
   const [dataFolder, setDataFolder] = useState([]);
@@ -38,6 +39,7 @@ const useViewFolder = () => {
     }
     getDataCard()
     const FolderID = await AsyncStorage.getItem("FolderID")
+
     const q = query(collection(db, "Folder"), where(documentId(), "==", FolderID))
     const getDataFolder = async () =>{
       const headerFolders = await getDocs(q)

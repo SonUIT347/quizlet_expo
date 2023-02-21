@@ -88,6 +88,7 @@ const EditFolder = ({
             </View>
             <View style={{ marginTop: 10 }}>
               <Input
+                inputStyle={{ color: "white", fontSize: 15 }}
                 errorStyle={{ color: "white", fontWeight: "600" }}
                 errorMessage="MÔ TẢ (TUỲ CHỌN)"
               />
@@ -115,6 +116,7 @@ const styles = StyleSheet.create({
   modalView: {
     marginLeft: 30,
     marginRight: 30,
+    marginTop: 20,
     height: "95%",
   },
   text: {

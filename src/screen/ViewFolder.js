@@ -35,7 +35,7 @@ const ViewFolder = () => {
   useEffect(() =>{
     AsyncStorage.setItem("FolderID", `${route.params.FolderID}`)
   },[])
-    // console.log(headerFolder)
+    console.log(headerFolder)
 
   return (
     <View style={styles.container}>
@@ -96,7 +96,7 @@ const ViewFolder = () => {
           title="Học thư mục này"
           buttonStyle={{
             backgroundColor: "#4654F6",
-            borderRadius: 7,
+            borderRadius: 10,
           }}
           containerStyle={{
             marginTop: 30,
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   marginContainer: {
     marginLeft: 30,
     marginRight: 30,
-    marginTop: 30,
+    marginTop: 40,
   },
   header: {
     flexDirection: "row",
