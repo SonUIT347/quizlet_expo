@@ -23,6 +23,7 @@ const AddFolder = ({
   setModalVisible,
   setDataFolder,
   setHeaderFolder,
+  // userName,
   
 }) => {
   const checkCard = (data) => {

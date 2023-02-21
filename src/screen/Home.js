@@ -24,11 +24,13 @@ import ShowFolder from "../component/ShowFolder";
 var widthfull = Dimensions.get("window").width; //full width
 var heightfull = Dimensions.get("window").height; //full height
 
-const Home = ({ navigation }) => {
+const Home = ({ navigation, route}) => {
+  const userName = `${route.params.userName}`
   const [modalVisible, setModalVisible] = useState({
     showLesson: false,
     showFolder: false,
   });
+  console.log(navigation)
   const [lesson, setLesson] = useState([]);
   const [folder, setfolder] = useState([]);
   const logOut = () => {
@@ -96,7 +98,7 @@ const Home = ({ navigation }) => {
             </TouchableOpacity>
           </SafeAreaView>
         </View>
-        <Lesson props={lesson} navigation={navigation} />
+        <Lesson props={{lesson, userName}} navigation={navigation} />
 
         <SafeAreaView style={styles.ac_text_ctn}>
           <Text
@@ -126,7 +128,7 @@ const Home = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
         </SafeAreaView>
-        <Folder props={folder} navigation={navigation} />
+        <Folder props={{folder, userName}} navigation={navigation} />
       </ScrollView>
       <ShowLesson
         lesson={lesson}

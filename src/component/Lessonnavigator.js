@@ -25,7 +25,7 @@ const LessonNavigator = () => {
             }
 
         }} >
-          <Stack.Screen name="Home"  initialParams={{userID:route.params.userID}} component={Home} />
+          <Stack.Screen name="Home"  initialParams={{userID:route.params.userID, userName:route.params.userName}} component={Home} />
           <Stack.Screen name="Option" component={OptionTest}  /> 
           <Stack.Screen name='ViewFolder' component={ViewFolder} />
           <Stack.Screen name='Flashcard' component={FlashCard} />

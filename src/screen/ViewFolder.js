@@ -19,21 +19,26 @@ import EditFolder from "../component/EditFolder";
 import { useRoute } from "@react-navigation/native";
 import { useEffect } from "react";
 import { async } from "@firebase/util";
+
+const Avatar = 'https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2022/09/avatar-anime-1.jpg?ssl=1'
 const ViewFolder = ({navigation}) => {
   const route = useRoute()
   console.log(route.params.FolderID)
+  console.log(route.params.userName)
   const {
     dataFolder,
     dataFolders,
     modalVisible,
     setModalVisible,
     dataCards,
+    // userName,
     headerFolder,
     setHeaderFolder, setDataFolder, setDataFolders,
   } = useViewFolder();
 
   useEffect(() =>{
     AsyncStorage.setItem("FolderID", `${route.params.FolderID}`)
+    AsyncStorage.setItem("userName", `${route.params.userName}`)
   },[])
     // console.log(headerFolder)
 
@@ -81,14 +86,12 @@ const ViewFolder = ({navigation}) => {
           <View style={{ marginRight: 30, justifyContent: "center" }}>
             <Text style={[styles.text]}>{dataFolder.length} học phần</Text>
           </View>
-          <Image
-            style={styles.img}
-            source={{
-              uri: headerFolder.img,
-            }}
-          />
-          <View style={{ justifyContent: "center", marginLeft: 10 }}>
-            <Text style={styles.text}>{headerFolder.nameAuthor}</Text>
+          <View style={{ justifyContent: "center"}}>
+            {/* <Text style={styles.text}>{route.params.userName}</Text> */}
+            <View style={{flexDirection: 'row'}}>
+              <Image source={{uri: Avatar}} style={{ height: 30, width: 30, borderRadius: 20,}}/>
+              <Text style={[styles.text, {color:'white',fontSize: 18,fontWeight: '500', textAlign: 'center', padding: 5, marginLeft: 5}]}>{route.params.userName}</Text>
+            </View>
             {/* {console.log(headerFolder)} */}
           </View>
         </View>
@@ -127,6 +130,7 @@ const ViewFolder = ({navigation}) => {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         setDataFolder={setDataFolder}
+        // userName={route.params.userName}
       />
       <SettingFolder
         modalVisible={modalVisible}
@@ -137,6 +141,7 @@ const ViewFolder = ({navigation}) => {
         setHeaderFolder={setHeaderFolder}
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
+        FolderId={route.params.FolderID}
       />
     </View>
   );

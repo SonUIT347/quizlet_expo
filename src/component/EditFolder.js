@@ -12,17 +12,22 @@ import {
   ScrollView,
 } from "react-native";
 import { Input, Icon, Button } from "@rneui/themed";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import Folder from "./Folder";
 
-const FolderId = 'jtOjniEeGlpuxHQg4txg'
 
 const EditFolder = ({
   modalVisible,
   setModalVisible,
   headerFolder,
+  FolderId,
   setHeaderFolder,
 }) => {
   const [text, setText] = useState({ nameFolder: headerFolder.nameFolder });
+  // useEffect(async() =>{
+  //   const FolderId = await AsyncStorage.getItem("FolderID")
+  // },[])
   return (
     <View style={styles.centeredView}>
       <Modal

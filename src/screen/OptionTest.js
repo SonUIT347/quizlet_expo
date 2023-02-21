@@ -32,7 +32,9 @@ const OptionTest = ({navigation}) =>{
   // },[])
   const [lesson, setLesson] = useState([])
   const [folder, setfolder] = useState([])
+  console.log(route.params.userName)
   useEffect(() =>{
+    // AsyncStorage.setItem("userName", `${route.params.userName}`)
     const q = query(collection(db, "Lesson"), where(documentId(), "==", `${route.params.lessonId}`))
     // console.log(route.params.lessonId)
 
@@ -60,7 +62,7 @@ const OptionTest = ({navigation}) =>{
           <Text style={styles.lesson} >{lesson.map((name) => {return name.Name})}</Text>
           <View style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
             <Image source={{uri: Avatar}} style={{height: 30, width: 30, borderRadius: 20,}}/>
-            <Text style={{color:'white',fontSize: 18,fontWeight: '500', textAlign: 'center', padding: 5, marginLeft: 5}}>by User</Text>
+            <Text style={{color:'white',fontSize: 18,fontWeight: '500', textAlign: 'center', padding: 5, marginLeft: 5}}>{route.params.userName}</Text>
             <Icon style={{color:'white',fontSize: 18,fontWeight: '500', textAlign: 'center',  marginLeft: 10, marginRight: 10}} name='more-vertical'></Icon>
             <Text style={{color:'white', fontSize: 17, margin: 5}}>{lesson.map((item) => {return item.Count})}  thuật ngữ</Text>
           </View>

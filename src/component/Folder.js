@@ -16,18 +16,19 @@ var widthfull = Dimensions.get("window").width; //full width
 var heightfull = Dimensions.get("window").height; //full height
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 const Folder = ({ props, navigation }) => {
+  console.log(props)
   return (
     <SafeAreaView style={styles.scroll_ctn}>
       <ScrollView horizontal={true} style={styles.scroll}>
-        {props.map((props, index) => {
+        {props.folder.map((prop, index) => {
           // console.log(props.id)
           return (
             <TouchableOpacity
               style={styles.lesson}
-              key={props.id}
+              key={prop.id}
               onPress={() =>
                 navigation.navigate("ViewFolder", {
-                  FolderID: props.id,
+                  FolderID: prop.id, userName: props.userName
                 })
               }
             >
@@ -43,7 +44,7 @@ const Folder = ({ props, navigation }) => {
                       textAlign: "center",
                     }}
                   >
-                    5 học phần
+                    {prop.Lesson_Id.length} học phần
                   </Text>
                 </View>
                 <SafeAreaView style={{ marginBottom: 20, marginTop: 20 }}>
@@ -54,7 +55,7 @@ const Folder = ({ props, navigation }) => {
                       color: "white",
                     }}
                   >
-                    {props.nameFolder}
+                    {prop.nameFolder}
                   </Text>
                   {/* <Text style={{width:60, borderRadius: 10, padding:3, backgroundColor:"white", fontSize:10,paddingLeft:5,color:"red"}}>{props.count + " tems"}</Text> */}
                 </SafeAreaView>
@@ -78,7 +79,7 @@ const Folder = ({ props, navigation }) => {
                       textAlign: "center",
                     }}
                   >
-                    taitai
+                  {props.userName}
                   </Text>
                 </View>
               </View>

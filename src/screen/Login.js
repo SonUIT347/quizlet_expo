@@ -33,10 +33,12 @@ const Login = ({ navigation }) => {
             // User is signed in, see docs for a list of available properties
             // https://firebase.google.com/docs/reference/js/firebase.User
             const uid = user.uid;
+            const userName = user.email.split('@gmail.com', 1);
+            // console.log(userName);
             // const userId = createContext(uid)
             // console.log(userId.Provider)
             navigation.navigate("TabBar",{
-              userID:uid
+              userID:uid, userName: userName,
             })
             // console.log(uid)
             // ...

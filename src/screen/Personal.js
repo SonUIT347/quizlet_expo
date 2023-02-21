@@ -22,6 +22,9 @@ export default function Personal({navigation,route}) {
   // const [Content, setContent] = useState(Lesson);
   const [Page, setPage] = useState('HOC_PHAN');
   const userID = `${route.params.userID}`//này là userID của tài khoản đag login
+  const userName = `${route.params.userName}`//này là userID của tài khoản đag login
+
+  console.log(userName)
   // console.log(userID)
   useEffect (() => {
     const pLesson = query(collection(db, 'Lesson'), where('userID', '==', userID )) // trong la user id
@@ -52,7 +55,7 @@ export default function Personal({navigation,route}) {
 
         <View style={{flex: 4, alignItems: 'center',  width: '100%', height: '100%', marginTop: 20}}>
           <Image source={{uri: Avatar}} style={styles.Img}/>
-          <Text style={styles.Name}>{nameAuthor}</Text>
+          <Text style={styles.Name}>{userName}</Text>
 
           <View style={{flex: 1, flexDirection: 'row', marginTop: -5, bottom: 0}}>
             <TouchableOpacity style={styles.ButtonContent1} 
@@ -89,7 +92,7 @@ export default function Personal({navigation,route}) {
 
                   <View style={{flexDirection: 'row', margin: 5}}>
                     <Image source={{uri: Avatar}} style={styles.Hpimg}/>
-                    <Text style={{color:'white',fontSize: 18,fontWeight: '500', textAlign: 'center', padding: 5, marginLeft: 5}}>{Contents.nameAuthor}</Text>
+                    <Text style={{color:'white',fontSize: 18,fontWeight: '500', textAlign: 'center', padding: 5, marginLeft: 5}}>{Contents.userName}</Text>
                   </View>
                 </View>
               </TouchableOpacity>
@@ -119,7 +122,7 @@ export default function Personal({navigation,route}) {
 
                 <View style={{flexDirection: 'row', margin: 5}}>
                   <Image source={{uri: Avatar}} style={styles.Hpimg}/>
-                  <Text style={{color:'white',fontSize: 18,fontWeight: '500', textAlign: 'center', padding: 5, marginLeft: 5}}>{nameAuthor}</Text>
+                  <Text style={{color:'white',fontSize: 18,fontWeight: '500', textAlign: 'center', padding: 5, marginLeft: 5}}>{userName}</Text>
                 </View>
               </View>
             </TouchableOpacity>

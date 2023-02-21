@@ -25,7 +25,7 @@ const BottomTab = ({navigation}) =>{
     // console.log(route.params.userID)
     return(
         <Tab.Navigator screenOptions={{headerShown:false,tabBarStyle: styles.tabBarStyle}  } >
-            <Tab.Screen name = "LessonNavigator" initialParams={{userID:route.params.userID}}  component={LessonNavigator} options={{
+            <Tab.Screen name = "LessonNavigator" initialParams={{userID:route.params.userID, userName: route.params.userName}}  component={LessonNavigator} options={{
                 tabBarLabel:"",
                 tabBarIcon: () =>{
                     return(
@@ -50,7 +50,7 @@ const BottomTab = ({navigation}) =>{
                     )
                 }
             }} />
-            <Tab.Screen name = "CreateNav" initialParams={{userID:route.params.userID}} component={CreateNavigator} options={{
+            <Tab.Screen name = "CreateNav" initialParams={{userID:route.params.userID, userName: route.params.userName}} component={CreateNavigator} options={{
                 tabBarLabel:"",
                 tabBarIcon: () => {
                     return(
@@ -62,7 +62,7 @@ const BottomTab = ({navigation}) =>{
                     )
                 }
             }} />
-            <Tab.Screen name = "personal" component={Personal} initialParams={{userID:route.params.userID}} options = {{
+            <Tab.Screen name = "personal" component={Personal} initialParams={{userID:route.params.userID, userName: route.params.userName}} options = {{
                 tabBarLabel:"",
                 tabBarIcon: ()=>{
                     return(

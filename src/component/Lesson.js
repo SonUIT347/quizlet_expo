@@ -20,16 +20,17 @@ var heightfull = Dimensions.get("window").height; //full height
 const Lesson = ({ props, navigation }) => {
   return (
     <SafeAreaView style={styles.scroll_ctn}>
+      {console.log(props)}
       <ScrollView horizontal={true} style={styles.scroll}>
-        {props.map((props, index) => {
+        {props.lesson.map((prop, index) => {
           return (
             <TouchableOpacity
               style={styles.card}
-              key={props.id}
+              key={prop.id}
               onPress={() =>
                 navigation.navigate(
                   "Option" ,{
-                lessonId:props.id
+                lessonId:prop.id, userName: props.userName
               }
                 )
               }
@@ -43,7 +44,7 @@ const Lesson = ({ props, navigation }) => {
                     marginBottom: 10,
                   }}
                 >
-                  {props.Name}
+                  {prop.Name}
                 </Text>
                 <View
                   style={{
@@ -61,7 +62,7 @@ const Lesson = ({ props, navigation }) => {
                       padding: 2
                     }}
                   >
-                    {props.Count + " tems"}
+                    {prop.Count + " tems"}
                   </Text>
                 </View>
                 <View style={{ flexDirection: "row", marginTop: 20}}>
@@ -84,7 +85,7 @@ const Lesson = ({ props, navigation }) => {
                       textAlign: "center",
                     }}
                   >
-                    taitai
+                  {props.userName}
                   </Text>
                 </View>
               </SafeAreaView>
