@@ -141,7 +141,9 @@ const styles = StyleSheet.create({
     borderColor: "white",
     backgroundColor: "white",
     height: 50,
-    borderRadius: 4
+    borderRadius: 4,
+    paddingLeft: 15,
+    paddingRight: 15,
   },
   text: {
     alignSelf: "flex-start",
