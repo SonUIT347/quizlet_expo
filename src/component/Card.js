@@ -3,7 +3,7 @@ const Card = ({Name, Count, img, nameAuthor, borderColor}) => {
   return (
     <View style={[styles.container,{ borderColor: borderColor ? '#A9B1F9' : "#2F3856"}]}>
       <View style={styles.marginContainer}>
-        <View style={{marginBottom: 5}}>
+        <View style={{marginBottom: 10}}>
           <Text style={[styles.text, { fontSize: 20, fontWeight: '600' }]}>{Name}</Text>
         </View>
         <Text style={[styles.text, {fontSize: 10}]}>{Count} thuật ngữ</Text>

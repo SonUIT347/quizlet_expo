@@ -13,7 +13,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 //   setdata = (data_Folders.docs.map((doc) =>({...doc.data(), id: doc.id}) )[0])
 // }
 // getData_Folder()
-let temp = 0;
 
 const dataCard = [
 
@@ -26,6 +25,8 @@ const Folder =
     // nameFolder: 'Son'
   }]
 
+  // const FolderID = 'jtOjniEeGlpuxHQg4txg'
+
 const useViewFolder = () => {
   const [dataFolder, setDataFolder] = useState([]);
   const [dataFolders, setDataFolders] = useState({});
@@ -37,8 +38,8 @@ const useViewFolder = () => {
       setDataCards(dataCards.docs.map((doc) =>({...doc.data(), id: doc.id}) ))
     }
     getDataCard()
-    // const FolderID = await AsyncStorage.getItem("FolderID")
-    const q = query(collection(db, "Folder"), where(documentId(), "==", "5spIOicjDcXhzf9dNil6"))
+    const FolderID = await AsyncStorage.getItem("FolderID")
+    const q = query(collection(db, "Folder"), where(documentId(), "==", FolderID))
     const getDataFolder = async () =>{
       const headerFolders = await getDocs(q)
       setHeaderFolder(headerFolders.docs.map((doc) =>({...doc.data(), id: doc.id}) )[0])

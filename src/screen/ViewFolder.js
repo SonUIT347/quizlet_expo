@@ -32,9 +32,9 @@ const ViewFolder = ({navigation}) => {
     setHeaderFolder, setDataFolder, setDataFolders,
   } = useViewFolder();
 
-  // useEffect(() =>{
-  //   AsyncStorage.setItem("FolderID", `${route.params.FolderID}`)
-  // },[])
+  useEffect(() =>{
+    AsyncStorage.setItem("FolderID", `${route.params.FolderID}`)
+  },[])
     // console.log(headerFolder)
 
   return (
@@ -96,7 +96,7 @@ const ViewFolder = ({navigation}) => {
           title="Học thư mục này"
           buttonStyle={{
             backgroundColor: "#4654F6",
-            borderRadius: 7,
+            borderRadius: 10,
           }}
           containerStyle={{
             marginTop: 30,
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   marginContainer: {
     marginLeft: 30,
     marginRight: 30,
-    marginTop: 30,
+    marginTop: 40,
   },
   header: {
     flexDirection: "row",
