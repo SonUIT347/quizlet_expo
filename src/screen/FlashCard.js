@@ -8,15 +8,15 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-
 import { LinearProgress } from "@rneui/themed";
 import useTinderCard from "../component/useFlashCard";
 import Icon from "react-native-vector-icons/FontAwesome";
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import Speedometer from "react-native-speedometer-chart";
 import { useRoute } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SafeAreaView } from "react-native-safe-area-context";
-function FlashCard({navigation}) {
+function FlashCard({ navigation }) {
   // const route = useRoute()
   // console.log(route.params.lessonId)
   // useEffect(() =>{
@@ -64,7 +64,7 @@ function FlashCard({navigation}) {
       <View style={styles.header}>
         <SafeAreaView>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon name="close" color="white" size={30} marginTop={30} />
+            <Icon name="close" color="white" size={30} marginTop={30} />
           </TouchableOpacity>
         </SafeAreaView>
 
@@ -76,6 +76,11 @@ function FlashCard({navigation}) {
         >
           {dataHeader.indexFashCard}/{dataHeader.lenghtData}
         </Text>
+        <SafeAreaView>
+          <TouchableOpacity>
+            <AntDesign name="setting" color="white" size={30} marginTop={30} />
+          </TouchableOpacity>
+        </SafeAreaView>
       </View>
       <LinearProgress
         style={{ marginVertical: 10 }}
@@ -165,7 +170,7 @@ function FlashCard({navigation}) {
                 style={[styles.card, cardStyle, nextStyle]}
                 key={item.id}
               >
-                <Icon name="volume-down" color="white" size={30} margin={20} />
+                
                 <View
                   style={{
                     flex: 1,
@@ -351,9 +356,14 @@ function FlashCard({navigation}) {
             }}
           >
             <View style={{ backgroundColor: "#4654F6", borderRadius: 7 }}>
-              <TouchableOpacity style={{ margin: 20 }} onPress={() => navigation.navigate("Test",{
-                lessonId:route.params.lessonId
-              })}>
+              <TouchableOpacity
+                style={{ margin: 20 }}
+                onPress={() =>
+                  navigation.navigate("Test", {
+                    lessonId: route.params.lessonId,
+                  })
+                }
+              >
                 <Text
                   style={{
                     textAlign: "center",
