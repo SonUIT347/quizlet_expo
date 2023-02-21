@@ -149,5 +149,6 @@ const styles = StyleSheet.create({
   text_color: {
     textColor: "white",
   },
-});
+})};
+
 export default Login;

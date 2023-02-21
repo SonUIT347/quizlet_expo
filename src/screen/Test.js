@@ -12,7 +12,9 @@ import Speedometer from 'react-native-speedometer-chart';
 import {Switch} from '@rneui/themed';
 import {useState, useRef,useEffect} from 'react';
 import {Picker} from '@react-native-picker/picker';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/AntDesign';
+import IconARight from 'react-native-vector-icons/FontAwesome';
+import IconFile from 'react-native-vector-icons/MaterialCommunityIcons';
 import {LinearProgress, Dialog, Button} from '@rneui/themed';
 import useStudy from '../component/useStudy';
 import { useRoute } from '@react-navigation/native';
@@ -139,83 +141,85 @@ const Test = ({navigation}) => {
         }}>
         <View style={styles.centeredView}>
           <View style={[styles.modalView, {backgroundColor: '#0A092D'}]}>
-            <View style={[styles.header, {marginLeft: 20, marginRight: 20}]}>
-              <Icon name="close" color="white" size={30} marginTop={30} />
+            <View style={[styles.header, { justifyContent: 'center', paddingLeft: 20}]}>
+              <Icon name="close" color="white" size={30} marginTop={30}/>
             </View>
-            <Button
-              title="Bắt đầu làm kiểm tra"
-              buttonStyle={{
-                backgroundColor: '#4654F6',
-                borderRadius: 7,
-              }}
-              containerStyle={{
-                width: '85%',
-                marginHorizontal: 50,
-                marginVertical: 10,
-              }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-                setDatas(shuffle(datas).slice(0, getInf.ansLenght));
-              }}
-            />
-            <Text style={{color: 'white', marginLeft: 30, marginTop: 50}}>
-              CHUNG
-            </Text>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text
-                style={{
-                  color: 'white',
-                  marginLeft: 30,
-                  marginTop: 15,
-                  fontSize: 20,
-                  fontWeight: '700',
-                }}>
-                Số câu hỏi{' '}
+            <View style={{margin: 20, flexDirection: 'column'}}>
+              <Button
+                // title="Bắt đầu làm kiểm tra"
+                buttonStyle={{
+                  backgroundColor: '#4654F6',
+                  borderRadius: 7,
+                  alignContent: 'center',
+                  marginLeft: 35,
+                  marginRight: 35,
+                }}
+                containerStyle={{
+                }}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                  setDatas(shuffle(datas).slice(0, getInf.ansLenght));
+                }}
+              >
+                <Text style={{color: 'white', fontSize: 23, paddingBottom: 2, paddingTop: 2}}>Bắt đầu làm kiểm tra</Text>
+              </Button>
+
+              <Text style={{color: 'white', marginTop: 50, fontSize: 15}}>
+                CHUNG
               </Text>
-              {console.log(getInf.ansLenght)}
-              <Picker
-                style={{backgroundColor: 'white', width: '30%'}}
-                ref={pickerRef}
-                
-                selectedValue={getInf.ansLenght}
-                onValueChange={(itemValue, itemIndex) =>
-                  setGetInf(getInf => {
-                    return {...getInf, ansLenght: itemValue};
-                  })
-                }>
-                {datas.map((data, index) => {
+
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 10}}>
+                <Text
+                  style={{
+                    color: 'white',
+                    marginTop: 15,
+                    fontSize: 23,
+                    fontWeight: '700',
+                  }}>
+                  Số câu hỏi{' '}
+                </Text>
+                {console.log(getInf.ansLenght)}
+                <Picker
+                  style={{backgroundColor: 'white', width: '30%', color: 'black'}}
+                  ref={pickerRef}
                   
-                  let num = index + 1;
-                  return (
-                    num !== 1 && (
-                      <Picker.Item key={index}label={num.toString()} value={index + 1} />
-                    )
-                  );
-                })}
-              </Picker>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}>
-              <Text
-                style={{
-                  color: 'white',
-                  marginLeft: 30,
-                  marginTop: 15,
-                  fontSize: 20,
-                  fontWeight: '700',
-                }}>
-                Hiển thị ngay đáp án
-              </Text>
-              <Switch
-                style={{marginTop: 20}}
-                value={getInf.check}
-                onValueChange={value => setGetInf({...getInf, check: value})}
-                color={'#4654F6'}
-              />
+                  selectedValue={getInf.ansLenght}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setGetInf(getInf => {
+                      return {...getInf, ansLenght: itemValue};
+                    })
+                  }>
+                  {datas.map((data, index) => {
+                    
+                    let num = index + 1;
+                    return (
+                      num !== 1 && (
+                        <Picker.Item style={{fontSize: 17}} key={index}label={num.toString()} value={index + 1} />
+                      )
+                    );
+                  })}
+                </Picker>
+              </View>
+
+              <View style={{flexDirection: 'row',alignItems: 'center' ,justifyContent: 'space-between', marginTop: 20}}>
+                <Text
+                  style={{
+                    color: 'white',
+                    fontSize: 23,
+                    fontWeight: '700',
+                    width: '60%',
+                  }}>
+                  Hiển thị ngay đáp án
+                </Text>
+
+                <Switch
+                  style={{}}
+                  value={getInf.check}
+                  onValueChange={value => setGetInf({...getInf, check: value})}
+                  color={'#4654F6'}
+                />
+              </View>
             </View>
           </View>
         </View>
@@ -223,18 +227,17 @@ const Test = ({navigation}) => {
       <View style={{}}>
         <View
           style={{
-            marginTop: 30,
-            marginLeft: -30,
+            height: 60,
+            marginTop: 40,
             flexDirection: 'row',
-            justifyContent: 'space-around',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            // backgroundColor: 'red',
           }}>
-            <TouchableOpacity>
-              
-            </TouchableOpacity>
-          <Icon name="close" color="white" size={30} />
-          <Text style={styles.textHeader}>
+          <Icon name="close" color="white" size={30} style={{paddingLeft: 20}}/>
+          <Text style={{color: 'white', fontSize: 25, fontWeight: '800', marginLeft: -25}}>
             {getInf.index}/{getInf.ansLenght}
-          </Text>
+        </Text>
           <Text></Text>
         </View>
         <LinearProgress
@@ -440,8 +443,8 @@ const Test = ({navigation}) => {
           <Text style={{color: 'white', marginTop: 30, fontWeight: '600'}}>
             Kết quả của bạn
           </Text>
-          <View style={{marginTop: 20, marginBottom: 20, flexDirection: 'row'}}>
-            <View style={{marginRight: 10}}>
+          <View style={{marginTop: 20, marginBottom: 20, flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{marginRight: 10, flex: 1}}>
               <Speedometer
                 size={100}
                 value={result.correct}
@@ -453,10 +456,10 @@ const Test = ({navigation}) => {
                 percentStyle={{color: 'white', fontSize: 15, fontWeight: "500"}}
               />
             </View>
-            <View style={{flex: 1}}>
-              <View
-                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={{color: '#82E5B8', fontWeight: '600'}}>Đúng</Text>
+
+            <View style={{flex: 2}}>
+              <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text style={{color: '#82E5B8', fontWeight: '600', paddingLeft: 10}}>Đúng</Text>
                 <View
                   style={{
                     borderColor: '#82E5B8',
@@ -472,13 +475,14 @@ const Test = ({navigation}) => {
                   </Text>
                 </View>
               </View>
+
               <View
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between',
                   marginTop: 15,
                 }}>
-                <Text style={{color: '#C15E24', fontWeight: '600'}}>Sai</Text>
+                <Text style={{color: '#C15E24', fontWeight: '600', paddingLeft: 10}}>Sai</Text>
                 <View
                   style={{
                     borderColor: '#C15E24',
@@ -494,14 +498,16 @@ const Test = ({navigation}) => {
                   </Text>
                 </View>
               </View>
+
             </View>
           </View>
+
+
           <Text style={{color: 'white', fontWeight: '600'}}>Bước tiếp theo</Text>
           <View style={{marginTop: 20, marginBottom: 20}}>
             <TouchableOpacity onPress={() => navigation.goBack()}
               style={{
                 width: '100%',
-                height: 100,
                 backgroundColor: '#303753',
                 borderRadius: 10,
               }}>
@@ -511,23 +517,25 @@ const Test = ({navigation}) => {
                   margin: 20,
                   flexDirection: 'row',
                   justifyContent: 'space-around',
+                  alignItems: 'center',
                 }}>
-                <Icon name="pa" color="white" size={30} />
-                <View style={{justifyContent: 'space-between'}}>
+                <Icon name="sync" color="white" size={30} />
+
+                <View style={{justifyContent: 'space-between', width: '80%', padding: 10}}>
                   <Text
-                    style={{color: '#A9B1F9', fontWeight: '600', fontSize: 15}}>
+                    style={{color: '#A9B1F9', fontWeight: '600', fontSize: 16}}>
                     Làm lại bài kiểm tra
                   </Text>
-                  <View style={{width: '89%'}}>
+                  <View style={{}}>
                     <Text style={{color: 'white', fontWeight: '400'}}>
                       Đảm bảo rằng bản thực sự nắm chắc qua một bài kiểm tra
                       khác.
                     </Text>
                   </View>
+
                 </View>
-                <View style={{justifyContent: 'center'}}>
-                  <Icon name="angle-right" color="#A9B1F9" size={30} />
-                </View>
+
+                <IconARight name="angle-right" color="#A9B1F9" size={30} />
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.goBack()}
@@ -544,23 +552,25 @@ const Test = ({navigation}) => {
                   margin: 20,
                   flexDirection: 'row',
                   justifyContent: 'space-around',
+                  alignItems: 'center',
                 }}>
-                <Icon name="pa" color="white" size={30} />
-                <View style={{justifyContent: 'space-between'}}>
+                <IconFile name="file-multiple" color="white" size={30} />
+
+                <View style={{justifyContent: 'space-between', width: '80%', padding: 10}}>
                   <Text
-                    style={{color: '#A9B1F9', fontWeight: '600', fontSize: 15}}>
+                    style={{color: '#A9B1F9', fontWeight: '600', fontSize: 16}}>
                     Xem lại thẻ ghi nhớ
                   </Text>
-                  <View style={{width: '89%'}}>
+                  <View style={{}}>
                     <Text style={{color: 'white', fontWeight: '400'}}>
                       Nghiên cứu thuật ngữ dưới dạng thẻ để cải thiện khả năng
                       ghi nhớ.
                     </Text>
                   </View>
                 </View>
-                <View style={{justifyContent: 'center'}}>
-                  <Icon name="angle-right" color="#A9B1F9" size={30} />
-                </View>
+
+                <IconARight name="angle-right" color="#A9B1F9" size={30} />
+              
               </View>
             </TouchableOpacity>
           </View>
@@ -699,7 +709,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   pointBox: {
-    paddingLeft: 30,
+    // paddingLeft: 30,
     height: '100%',
     borderStyle: 'solid',
     borderWidth: 1,
@@ -757,7 +767,6 @@ const styles = StyleSheet.create({
   modalView: {
     width: '100%',
     height: '106%',
-
     backgroundColor: 'white',
 
     // alignItems: 'center',
