@@ -61,9 +61,9 @@ const ShowLesson = ({
                     key={index}
                     onPress={() =>
                       navigation.navigate(
-                        "Option" /*,{
-                        lessonId:props.id
-                      }*/
+                        "Option" ,{
+                        lessonId:index.id
+                      }
                       )
                     }
                   >

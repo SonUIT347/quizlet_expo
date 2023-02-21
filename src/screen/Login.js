@@ -25,23 +25,19 @@ const Login = ({ navigation }) => {
   const [isSecure, setIsSecure] = useState(true);
   const signIn = () => {
     signInWithEmailAndPassword(authentication, userName, Password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = authentication.currentUser;
-      console.log(user.email)
-      onAuthStateChanged(authentication, (user) => {
-        if (user) {
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/firebase.User
-          const uid = user.uid;
-          // const userId = createContext(uid)
-          // console.log(userId.Provider)
-
-
-          navigation.navigate("TabBar"/*,{
-            userID: uid
-          }*/
-            );
+      .then((userCredential) => {
+        // Signed in
+        onAuthStateChanged(authentication, (user) => {
+          if (user) {
+            console.log("abs")
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            const uid = user.uid;
+            // const userId = createContext(uid)
+            // console.log(userId.Provider)
+            navigation.navigate("TabBar",{
+              userID:uid
+            })
             // console.log(uid)
             // ...
           } else {
@@ -56,30 +52,36 @@ const Login = ({ navigation }) => {
         const errorMessage = error.message;
         alert(errorCode);
       });
-      // ...
-  //   })
-  //   .catch((error) => {
-  //     const errorCode = error.code;
-  //     const errorMessage = error.message;
-  //     alert(errorCode)
-  //   });
-  //   const getUserName = () =>{
-
-  //   }
-  //   getUserName()
-
-  //   setUserName({value:""})
-  // }
+  };
   return (
-    <SafeAreaView style = {styles.container} >
-    <SafeAreaView style = {styles.textInput_ctn} >
-      <Text style={styles.text} >Email</Text>
-      <TextInput fontSize={15} onChangeText={(newtext) => setUserName(newtext) } style={styles.textInput} placeholder='email' placeholderTextColor={"gray"} value={userName} >
-      </TextInput>
-      <Text style={styles.text} >Password</Text>
-      <TextInput fontSize={15} onChangeText={(newtext) => setPassword(newtext) } style={styles.textInput} secureTextEntry={isSecure} placeholder='Password' placeholderTextColor={"gray"} >
-      </TextInput>
-      {/* <TouchableOpacity onPress={() => setEyeicon("eye-off") } >
+    <SafeAreaView style={styles.container}>
+      <Image
+        style={{ width: "100%", height: "50%" }}
+        source={require("./Login.png")}
+      />
+      <SafeAreaView
+        style={[styles.textInput_ctn, { marginLeft: 30, marginRight: 30 }]}
+      >
+        <Text style={styles.text}>Email</Text>
+        <TextInput
+          fontSize={15}
+          onChangeText={(newtext) => setUserName(newtext)}
+          style={styles.textInput}
+          placeholder="Email"
+          placeholderTextColor={"gray"}
+        ></TextInput>
+        <View style={{ marginTop: 20 }}>
+          <Text style={styles.text}>Password</Text>
+          <TextInput
+            fontSize={15}
+            onChangeText={(newtext) => setPassword(newtext)}
+            style={styles.textInput}
+            secureTextEntry={isSecure}
+            placeholder="Password"
+            placeholderTextColor={"gray"}
+          ></TextInput>
+        </View>
+        {/* <TouchableOpacity onPress={() => setEyeicon("eye-off") } >
               <Ionicons
                         name={eyeIcon}
                         size={24}
