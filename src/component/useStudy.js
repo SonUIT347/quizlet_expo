@@ -4,7 +4,7 @@ import { db } from "../firebase/firebaseConfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
-const LessonID = 'FFuNQeomrVf4ov8TIuIL'// id cua lesson dag test
+// const LessonID = 'FFuNQeomrVf4ov8TIuIL'// id cua lesson dag test
 
 
 const useStudy = () => {

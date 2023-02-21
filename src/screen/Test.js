@@ -21,10 +21,10 @@ import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Test = ({navigation}) => {
-  // const route = useRoute()
-  // useEffect(() =>{
-  //   AsyncStorage.setItem("lessonId", `${route.params.lessonId}`)
-  // },[])
+  const route = useRoute()
+  useEffect(() =>{
+    AsyncStorage.setItem("lessonId", `${route.params.lessonId}`)
+  },[])
   const pickerRef = useRef();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [
