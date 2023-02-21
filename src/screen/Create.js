@@ -34,11 +34,18 @@ const Create = ({ navigation, route }) => {
     vocabularies: "",
   });
   const [count, setCount] = useState(1);
-  const [inputFlield, setInputField] = useState([1]);
+  const [inputFlield, setInputField] = useState([0]);
   const addTextField = () => {
     setCount((count) => count + 1);
-    setInputField([...inputFlield, count + 1]);
+    console.log(count,"count")
+    setInputField([...inputFlield, inputFlield.length + 1]);
   };
+  const subTextField = () => {
+    setCount((count) => count - 1);
+    console.log(count,"count sub")
+    setInputField([...inputFlield, count - 1]);
+  }
+
   const [vocabulary, setVocabulary] = useState("");
   const [vocabularies, setVocabularies] = useState({});
   const [mean, setMean] = useState("");
@@ -47,36 +54,36 @@ const Create = ({ navigation, route }) => {
     var a = [];
     // a.push({
     //     name:lessonName})
-    for (let i = 1; i <= inputFlield.length; i++) {
-      if (lesson.vocabularies[i] == undefined && lesson.means[i] == undefined) {
+    for (let i = 0; i < inputFlield.length; i++) {
+      if (lesson.vocabularies[inputFlield[i]] == undefined && lesson.means[inputFlield[i]] == undefined) {
         a.push({
           id: i,
           Term: "",
           Define: "",
         });
       } else if (
-        lesson.vocabularies[i] == undefined &&
-        lesson.means[i] != undefined
+        lesson.vocabularies[inputFlield[i]] == undefined &&
+        lesson.means[inputFlield[i]] != undefined
       ) {
         a.push({
           id: i,
           Term: "",
-          Define: lesson.means[i].mean,
+          Define: lesson.means[inputFlield[i]].mean,
         });
       } else if (
-        lesson.vocabularies[i] !== undefined &&
-        lesson.means[i] == undefined
+        lesson.vocabularies[inputFlield[i]] !== undefined &&
+        lesson.means[inputFlield[i]] == undefined
       ) {
         a.push({
           id: i,
-          Term: lesson.vocabularies[i].voca,
+          Term: lesson.vocabularies[inputFlield[i]].voca,
           Define: "",
         });
       } else
         a.push({
           id: i,
-          Term: lesson.vocabularies[i].voca,
-          Define: lesson.means[i].mean,
+          Term: lesson.vocabularies[inputFlield[i]].voca,
+          Define: lesson.means[inputFlield[i]].mean,
         });
     }
     console.log(a);
@@ -88,12 +95,12 @@ const Create = ({ navigation, route }) => {
 
       // });
       const docLesson = await addDoc(collection(db, "Lesson"), {
-        userID: route.params.userID,
+        // userID: route.params.userID,
         Card: a,
         Name: lessonName,
         Count: a.length,
       });
-      navigation.goBack();
+    //   navigation.goBack();
       setCount(1);
       setInputField([1]);
       setVocabularies({});
@@ -111,6 +118,21 @@ const Create = ({ navigation, route }) => {
       console.log(error);
     }
   };
+  const lessonDelete =(index) => {
+    console.log(index, "vi tri")
+    const start = inputFlield.slice(0,index)
+    const end = inputFlield.slice(index + 1,inputFlield.length)
+    console.log(start, "mang 1")
+    console.log(end, "mang 2")
+    // for(let i = index + 1; i <= inputFlield.length; i++){
+    //     end[i] = end[i] - 1
+    // }
+
+    setInputField([...start,...end])
+    console.log(start.concat(end))
+    console.log(inputFlield)
+    // subTextField()
+  }
   // }
   // console.log(lessonArray)
 
@@ -195,12 +217,12 @@ const Create = ({ navigation, route }) => {
           enabled
           keyboardVerticalOffset={10}
         >
-          <ScrollView>
+          <ScrollView style = {{height:500}}>
             {inputFlield.map((inputFlield, index) => {
               return (
                 <SafeAreaView style={styles.text_input_ctn} key={inputFlield}>
-                  {/* {console.log(inputFlield)} */}
-                  {index > 1 && <TouchableOpacity>
+                  {console.log(inputFlield)}
+                  {index > 1 && <TouchableOpacity onPress={() => lessonDelete(index)}>
                     <AntDesign name="close" color="white" size={15} />
                   </TouchableOpacity>}
                   <TextInput
@@ -231,15 +253,15 @@ const Create = ({ navigation, route }) => {
                 </SafeAreaView>
               );
             })}
-          </ScrollView>
-          <TouchableOpacity onPress={() => addTextField()}>
+            <TouchableOpacity onPress={() => addTextField()}>
             <Ionicons
               name="md-add-circle-outline"
               color="white"
               size={50}
               style={{ alignSelf: "center" }}
             />
-          </TouchableOpacity>
+            </TouchableOpacity>
+          </ScrollView>
         </KeyboardAvoidingView>
       </View>
     </SafeAreaView>
