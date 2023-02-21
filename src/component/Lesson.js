@@ -28,9 +28,9 @@ const Lesson = ({ props, navigation }) => {
               key={props.id}
               onPress={() =>
                 navigation.navigate(
-                  "Option" /*,{
+                  "Option" ,{
                 lessonId:props.id
-              }*/
+              }
                 )
               }
             >

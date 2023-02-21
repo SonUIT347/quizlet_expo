@@ -15,17 +15,17 @@ const Avatar = 'https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2022
 const nameAuthor = 'SonTran'
 
 
-export default function Personal({route}) {
+export default function Personal({navigation,route}) {
 
   const [Lesson, setLesson] = useState([]);
   const [Folder, setFolder] = useState([]);
   // const [Content, setContent] = useState(Lesson);
   const [Page, setPage] = useState('HOC_PHAN');
-  // // const userID = `${route.params.userID}`//này là userID của tài khoản đag login
+  const userID = `${route.params.userID}`//này là userID của tài khoản đag login
   // console.log(userID)
   useEffect (() => {
-    const pLesson = query(collection(db, 'Lesson'), where('userID', '==', "CGBLkojIxlfdlBbg6TcffaD9ngi2" )) // trong la user id
-    const pFolder  = query(collection(db, 'Folder',), where('userID', '==', "CGBLkojIxlfdlBbg6TcffaD9ngi2"))// trong la user id
+    const pLesson = query(collection(db, 'Lesson'), where('userID', '==', userID )) // trong la user id
+    const pFolder  = query(collection(db, 'Folder',), where('userID', '==', userID))// trong la user id
     getDataLesson = async () => {
       const DataLesson = await getDocs(pLesson)
       setLesson(DataLesson.docs.map((doc)=>({...doc.data(), id: doc.id})))
@@ -80,7 +80,7 @@ export default function Personal({route}) {
         {Folder.map((Contents, index) => {
           return(
             <View style = {{marginLeft: 30, marginRight: 30, marginTop: 10, marginBottom: 10}}>
-              <TouchableOpacity key={index}
+              <TouchableOpacity key={index} onPress={() => navigation.navigate("ViewFolder", {lessonId:Contents.id})}
               style={{backgroundColor: '#2F3856', borderRadius: 10}}>
                 <View style = {{margin: 15,}}>
                   <Icon name='folder' size={25} color='white' style={{margin: 5}}></Icon>
@@ -110,7 +110,7 @@ export default function Personal({route}) {
         {Lesson.map((Contents, index) => {
           return(
           <View style = {{marginLeft: 30, marginRight: 30, marginTop: 10, marginBottom: 10}}>
-            <TouchableOpacity key={index}
+            <TouchableOpacity key={index} onPress={() => navigation.navigate("Option",{lessonId:Contents.id})}
             style={{backgroundColor: '#2F3856', borderRadius: 10}}>
               <View style = {{margin: 15,}}>
                 <Text style={{color:'white', fontSize: 25, margin: 5, fontWeight: '700'}}>{Contents.Name}</Text>

@@ -30,9 +30,9 @@ export default function App() {
       {/* <Create/> */}
       {/* <CreateFolder/> */}
       {/* <Personal/> */}
-      {/* <NavigationContainer>
+      <NavigationContainer>
         <AuthNavigator/>
-      </NavigationContainer> */}
+      </NavigationContainer>
       {/* <ViewFolder/> */}
       {/* <Card/> */}
       {/* <SettingFolder/> */}
@@ -43,7 +43,7 @@ export default function App() {
      {/* <Test/> */}
      {/* <Flashcard/> */}
      {/* <ViewFolder/> */}
-     <Register/>
+     {/* <Register/> */}
     </View>
   );
 }

@@ -70,9 +70,9 @@ const Search = ({navigation}) =>{
         .map((lesson,index) => {
           return(
             <View style = {{marginLeft: 30, marginRight: 30, marginTop: 10, marginBottom: 10,}}>
-              <TouchableOpacity style = {styles.lesson} key={lesson.id} onPress={() => navigation.navigate("option"/*,{
-                lessonId:search.id
-              }*/)} >
+              <TouchableOpacity style = {styles.lesson} key={lesson.id} onPress={() => navigation.navigate("option",{
+                lessonId:lesson.id
+              })} >
                 <SafeAreaView style = {styles.acm_name_text}>
                   <View style = {styles.name_ctn}>
                     
@@ -109,7 +109,9 @@ const Search = ({navigation}) =>{
               //   </TouchableOpacity>
               // </View>
               <View style = {{marginLeft: 30, marginRight: 30, marginTop: 10, marginBottom: 10}}>
-                <TouchableOpacity key={index}
+                <TouchableOpacity key={index} onPress={() => navigation.navigate("ViewFolder",{
+                  FolderID:folder.id
+                })}
                 style={{backgroundColor: '#2e3969', borderRadius: 10}}>
                   <View style = {{margin: 15,}}>
                     <Icon name='folder' size={25} color='white' style={{margin: 5}}></Icon>

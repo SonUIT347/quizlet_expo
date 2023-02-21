@@ -26,9 +26,9 @@ export default function useTinderCards() {
   });
 
   useEffect( async () =>{
-    // const lessonId = await AsyncStorage.getItem("lessonId")
+    const lessonId = await AsyncStorage.getItem("lessonId")
     // console.log(lessonId, "use")
-    const q = query(collection(db, "Lesson"), where(documentId(), "==", "6nRoZaByVKsmENPKZf9P"))
+    const q = query(collection(db, "Lesson"), where(documentId(), "==", lessonId))
    
       getDocs(q).then(data=>{
         setDeck(data.docs.map((doc) =>({...doc.data(), id: doc.id}))[0].Card)

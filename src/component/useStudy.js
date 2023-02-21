@@ -19,7 +19,7 @@ const shuffle = (arr) => {
 };
 
 useEffect( async ()=>{
-  // const LessonID = await AsyncStorage.getItem("lessonId")
+  const LessonID = await AsyncStorage.getItem("lessonId")
   const dbArr = query(collection(db, 'Lesson'), where(documentId(), '==', LessonID))
   const getDataArr = async () =>{
     const DataArr = await getDocs(dbArr)
