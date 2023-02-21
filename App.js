@@ -24,10 +24,10 @@ export default function App() {
   return (
     <View style={styles.container}>
       {/* <ViewFolder/> */}
-      <Home/>
+      {/* <Home/> */}
       {/* <Lesson/> */}
       {/* <Search/> */}
-      {/* <Create/> */}
+      <Create/>
       {/* <CreateFolder/> */}
       {/* <Personal/> */}
       {/* <NavigationContainer>
@@ -42,7 +42,7 @@ export default function App() {
      {/* <Login/> */}
      {/* <Test/> */}
      {/* <Flashcard/> */}
-     <ViewFolder/>
+     {/* <ViewFolder/> */}
     </View>
   );
 }
