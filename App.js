@@ -40,10 +40,10 @@ export default function App() {
       {/* <Flashcards/> */}
       {/* <Flashcard_List/> */}
      {/* <Login/> */}
-     {/* <Test/> */}
+     <Test/>
      {/* <Flashcard/> */}
      {/* <ViewFolder/> */}
-     <Register/>
+     {/* <Register/> */}
     </View>
   );
 }
